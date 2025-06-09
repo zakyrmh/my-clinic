@@ -33,6 +33,10 @@ public class SceneManager {
     public void switchToRegisterScene() {
         loadScene("/com/clinic/view/RegisterView.fxml");
     }
+
+    public void switchToDashboard() {
+        loadScene("/com/clinic/view/DashboardView.fxml");
+    }
     private void loadScene(String fxmlPath) {
         try {
             URL fxmlUrl = getClass().getResource(fxmlPath);

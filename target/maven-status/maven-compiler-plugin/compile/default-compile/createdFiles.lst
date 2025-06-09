@@ -1,9 +1,11 @@
 com\clinic\models\User$Status.class
+com\clinic\controllers\LoginController.class
+com\clinic\controllers\RegisterController.class
+com\clinic\services\AuthService.class
+com\clinic\models\User$Role.class
 com\clinic\manager\SceneManager.class
 com\clinic\utils\SecurityUtil.class
 com\clinic\models\User.class
-com\clinic\controllers\RegisterController.class
 com\clinic\Main.class
-com\clinic\services\AuthService.class
+com\clinic\manager\UserSession.class
 com\clinic\utils\DatabaseUtil.class
-com\clinic\models\User$Role.class

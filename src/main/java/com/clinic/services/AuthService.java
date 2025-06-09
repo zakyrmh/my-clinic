@@ -39,4 +39,32 @@ public class AuthService {
             }
         }
     }
+
+    public User login(String username, String password) throws SQLException {
+        String sql = "SELECT id, password, role, name, email, phone, status FROM users WHERE username = ?";
+        
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, username);
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    String storedHash = rs.getString("password");
+                    
+                    if (SecurityUtil.verifyPassword(storedHash, password)) {
+                        String name = rs.getString("name");
+                        String email = rs.getString("email");
+                        String phone = rs.getString("phone");
+                        User.Role role = User.Role.valueOf(rs.getString("role").toUpperCase());
+                        User.Status status = User.Status.valueOf(rs.getString("status").toUpperCase());
+                        
+                        return new User(username, storedHash, role, name, email, phone, status, null, null);
+                    }
+                }
+            }
+        }
+        
+        return null;
+    }
 }
