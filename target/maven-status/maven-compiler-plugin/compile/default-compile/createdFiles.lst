@@ -1,6 +1,7 @@
 com\clinic\models\User$Status.class
 com\clinic\controllers\LoginController.class
 com\clinic\controllers\RegisterController.class
+com\clinic\controllers\DashboardController.class
 com\clinic\services\AuthService.class
 com\clinic\models\User$Role.class
 com\clinic\manager\SceneManager.class

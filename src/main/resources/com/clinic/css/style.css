@@ -116,6 +116,7 @@
     -fx-background-color: #ffffff;
     -fx-border-color: #e4e7ec;
     -fx-border-width: 0 1 0 0;
+    -fx-padding: 32px 20px 0 20px;
 }
 
 .sidebar-button, .sidebar-button-active {
@@ -182,6 +183,7 @@
 .menu-item {
     -fx-background-radius: 8px;
     -fx-padding: 10px 12px;
+    -fx-alignment: CENTER_LEFT;
 }
 
 .menu-item .label {
@@ -193,6 +195,6 @@
     -fx-padding: 0 10px 0 0;
 }
 
-.menu-item:hover {
+.menu-item:focused {
     -fx-background-color: #F5F5F5;
 }
