@@ -15,7 +15,7 @@ public class Main extends Application {
         primaryStage.setTitle("Aplikasi Klinik");
         primaryStage.setResizable(false);
         
-        sceneManager.switchToRegisterScene();
+        sceneManager.switchToLoginScene();
     }
 
     public static void main(String[] args) {
