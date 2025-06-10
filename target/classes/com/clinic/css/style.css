@@ -110,3 +110,89 @@
 .error-message {
     -fx-text-fill: #fb2c36;
 }
+
+/* -- SIDEBAR -- */
+.sidebar {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e4e7ec;
+    -fx-border-width: 0 1 0 0;
+}
+
+.sidebar-button, .sidebar-button-active {
+    -fx-background-color: transparent;
+    -fx-text-fill: #344054;
+    -fx-alignment: CENTER_LEFT;
+    -fx-font-size: 16px;
+    -fx-padding: 8px 12px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.sidebar-button:hover {
+    -fx-background-color: #e4e7ec;
+}
+
+.sidebar-button:pressed {
+    -fx-background-color: #e4e7ec;
+}
+
+.sidebar-button-active {
+    -fx-background-color: #ecf3ff;
+    -fx-text-fill: #465fff;
+}
+
+/* -- HEADER -- */
+.header {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e4e7ec;
+    -fx-border-width: 0 0 1 0;
+}
+
+.user-profile-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+.user-profile-button .arrow-button {
+    -fx-padding: 0;
+}
+
+.user-profile-button .arrow {
+    -fx-shape: "";
+    -fx-padding: 0;
+}
+
+.user-profile-button:hover {
+    -fx-opacity: 0.85;
+    -fx-cursor: hand;
+}
+
+/* -- DROPDOWN MENU -- */
+
+.context-menu {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    -fx-padding: 12px;
+    -fx-node-orientation: LEFT_TO_RIGHT;
+}
+
+.menu-item {
+    -fx-background-radius: 8px;
+    -fx-padding: 10px 12px;
+}
+
+.menu-item .label {
+    -fx-text-fill: #344054;
+    -fx-font-size: 14px;
+}
+
+.menu-item .graphic {
+    -fx-padding: 0 10px 0 0;
+}
+
+.menu-item:hover {
+    -fx-background-color: #F5F5F5;
+}
