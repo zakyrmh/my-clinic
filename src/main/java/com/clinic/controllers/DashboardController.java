@@ -3,7 +3,6 @@ package com.clinic.controllers;
 import com.clinic.manager.SceneManager;
 import com.clinic.manager.UserSession;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 public class DashboardController {
@@ -15,10 +14,15 @@ public class DashboardController {
     }
 
     @FXML
-    private void handleLogout(ActionEvent event) {
+    private void handleLogout() {
         UserSession.getInstance().endSession();
         System.out.println("The user session has ended (logout).");
 
         SceneManager.getInstance().switchToLoginScene();
+    }
+
+    @FXML
+    protected void handlePatientLinkAction() {
+        SceneManager.getInstance().switchToPatientScene();
     }
 }

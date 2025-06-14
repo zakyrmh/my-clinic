@@ -31,7 +31,7 @@
                 <VBox alignment="TOP_CENTER" spacing="16.0">
                     <children>
                         <Button text="Dashboard" styleClass="sidebar-button-active" maxWidth="Infinity"/>
-                        <Button text="Patients" styleClass="sidebar-button" maxWidth="Infinity"/>
+                        <Button text="Patients" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handlePatientLinkAction"/>
                         <Button text="Doctors" styleClass="sidebar-button" maxWidth="Infinity"/>
                         <Button text="Appointments" styleClass="sidebar-button" maxWidth="Infinity"/>
                         <Button text="Medical Records" styleClass="sidebar-button" maxWidth="Infinity"/>
@@ -53,12 +53,12 @@
                     <MenuButton styleClass="user-profile-button" text="" nodeOrientation="RIGHT_TO_LEFT">
                         <graphic>
                             <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../images/default-profile.jpg" />
-                            </image>
-                            <clip>
-                                <Circle centerX="21.0" centerY="21.0" radius="21.0" />
-                            </clip>
+                                <image>
+                                    <Image url="@../images/default-profile.jpg" />
+                                </image>
+                                <clip>
+                                    <Circle centerX="21.0" centerY="21.0" radius="21.0" />
+                                </clip>
                             </ImageView>
                         </graphic>
                         <items>

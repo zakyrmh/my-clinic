@@ -39,6 +39,11 @@
             <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLoginButtonAction" styleClass="primary-button" text="Sign In" />
          </children>
       </HBox>
-      <Hyperlink fx:id="registerLink" onAction="#handleRegisterLinkAction" text="Don't have an account yet? Sign Up here" />
+      <HBox alignment="CENTER">
+         <children>
+            <Label text="Don't have an account yet?" />
+            <Hyperlink fx:id="registerLink" onAction="#handleRegisterLinkAction" text="Sign Up here" />
+         </children>
+      </HBox>
    </children>
 </VBox>
