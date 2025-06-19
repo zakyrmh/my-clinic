@@ -68,8 +68,8 @@ public class Patient {
     }
 
     public Patient(int id, String medicalRecord, String name, LocalDate dateOfBirth, Gender gender,
-                   String address, String phone, String identityNumber,
-                   LocalDateTime createdAt, LocalDateTime updatedAt) {
+            String address, String phone, String identityNumber,
+            LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = new SimpleIntegerProperty(id);
         this.medicalRecord = new SimpleStringProperty(medicalRecord);
         this.name = new SimpleStringProperty(name);
