@@ -53,6 +53,7 @@ public class PatientEditController {
 
     public void setPatientData(Patient patient) {
         this.currentPatient = patient;
+
         medicalRecordField.setText(patient.getMedicalRecord());
         nameField.setText(patient.getName());
         dateOfBirthPicker.setValue(patient.getDateOfBirth());
@@ -128,7 +129,12 @@ public class PatientEditController {
     }
 
     @FXML
-    protected void handlePatientAction() {
+    protected void handlePatientLinkAction() {
         SceneManager.getInstance().switchToPatientScene();
+    }
+
+    @FXML
+    protected void handleDoctorLinkAction() {
+        SceneManager.getInstance().switchToDoctorScene();
     }
 }

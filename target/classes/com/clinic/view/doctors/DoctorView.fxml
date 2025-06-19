@@ -82,6 +82,7 @@
                                 <TableColumn fx:id="name" text="Nama"/>
                                 <TableColumn fx:id="specialization" text="Spesialisasi"/>
                                 <TableColumn fx:id="phone" text="No Telp"/>
+                                <TableColumn fx:id="action" text="Action" prefWidth="200"/>
                             </columns>
                         </TableView>
                     </children>

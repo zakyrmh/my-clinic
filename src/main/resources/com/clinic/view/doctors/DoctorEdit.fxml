@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/style.css" fx:controller="com.clinic.controllers.PatientEditController">
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/style.css" fx:controller="com.clinic.controllers.DoctorEditController">
 
     <left>
         <VBox alignment="TOP_CENTER" spacing="25.0" styleClass="sidebar">
@@ -23,8 +23,8 @@
                 <VBox alignment="TOP_CENTER" spacing="16.0">
                     <children>
                         <Button text="Dashboard" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleDashboardLinkAction"/>
-                        <Button text="Patients" styleClass="sidebar-button-active" maxWidth="Infinity" onAction="#handlePatientLinkAction"/>
-                        <Button text="Doctors" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleDoctorLinkAction"/>
+                        <Button text="Patients" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handlePatientLinkAction"/>
+                        <Button text="Doctors" styleClass="sidebar-button-active" maxWidth="Infinity" onAction="#handleDoctorLinkAction"/>
                         <Button text="Appointments" styleClass="sidebar-button" maxWidth="Infinity"/>
                         <Button text="Medical Records" styleClass="sidebar-button" maxWidth="Infinity"/>
                         <Button text="Reports" styleClass="sidebar-button" maxWidth="Infinity"/>
@@ -70,41 +70,21 @@
                                 <Insets top="16" right="16" bottom="16" left="16"/>
                             </VBox.margin>
                             <children>
-                                <Label text="Halaman Edit Data Pasien" styleClass="form-title"/>
+                                <Label text="Edit Data Dokter" styleClass="form-title"/>
 
                                 <HBox spacing="16" alignment="CENTER_LEFT">
-                                    <Label text="Medical Record" styleClass="label-form"/>
-                                    <TextField fx:id="medicalRecordField" promptText="Enter Medical Record Number" styleClass="text-field"/>
+                                    <Label text="No Lisensi" styleClass="label-form"/>
+                                    <TextField fx:id="licenseNoField" promptText="Masukkan No Lisensi" styleClass="text-field"/>
                                 </HBox>
 
                                 <HBox spacing="16" alignment="CENTER_LEFT">
-                                    <Label text="Name" styleClass="label-form"/>
-                                    <TextField fx:id="nameField" promptText="Enter Full Name" styleClass="text-field"/>
+                                    <Label text="Nama" styleClass="label-form"/>
+                                    <TextField fx:id="nameField" promptText="Masukkan Nama Lengkap" styleClass="text-field"/>
                                 </HBox>
 
                                 <HBox spacing="16" alignment="CENTER_LEFT">
-                                    <Label text="Date of Birth" styleClass="label-form"/>
-                                    <DatePicker fx:id="dateOfBirthPicker" promptText="Select Date" styleClass="date-picker"/>
-                                </HBox>
-
-                                <HBox spacing="16" alignment="CENTER_LEFT">
-                                    <Label text="Gender" styleClass="label-form"/>
-                                    <HBox spacing="16">
-                                        <VBox.margin>
-                                            <Insets right="8" />
-                                        </VBox.margin>
-                                        <RadioButton fx:id="maleRadio" text="Male" styleClass="radio-button">
-                                            <toggleGroup>
-                                                <ToggleGroup fx:id="genderGroup"/>
-                                            </toggleGroup>
-                                        </RadioButton>
-                                        <RadioButton fx:id="femaleRadio" text="Female" styleClass="radio-button" toggleGroup="$genderGroup"/>
-                                    </HBox>
-                                </HBox>
-
-                                <HBox spacing="16" alignment="CENTER_LEFT">
-                                    <Label text="Address" styleClass="label-form"/>
-                                    <TextArea fx:id="addressField" promptText="Enter Address" styleClass="text-area" prefHeight="80"/>
+                                    <Label text="Spesialisasi" styleClass="label-form"/>
+                                    <TextField fx:id="specializationField" promptText="Masukkan Spesialisasi" styleClass="text-field"/>
                                 </HBox>
 
                                 <HBox spacing="16" alignment="CENTER_LEFT">
@@ -112,14 +92,9 @@
                                     <TextField fx:id="phoneField" promptText="Enter Phone Number" styleClass="text-field"/>
                                 </HBox>
 
-                                <HBox spacing="16" alignment="CENTER_LEFT">
-                                    <Label text="Identity Number" styleClass="label-form"/>
-                                    <TextField fx:id="identityNumberField" promptText="Enter Identity Number" styleClass="text-field"/>
-                                </HBox>
-
                                 <HBox spacing="20" alignment="CENTER_RIGHT">
-                                    <Button fx:id="cancel" text="Cancel" styleClass="secondary-button" onAction="#handlePatientLinkAction"/>
-                                    <Button fx:id="submitButton" text="Edit" styleClass="primary-button" onAction="#handleUpdatePatient"/>
+                                    <Button fx:id="cancel" text="Cancel" styleClass="secondary-button" onAction="#handleDoctorLinkAction"/>
+                                    <Button fx:id="submitButton" text="Edit" styleClass="primary-button" onAction="#handleEditDoctor"/>
                                 </HBox>
                             </children>
                         </VBox>

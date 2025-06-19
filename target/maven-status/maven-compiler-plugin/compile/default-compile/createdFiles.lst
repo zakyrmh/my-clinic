@@ -1,4 +1,5 @@
 com\clinic\models\User$Status.class
+com\clinic\controllers\DoctorEditController.class
 com\clinic\controllers\PatientAddController.class
 com\clinic\controllers\DashboardController.class
 com\clinic\models\MedicalRecord.class
@@ -7,6 +8,7 @@ com\clinic\services\AuthService.class
 com\clinic\Main.class
 com\clinic\manager\UserSession.class
 com\clinic\controllers\PatientController.class
+com\clinic\controllers\DoctorController$1.class
 com\clinic\controllers\PatientEditController.class
 com\clinic\models\Doctor.class
 com\clinic\models\Patient$Gender.class

@@ -1,8 +1,11 @@
 C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\controllers\DoctorController.java
+C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\controllers\PatientEditController.java
 C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\models\Doctor.java
 C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\manager\UserSession.java
 C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\controllers\PatientAddController.java
+C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\controllers\DoctorEditController.java
 C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\controllers\DashboardController.java
+C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\controllers\DoctorAddController.java
 C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\controllers\RegisterController.java
 C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\models\Prescription.java
 C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\utils\DatabaseUtil.java

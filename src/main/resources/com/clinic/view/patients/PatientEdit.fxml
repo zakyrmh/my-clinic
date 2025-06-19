@@ -23,8 +23,8 @@
                 <VBox alignment="TOP_CENTER" spacing="16.0">
                     <children>
                         <Button text="Dashboard" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleDashboardLinkAction"/>
-                        <Button text="Patients" styleClass="sidebar-button-active" maxWidth="Infinity"/>
-                        <Button text="Doctors" styleClass="sidebar-button" maxWidth="Infinity"/>
+                        <Button text="Patients" styleClass="sidebar-button-active" maxWidth="Infinity" onAction="#handlePatientLinkAction"/>
+                        <Button text="Doctors" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleDoctorLinkAction"/>
                         <Button text="Appointments" styleClass="sidebar-button" maxWidth="Infinity"/>
                         <Button text="Medical Records" styleClass="sidebar-button" maxWidth="Infinity"/>
                         <Button text="Reports" styleClass="sidebar-button" maxWidth="Infinity"/>
@@ -118,7 +118,7 @@
                                 </HBox>
 
                                 <HBox spacing="20" alignment="CENTER_RIGHT">
-                                    <Button fx:id="cancel" text="Cancel" styleClass="secondary-button" onAction="#handlePatientAction"/>
+                                    <Button fx:id="cancel" text="Cancel" styleClass="secondary-button" onAction="#handlePatientLinkAction"/>
                                     <Button fx:id="submitButton" text="Edit" styleClass="primary-button" onAction="#handleUpdatePatient"/>
                                 </HBox>
                             </children>
