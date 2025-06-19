@@ -397,3 +397,40 @@
 .clear-button:hover {
     -fx-background-color: #4b5563;
 }
+
+/* Action Button Table */
+.view-button {
+    -fx-background-color: #465fff;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 6 8;
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+}
+
+.edit-button {
+    -fx-background-color: #12b76a;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 6 8;
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+}
+
+.delete-button {
+    -fx-background-color: #f04438;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 6 8;
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+}
+
+.view-button:hover {
+    -fx-background-color: #3641f5;
+}
+
+.edit-button:hover {
+    -fx-background-color: #039855;
+}
+
+.delete-button:hover {
+    -fx-background-color: #d92d20;
+}

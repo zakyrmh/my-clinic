@@ -2,12 +2,12 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../css/style.css" fx:controller="com.clinic.controllers.PatientController">
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/style.css" fx:controller="com.clinic.controllers.PatientController">
 
     <left>
         <VBox alignment="TOP_CENTER" spacing="25.0" styleClass="sidebar">
@@ -17,7 +17,7 @@
             <children>
                 <ImageView fitHeight="32.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../images/default-profile.jpg" />
+                        <Image url="@../../images/default-profile.jpg" />
                     </image>
                 </ImageView>
                 <VBox alignment="TOP_CENTER" spacing="16.0">
@@ -46,7 +46,7 @@
                         <graphic>
                             <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../images/default-profile.jpg" />
+                                <Image url="@../../images/default-profile.jpg" />
                             </image>
                             <clip>
                                 <Circle centerX="21.0" centerY="21.0" radius="21.0" />
@@ -78,10 +78,11 @@
                             </VBox.margin>
                             <columns>
                                 <TableColumn fx:id="no" text="No" prefWidth="80" styleClass="no-table"/>
-                                <TableColumn fx:id="medicalRecord" text="Medical Record"/>
-                                <TableColumn fx:id="name" text="Name"/>
-                                <TableColumn fx:id="dateOfBirth" text="Date of Birth"/>
-                                <TableColumn fx:id="gender" text="Gender"/>
+                                <TableColumn fx:id="medicalRecord" text="No Rekam Medis"/>
+                                <TableColumn fx:id="name" text="Nama"/>
+                                <TableColumn fx:id="dateOfBirth" text="Tanggal Lahir"/>
+                                <TableColumn fx:id="gender" text="Jenis Kelamin"/>
+                                <TableColumn fx:id="action" text="Action" prefWidth="200"/>
                             </columns>
                         </TableView>
                     </children>

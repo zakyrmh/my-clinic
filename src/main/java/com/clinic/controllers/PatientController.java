@@ -15,9 +15,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+
 
 public class PatientController {
     @FXML private TableView<Patient> tableView;
@@ -26,6 +30,7 @@ public class PatientController {
     @FXML private TableColumn<Patient, String> medicalRecord;
     @FXML private TableColumn<Patient, String> dateOfBirth;
     @FXML private TableColumn<Patient, String> gender;
+    @FXML private TableColumn<Patient, Void> action;
     
     @FXML
     public void initialize() {
@@ -38,6 +43,8 @@ public class PatientController {
         medicalRecord.setCellValueFactory(new PropertyValueFactory<>("medicalRecord"));
         dateOfBirth.setCellValueFactory(new PropertyValueFactory<>("dateOfBirth"));
         gender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+
+        configureActionColumn();
 
         if (UserSession.getInstance().isLoggedIn()) {
             loadPatientData();
@@ -73,6 +80,73 @@ public class PatientController {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error loading patient data: " + e.getMessage());
+        }
+    }
+
+    private void configureActionColumn() {
+        action.setCellFactory(param -> new TableCell<Patient, Void>() {
+            private final Button viewButton = new Button("Lihat");
+            private final Button editButton = new Button("Edit");
+            private final Button deleteButton = new Button("Hapus");
+            private final HBox pane = new HBox(5, viewButton, editButton, deleteButton);
+
+            {
+                // Styling tombol
+                viewButton.getStyleClass().add("view-button");
+                editButton.getStyleClass().add("edit-button");
+                deleteButton.getStyleClass().add("delete-button");
+
+                // Handler untuk tombol Lihat
+                viewButton.setOnAction(event -> {
+                    Patient patient = getTableView().getItems().get(getIndex());
+                    handleViewAction(patient);
+                });
+
+                // Handler untuk tombol Edit
+                editButton.setOnAction(event -> {
+                    Patient patient = getTableView().getItems().get(getIndex());
+                    handleEditAction(patient);
+                });
+
+                // Handler untuk tombol Hapus
+                deleteButton.setOnAction(event -> {
+                    Patient patient = getTableView().getItems().get(getIndex());
+                    handleDeleteAction(patient);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : pane);
+            }
+        });
+    }
+
+    // Handler untuk aksi Lihat
+    private void handleViewAction(Patient patient) {
+        // TODO: Implementasi navigasi ke halaman detail pasien
+        System.out.println("View patient: " + patient.getName());
+        // Contoh: SceneManager.getInstance().switchToPatientDetailScene(patient);
+    }
+
+    // Handler untuk aksi Edit
+    private void handleEditAction(Patient patient) {
+        // TODO: Implementasi navigasi ke halaman edit pasien
+        System.out.println("Edit patient: " + patient.getName());
+        SceneManager.getInstance().switchToPatientEditScene(patient);
+    }
+
+    // Handler untuk aksi Hapus
+    private void handleDeleteAction(Patient patient) {
+        try (Connection conn = DatabaseUtil.getConnection();
+             Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate("DELETE FROM patients WHERE id = " + patient.getId());
+            tableView.getItems().remove(patient);
+            System.out.println("Deleted patient: " + patient.getName());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error deleting patient: " + e.getMessage());
         }
     }
 
