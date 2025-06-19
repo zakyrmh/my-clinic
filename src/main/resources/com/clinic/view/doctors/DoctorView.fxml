@@ -69,7 +69,7 @@
                             <children>
                                 <Label text="Data Dokter" styleClass="header-title"/>
                                 <Region HBox.hgrow="ALWAYS"/>
-                                <Button text="Add" styleClass="primary-button" onAction="#handlePatientAddAction"/>
+                                <Button text="Add" styleClass="primary-button" onAction="#handleDoctorAddAction"/>
                             </children>
                         </HBox>
                         <TableView fx:id="tableView" styleClass="custom-table">

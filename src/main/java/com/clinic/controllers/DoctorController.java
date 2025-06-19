@@ -86,8 +86,8 @@ public class DoctorController {
     }
 
     @FXML
-    protected void handlePatientAddAction(ActionEvent event) {
-        SceneManager.getInstance().switchToPatientAddScene();
+    protected void handleDoctorAddAction(ActionEvent event) {
+        SceneManager.getInstance().switchToDoctorAddScene();
     }
 
     @FXML
