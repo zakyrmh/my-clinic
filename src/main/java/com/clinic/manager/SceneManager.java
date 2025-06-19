@@ -46,6 +46,10 @@ public class SceneManager {
         loadScene("/com/clinic/view/patients/PatientAdd.fxml");
     }
 
+    public void switchToDoctorScene() {
+        loadScene("/com/clinic/view/doctors/DoctorView.fxml");
+    }
+
     private void loadScene(String fxmlPath) {
         try {
             URL fxmlUrl = getClass().getResource(fxmlPath);

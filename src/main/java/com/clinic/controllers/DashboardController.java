@@ -25,4 +25,9 @@ public class DashboardController {
     protected void handlePatientLinkAction() {
         SceneManager.getInstance().switchToPatientScene();
     }
+
+    @FXML
+    protected void handleDoctorLinkAction() {
+        SceneManager.getInstance().switchToDoctorScene();
+    }
 }

@@ -24,7 +24,7 @@
                     <children>
                         <Button text="Dashboard" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleDashboardLinkAction"/>
                         <Button text="Patients" styleClass="sidebar-button-active" maxWidth="Infinity"/>
-                        <Button text="Doctors" styleClass="sidebar-button" maxWidth="Infinity"/>
+                        <Button text="Doctors" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleDoctorLinkAction"/>
                         <Button text="Appointments" styleClass="sidebar-button" maxWidth="Infinity"/>
                         <Button text="Medical Records" styleClass="sidebar-button" maxWidth="Infinity"/>
                         <Button text="Reports" styleClass="sidebar-button" maxWidth="Infinity"/>
@@ -67,7 +67,7 @@
                     <children>
                         <HBox styleClass="header-container">
                             <children>
-                                <Label text="Patient Data" styleClass="header-title"/>
+                                <Label text="Patients Data" styleClass="header-title"/>
                                 <Region HBox.hgrow="ALWAYS"/>
                                 <Button text="Add" styleClass="primary-button" onAction="#handlePatientAddAction"/>
                             </children>

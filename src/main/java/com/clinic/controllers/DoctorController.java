@@ -7,8 +7,7 @@ import java.sql.Statement;
 
 import com.clinic.manager.SceneManager;
 import com.clinic.manager.UserSession;
-import com.clinic.models.Patient;
-import com.clinic.models.Patient.Gender;
+import com.clinic.models.Doctor;
 import com.clinic.utils.DatabaseUtil;
 
 import javafx.collections.FXCollections;
@@ -19,13 +18,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class PatientController {
-    @FXML private TableView<Patient> tableView;
-    @FXML private TableColumn<Patient, Integer> no;
-    @FXML private TableColumn<Patient, String> name;
-    @FXML private TableColumn<Patient, String> medicalRecord;
-    @FXML private TableColumn<Patient, String> dateOfBirth;
-    @FXML private TableColumn<Patient, String> gender;
+public class DoctorController {
+    @FXML private TableView<Doctor> tableView;
+    @FXML private TableColumn<Doctor, Integer> no;
+    @FXML private TableColumn<Doctor, String> licenseNo;
+    @FXML private TableColumn<Doctor, String> name;
+    @FXML private TableColumn<Doctor, String> specialization;
+    @FXML private TableColumn<Doctor, String> phone;
     
     @FXML
     public void initialize() {
@@ -34,41 +33,38 @@ public class PatientController {
             return javafx.beans.binding.Bindings.createObjectBinding(() -> index);
         });
         no.setSortable(false);
+        licenseNo.setCellValueFactory(new PropertyValueFactory<>("licenseNo"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        medicalRecord.setCellValueFactory(new PropertyValueFactory<>("medicalRecord"));
-        dateOfBirth.setCellValueFactory(new PropertyValueFactory<>("dateOfBirth"));
-        gender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+        specialization.setCellValueFactory(new PropertyValueFactory<>("specialization"));
+        phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
 
         if (UserSession.getInstance().isLoggedIn()) {
-            loadPatientData();
+            loadDoctorData();
         }
     }
 
-    private void loadPatientData() {
-        ObservableList<Patient> patientList = FXCollections.observableArrayList();
+    private void loadDoctorData() {
+        ObservableList<Doctor> doctorList = FXCollections.observableArrayList();
 
         try (Connection conn = DatabaseUtil.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM patients")) {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM doctors")) {
 
             while (rs.next()) {
-                Patient patient = new Patient(
+                Doctor doctor = new Doctor(
                     rs.getInt("id"),
-                    rs.getString("medical_record"),
+                    rs.getString("license_no"),
                     rs.getString("name"),
-                    rs.getDate("date_of_birth").toLocalDate(),
-                    rs.getString("gender").equals("male") ? Gender.MALE : Gender.FEMALE,
-                    rs.getString("address"),
+                    rs.getString("specialization"),
                     rs.getString("phone"),
-                    rs.getString("identity_number"),
                     rs.getTimestamp("created_at") != null ? rs.getTimestamp("created_at").toLocalDateTime() : null,
                     rs.getTimestamp("updated_at") != null ? rs.getTimestamp("updated_at").toLocalDateTime() : null
                 );
-                patientList.add(patient);
+                doctorList.add(doctor);
             }
 
             // Mengisi TableView dengan data
-            tableView.setItems(patientList);
+            tableView.setItems(doctorList);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -95,7 +91,7 @@ public class PatientController {
     }
 
     @FXML
-    protected void handleDoctorLinkAction() {
-        SceneManager.getInstance().switchToDoctorScene();
+    protected void handlePatientLinkAction() {
+        SceneManager.getInstance().switchToPatientScene();
     }
 }
