@@ -1,127 +1,226 @@
 package com.clinic.models;
 
+import java.time.LocalDateTime;
+
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class PrescriptionItem {
-    private final IntegerProperty id;
-    private final IntegerProperty prescriptionId;
-    private final StringProperty drug;
-    private final StringProperty dosage;
-    private final StringProperty frequency;
-    private final StringProperty duration;
-    private final StringProperty instructions;
-
+    private final IntegerProperty idDetailResep;
+    private final IntegerProperty idResep;
+    private final StringProperty namaObat;
+    private final StringProperty kategoriObat;
+    private final StringProperty satuan;
+    private final IntegerProperty jumlah;
+    private final StringProperty aturanPakai;
+    private final IntegerProperty hargaSatuan;
+    private final IntegerProperty subTotal;
+    private final StringProperty catatan;
+    private final ObjectProperty<LocalDateTime> createdAt;
+    private final ObjectProperty<LocalDateTime> updatedAt;
+    
     public PrescriptionItem() {
-        this.id = new SimpleIntegerProperty();
-        this.prescriptionId = new SimpleIntegerProperty();
-        this.drug = new SimpleStringProperty();
-        this.dosage = new SimpleStringProperty();
-        this.frequency = new SimpleStringProperty();
-        this.duration = new SimpleStringProperty();
-        this.instructions = new SimpleStringProperty();
+        this.idDetailResep = new SimpleIntegerProperty();
+        this.idResep = new SimpleIntegerProperty();
+        this.namaObat = new SimpleStringProperty();
+        this.kategoriObat = new SimpleStringProperty();
+        this.satuan = new SimpleStringProperty();
+        this.jumlah = new SimpleIntegerProperty();
+        this.aturanPakai = new SimpleStringProperty();
+        this.hargaSatuan = new SimpleIntegerProperty();
+        this.subTotal = new SimpleIntegerProperty();
+        this.catatan = new SimpleStringProperty();
+        this.createdAt = new SimpleObjectProperty<>();
+        this.updatedAt = new SimpleObjectProperty<>();
     }
     
-    public PrescriptionItem(int id, int prescriptionId, String drug, String dosage, String frequency, String duration, String instructions) {
-        this.id = new SimpleIntegerProperty(id);
-        this.prescriptionId = new SimpleIntegerProperty(prescriptionId);
-        this.drug = new SimpleStringProperty(drug);
-        this.dosage = new SimpleStringProperty(dosage);
-        this.frequency = new SimpleStringProperty(frequency);
-        this.duration = new SimpleStringProperty(duration);
-        this.instructions = new SimpleStringProperty(instructions);
+    public PrescriptionItem(
+        int idDetailResep,
+        int idResep,
+        String namaObat,
+        String kategoriObat,
+        String satuan,
+        int jumlah,
+        String aturanPakai,
+        int hargaSatuan,
+        int subTotal,
+        String catatan,
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
+    ) {
+        this.idDetailResep = new SimpleIntegerProperty(idDetailResep);
+        this.idResep = new SimpleIntegerProperty(idResep);
+        this.namaObat = new SimpleStringProperty(namaObat);
+        this.kategoriObat = new SimpleStringProperty(kategoriObat);
+        this.satuan = new SimpleStringProperty(satuan);
+        this.jumlah = new SimpleIntegerProperty(jumlah);
+        this.aturanPakai = new SimpleStringProperty(aturanPakai);
+        this.hargaSatuan = new SimpleIntegerProperty(hargaSatuan);
+        this.subTotal = new SimpleIntegerProperty(subTotal);
+        this.catatan = new SimpleStringProperty(catatan);
+        this.createdAt = new SimpleObjectProperty<>(createdAt);
+        this.updatedAt = new SimpleObjectProperty<>(updatedAt);
     }
 
-    // Getter dan Setter untuk id
-    public int getId() {
-        return id.get();
+    // --- Property Methods, Getters, and Setters ---
+
+    // idDetailResep
+    public IntegerProperty idDetailResepProperty() {
+        return idDetailResep;
     }
 
-    public void setId(int id) {
-        this.id.set(id);
+    public int getIdDetailResep() {
+        return idDetailResep.get();
     }
 
-    public IntegerProperty idProperty() {
-        return id;
+    public void setIdDetailResep(int idDetailResep) {
+        this.idDetailResep.set(idDetailResep);
     }
 
-    // Getter dan Setter untuk prescriptionId
-    public int getPrescriptionId() {
-        return prescriptionId.get();
+    // idResep
+    public IntegerProperty idResepProperty() {
+        return idResep;
     }
 
-    public void setPrescriptionId(int prescriptionId) {
-        this.prescriptionId.set(prescriptionId);
+    public int getIdResep() {
+        return idResep.get();
     }
 
-    public IntegerProperty prescriptionIdProperty() {
-        return prescriptionId;
+    public void setIdResep(int idResep) {
+        this.idResep.set(idResep);
     }
 
-    // Getter dan Setter untuk drug
-    public String getDrug() {
-        return drug.get();
+    // namaObat
+    public StringProperty namaObatProperty() {
+        return namaObat;
     }
 
-    public void setDrug(String drug) {
-        this.drug.set(drug);
+    public String getNamaObat() {
+        return namaObat.get();
     }
 
-    public StringProperty drugProperty() {
-        return drug;
+    public void setNamaObat(String namaObat) {
+        this.namaObat.set(namaObat);
     }
 
-    // Getter dan Setter untuk dosage
-    public String getDosage() {
-        return dosage.get();
+    // kategoriObat
+    public StringProperty kategoriObatProperty() {
+        return kategoriObat;
     }
 
-    public void setDosage(String dosage) {
-        this.dosage.set(dosage);
+    public String getKategoriObat() {
+        return kategoriObat.get();
     }
 
-    public StringProperty dosageProperty() {
-        return dosage;
+    public void setKategoriObat(String kategoriObat) {
+        this.kategoriObat.set(kategoriObat);
     }
 
-    // Getter dan Setter untuk frequency
-    public String getFrequency() {
-        return frequency.get();
+    // satuan
+    public StringProperty satuanProperty() {
+        return satuan;
     }
 
-    public void setFrequency(String frequency) {
-        this.frequency.set(frequency);
+    public String getSatuan() {
+        return satuan.get();
     }
 
-    public StringProperty frequencyProperty() {
-        return frequency;
+    public void setSatuan(String satuan) {
+        this.satuan.set(satuan);
     }
 
-    // Getter dan Setter untuk duration
-    public String getDuration() {
-        return duration.get();
+    // jumlah
+    public IntegerProperty jumlahProperty() {
+        return jumlah;
     }
 
-    public void setDuration(String duration) {
-        this.duration.set(duration);
+    public int getJumlah() {
+        return jumlah.get();
     }
 
-    public StringProperty durationProperty() {
-        return duration;
+    public void setJumlah(int jumlah) {
+        this.jumlah.set(jumlah);
     }
 
-    // Getter dan Setter untuk instructions
-    public String getInstructions() {
-        return instructions.get();
+    // aturanPakai
+    public StringProperty aturanPakaiProperty() {
+        return aturanPakai;
     }
 
-    public void setInstructions(String instructions) {
-        this.instructions.set(instructions);
+    public String getAturanPakai() {
+        return aturanPakai.get();
     }
 
-    public StringProperty instructionsProperty() {
-        return instructions;
+    public void setAturanPakai(String aturanPakai) {
+        this.aturanPakai.set(aturanPakai);
+    }
+
+    // hargaSatuan
+    public IntegerProperty hargaSatuanProperty() {
+        return hargaSatuan;
+    }
+
+    public int getHargaSatuan() {
+        return hargaSatuan.get();
+    }
+
+    public void setHargaSatuan(int hargaSatuan) {
+        this.hargaSatuan.set(hargaSatuan);
+    }
+
+    // subTotal
+    public IntegerProperty subTotalProperty() {
+        return subTotal;
+    }
+
+    public int getSubTotal() {
+        return subTotal.get();
+    }
+
+    public void setSubTotal(int subTotal) {
+        this.subTotal.set(subTotal);
+    }
+
+    // catatan
+    public StringProperty catatanProperty() {
+        return catatan;
+    }
+
+    public String getCatatan() {
+        return catatan.get();
+    }
+
+    public void setCatatan(String catatan) {
+        this.catatan.set(catatan);
+    }
+
+    // CreatedAt
+    public ObjectProperty<LocalDateTime> createdAtProperty() {
+        return createdAt;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt.get();
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt.set(createdAt);
+    }
+
+    // UpdatedAt
+    public ObjectProperty<LocalDateTime> updatedAtProperty() {
+        return updatedAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt.get();
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt.set(updatedAt);
     }
 }

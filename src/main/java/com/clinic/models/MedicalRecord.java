@@ -1,6 +1,5 @@
 package com.clinic.models;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javafx.beans.property.IntegerProperty;
@@ -11,182 +10,313 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class MedicalRecord {
-    private final IntegerProperty id;
-    private final IntegerProperty patientId;
-    private final IntegerProperty doctorId;
-    private final ObjectProperty<LocalDate> visitDate;
-    private final StringProperty chiefComplaint;
-    private final StringProperty historyOfIllness;
-    private final StringProperty vitalSigns;
-    private final StringProperty physicalExam;
-    private final StringProperty diagnosis;
-    private final StringProperty treatment;
+    private final IntegerProperty idRekamMedis;
+    private final IntegerProperty idKunjungan;
+    private final IntegerProperty idPasien;
+    private final IntegerProperty idDokter;
+    private final StringProperty anamnesis;
+    private final StringProperty pemeriksaanFisik;
+    private final StringProperty tekananDarah;
+    private final IntegerProperty nadi;
+    private final IntegerProperty suhu;
+    private final IntegerProperty respirasi;
+    private final IntegerProperty beratBadan;
+    private final IntegerProperty tinggiBadan;
+    private final StringProperty diagnosaUtama;
+    private final StringProperty diagnosaSekunder;
+    private final StringProperty tindakan;
+    private final StringProperty terapi;
+    private final StringProperty catatanDokter;
     private final ObjectProperty<LocalDateTime> createdAt;
     private final ObjectProperty<LocalDateTime> updatedAt;
 
     public MedicalRecord() {
-        this.id = new SimpleIntegerProperty();
-        this.patientId = new SimpleIntegerProperty();
-        this.doctorId = new SimpleIntegerProperty();
-        this.visitDate = new SimpleObjectProperty<>();
-        this.chiefComplaint = new SimpleStringProperty();
-        this.historyOfIllness = new SimpleStringProperty();
-        this.vitalSigns = new SimpleStringProperty();
-        this.physicalExam = new SimpleStringProperty();
-        this.diagnosis = new SimpleStringProperty();
-        this.treatment = new SimpleStringProperty();
+        this.idRekamMedis = new SimpleIntegerProperty();
+        this.idKunjungan = new SimpleIntegerProperty();
+        this.idPasien = new SimpleIntegerProperty();
+        this.idDokter = new SimpleIntegerProperty();
+        this.anamnesis = new SimpleStringProperty();
+        this.pemeriksaanFisik = new SimpleStringProperty();
+        this.tekananDarah = new SimpleStringProperty();
+        this.nadi = new SimpleIntegerProperty();
+        this.suhu = new SimpleIntegerProperty();
+        this.respirasi = new SimpleIntegerProperty();
+        this.beratBadan = new SimpleIntegerProperty();
+        this.tinggiBadan = new SimpleIntegerProperty();
+        this.diagnosaUtama = new SimpleStringProperty();
+        this.diagnosaSekunder = new SimpleStringProperty();
+        this.tindakan = new SimpleStringProperty();
+        this.terapi = new SimpleStringProperty();
+        this.catatanDokter = new SimpleStringProperty();
         this.createdAt = new SimpleObjectProperty<>();
         this.updatedAt = new SimpleObjectProperty<>();
     }
 
-    public MedicalRecord(int id, int patientId, int doctorId, LocalDate visitDate, String chiefComplaint,
-            String historyOfIllness, String vitalSigns, String physicalExam, String diagnosis, String treatment,
-            LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.id = new SimpleIntegerProperty(id);
-        this.patientId = new SimpleIntegerProperty(patientId);
-        this.doctorId = new SimpleIntegerProperty(doctorId);
-        this.visitDate = new SimpleObjectProperty<>(visitDate);
-        this.chiefComplaint = new SimpleStringProperty(chiefComplaint);
-        this.historyOfIllness = new SimpleStringProperty(historyOfIllness);
-        this.vitalSigns = new SimpleStringProperty(vitalSigns);
-        this.physicalExam = new SimpleStringProperty(physicalExam);
-        this.diagnosis = new SimpleStringProperty(diagnosis);
-        this.treatment = new SimpleStringProperty(treatment);
+    public MedicalRecord(
+        int idRekamMedis,
+        int idKunjungan,
+        int idPasien,
+        int idDokter,
+        String anamnesis,
+        String pemeriksaanFisik,
+        String tekananDarah,
+        int nadi,
+        int suhu,
+        int respirasi,
+        int beratBadan,
+        int tinggiBadan,
+        String diagnosaUtama,
+        String diagnosaSekunder,
+        String tindakan,
+        String terapi,
+        String catatanDokter,
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
+    ) {
+        this.idRekamMedis = new SimpleIntegerProperty(idRekamMedis);
+        this.idKunjungan = new SimpleIntegerProperty(idKunjungan);
+        this.idPasien = new SimpleIntegerProperty(idPasien);
+        this.idDokter = new SimpleIntegerProperty(idDokter);
+        this.anamnesis = new SimpleStringProperty(anamnesis);
+        this.pemeriksaanFisik = new SimpleStringProperty(pemeriksaanFisik);
+        this.tekananDarah = new SimpleStringProperty(tekananDarah);
+        this.nadi = new SimpleIntegerProperty(nadi);
+        this.suhu = new SimpleIntegerProperty(suhu);
+        this.respirasi = new SimpleIntegerProperty(respirasi);
+        this.beratBadan = new SimpleIntegerProperty(beratBadan);
+        this.tinggiBadan = new SimpleIntegerProperty(tinggiBadan);
+        this.diagnosaUtama = new SimpleStringProperty(diagnosaUtama);
+        this.diagnosaSekunder = new SimpleStringProperty(diagnosaSekunder);
+        this.tindakan = new SimpleStringProperty(tindakan);
+        this.terapi = new SimpleStringProperty(terapi);
+        this.catatanDokter = new SimpleStringProperty(catatanDokter);
         this.createdAt = new SimpleObjectProperty<>(createdAt);
         this.updatedAt = new SimpleObjectProperty<>(updatedAt);
     }
 
-    // Getter dan Setter untuk id
-    public int getId() {
-        return id.get();
+    // --- Property Methods, Getters, and Setters ---
+    // idRekamMedis
+    public int getIdRekamMedis() {
+        return idRekamMedis.get();
     }
 
-    public IntegerProperty idProperty() {
-        return id;
+    public IntegerProperty idRekamMedisProperty() {
+        return idRekamMedis;
     }
 
-    public void setId(int id) {
-        this.id.set(id);
+    public void setIdRekamMedis(int idRekamMedis) {
+        this.idRekamMedis.set(idRekamMedis);
     }
 
-    // Getter dan Setter untuk patientId
-    public int getPatientId() {
-        return patientId.get();
+    // idKunjungan
+    public int getIdKunjungan() {
+        return idKunjungan.get();
     }
 
-    public IntegerProperty patientIdProperty() {
-        return patientId;
+    public IntegerProperty idKunjunganProperty() {
+        return idKunjungan;
     }
 
-    public void setPatientId(int patientId) {
-        this.patientId.set(patientId);
+    public void setIdKunjungan(int idKunjungan) {
+        this.idKunjungan.set(idKunjungan);
     }
 
-    // Getter dan Setter untuk doctorId
-    public int getDoctorId() {
-        return doctorId.get();
+    // idPasien
+    public int getIdPasien() {
+        return idPasien.get();
     }
 
-    public IntegerProperty doctorIdProperty() {
-        return doctorId;
+    public IntegerProperty idPasienProperty() {
+        return idPasien;
     }
 
-    public void setDoctorId(int doctorId) {
-        this.doctorId.set(doctorId);
+    public void setIdPasien(int idPasien) {
+        this.idPasien.set(idPasien);
     }
 
-    // Getter dan Setter untuk visitDate
-    public LocalDate getVisitDate() {
-        return visitDate.get();
+    // idDokter
+    public int getIdDokter() {
+        return idDokter.get();
     }
 
-    public ObjectProperty<LocalDate> visitDateProperty() {
-        return visitDate;
+    public IntegerProperty idDokterProperty() {
+        return idDokter;
     }
 
-    public void setVisitDate(LocalDate visitDate) {
-        this.visitDate.set(visitDate);
+    public void setIdDokter(int idDokter) {
+        this.idDokter.set(idDokter);
     }
 
-    // Getter dan Setter untuk chiefComplaint
-    public String getChiefComplaint() {
-        return chiefComplaint.get();
+    // anamnesis
+    public String getAnamnesis() {
+        return anamnesis.get();
     }
 
-    public StringProperty chiefComplaintProperty() {
-        return chiefComplaint;
+    public StringProperty anamnesisProperty() {
+        return anamnesis;
     }
 
-    public void setChiefComplaint(String chiefComplaint) {
-        this.chiefComplaint.set(chiefComplaint);
+    public void setAnamnesis(String anamnesis) {
+        this.anamnesis.set(anamnesis);
     }
 
-    // Getter dan Setter untuk historyOfIllness
-    public String getHistoryOfIllness() {
-        return historyOfIllness.get();
+    // pemeriksaanFisik
+    public String getPemeriksaanFisik() {
+        return pemeriksaanFisik.get();
     }
 
-    public StringProperty historyOfIllnessProperty() {
-        return historyOfIllness;
+    public StringProperty pemeriksaanFisikProperty() {
+        return pemeriksaanFisik;
     }
 
-    public void setHistoryOfIllness(String historyOfIllness) {
-        this.historyOfIllness.set(historyOfIllness);
+    public void setPemeriksaanFisik(String pemeriksaanFisik) {
+        this.pemeriksaanFisik.set(pemeriksaanFisik);
     }
 
-    // Getter dan Setter untuk vitalSigns
-    public String getVitalSigns() {
-        return vitalSigns.get();
+    // tekananDarah
+    public String getTekananDarah() {
+        return tekananDarah.get();
     }
 
-    public StringProperty vitalSignsProperty() {
-        return vitalSigns;
+    public StringProperty tekananDarahProperty() {
+        return tekananDarah;
     }
 
-    public void setVitalSigns(String vitalSigns) {
-        this.vitalSigns.set(vitalSigns);
+    public void setTekananDarah(String tekananDarah) {
+        this.tekananDarah.set(tekananDarah);
     }
 
-    // Getter dan Setter untuk physicalExam
-    public String getPhysicalExam() {
-        return physicalExam.get();
+    // nadi
+    public int getNadi() {
+        return nadi.get();
     }
 
-    public StringProperty physicalExamProperty() {
-        return physicalExam;
+    public IntegerProperty nadiProperty() {
+        return nadi;
     }
 
-    public void setPhysicalExam(String physicalExam) {
-        this.physicalExam.set(physicalExam);
+    public void setNadi(int nadi) {
+        this.nadi.set(nadi);
     }
 
-    // Getter dan Setter untuk diagnosis
-    public String getDiagnosis() {
-        return diagnosis.get();
+    // suhu
+    public int getSuhu() {
+        return suhu.get();
     }
 
-    public StringProperty diagnosisProperty() {
-        return diagnosis;
+    public IntegerProperty suhuProperty() {
+        return suhu;
     }
 
-    public void setDiagnosis(String diagnosis) {
-        this.diagnosis.set(diagnosis);
+    public void setSuhu(int suhu) {
+        this.suhu.set(suhu);
     }
 
-    // Getter dan Setter untuk treatment
-    public String getTreatment() {
-        return treatment.get();
+    // respirasi
+    public int getRespirasi() {
+        return respirasi.get();
     }
 
-    public StringProperty treatmentProperty() {
-        return treatment;
+    public IntegerProperty respirasiProperty() {
+        return respirasi;
     }
 
-    public void setTreatment(String treatment) {
-        this.treatment.set(treatment);
+    public void setRespirasi(int respirasi) {
+        this.respirasi.set(respirasi);
     }
 
-    // Getter dan Setter untuk createdAt
+    // beratBadan
+    public int getBeratBadan() {
+        return beratBadan.get();
+    }
+
+    public IntegerProperty beratBadanProperty() {
+        return beratBadan;
+    }
+
+    public void setBeratBadan(int beratBadan) {
+        this.beratBadan.set(beratBadan);
+    }
+
+    // tinggiBadan
+    public int getTinggiBadan() {
+        return tinggiBadan.get();
+    }
+
+    public IntegerProperty tinggiBadanProperty() {
+        return tinggiBadan;
+    }
+
+    public void setTinggiBadan(int tinggiBadan) {
+        this.tinggiBadan.set(tinggiBadan);
+    }
+
+    // diagnosaUtama
+    public String getDiagnosaUtama() {
+        return diagnosaUtama.get();
+    }
+
+    public StringProperty diagnosaUtamaProperty() {
+        return diagnosaUtama;
+    }
+
+    public void setDiagnosaUtama(String diagnosaUtama) {
+        this.diagnosaUtama.set(diagnosaUtama);
+    }
+
+    // diagnosaSekunder
+    public String getDiagnosaSekunder() {
+        return diagnosaSekunder.get();
+    }
+
+    public StringProperty diagnosaSekunderProperty() {
+        return diagnosaSekunder;
+    }
+
+    public void setDiagnosaSekunder(String diagnosaSekunder) {
+        this.diagnosaSekunder.set(diagnosaSekunder);
+    }
+
+    // tindakan
+    public String getTindakan() {
+        return tindakan.get();
+    }
+
+    public StringProperty tindakanProperty() {
+        return tindakan;
+    }
+
+    public void setTindakan(String tindakan) {
+        this.tindakan.set(tindakan);
+    }
+
+    // terapi
+    public String getTerapi() {
+        return terapi.get();
+    }
+
+    public StringProperty terapiProperty() {
+        return terapi;
+    }
+
+    public void setTerapi(String terapi) {
+        this.terapi.set(terapi);
+    }
+
+    // catatanDokter
+    public String getCatatanDokter() {
+        return catatanDokter.get();
+    }
+
+    public StringProperty catatanDokterProperty() {
+        return catatanDokter;
+    }
+
+    public void setCatatanDokter(String catatanDokter) {
+        this.catatanDokter.set(catatanDokter);
+    }
+
+    // createdAt
     public LocalDateTime getCreatedAt() {
         return createdAt.get();
     }
@@ -199,7 +329,7 @@ public class MedicalRecord {
         this.createdAt.set(createdAt);
     }
 
-    // Getter dan Setter untuk updatedAt
+    // untuk updatedAt
     public LocalDateTime getUpdatedAt() {
         return updatedAt.get();
     }

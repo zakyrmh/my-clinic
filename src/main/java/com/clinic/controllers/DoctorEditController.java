@@ -106,4 +106,9 @@ public class DoctorEditController {
     protected void handleDoctorLinkAction() {
         SceneManager.getInstance().switchToDoctorScene();
     }
+
+    @FXML
+    protected void handleMedicalRecordLinkAction() {
+        SceneManager.getInstance().switchToMedicalRecordScene();
+    }
 }

@@ -3,6 +3,8 @@ package com.clinic.models;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.clinic.models.Prescription.PrescriptionStatus;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -11,101 +13,190 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Prescription {
-    private final IntegerProperty id;
-    private final IntegerProperty medicalRecordId;
-    private final IntegerProperty doctorId;
-    private final ObjectProperty<LocalDate> prescriptionDate;
-    private final StringProperty note;
+    private final IntegerProperty idResep;
+    private final IntegerProperty idKunjungan;
+    private final IntegerProperty idDokter;
+    private final IntegerProperty idPasien;
+    private final ObjectProperty<LocalDate> tanggalResep;
+    private final ObjectProperty<PrescriptionStatus> statusResep;
+    private final StringProperty catatanResep;
+    private final IntegerProperty totalBiaya;
     private final ObjectProperty<LocalDateTime> createdAt;
     private final ObjectProperty<LocalDateTime> updatedAt;
 
+    // Enum untuk status resep
+    // 'Diresepkan', 'Sedang Disiapkan', 'Sudah Diambil', 'Batal'\
+    public enum PrescriptionStatus {
+        PRESCRIBED("Diresepkan"), PREPARING("Sedang Disiapkan"), TAKEN("Sudah Diambil"), CANCELLED("Batal");
+
+        private final String value;
+
+        PrescriptionStatus(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public static PrescriptionStatus fromString(String value) {
+            for (PrescriptionStatus status : PrescriptionStatus.values()) {
+                if (status.value.equalsIgnoreCase(value)) {
+                    return status;
+                }
+            }
+            throw new IllegalArgumentException("Invalid prescription status value: " + value);
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+    }
+
     public Prescription() {
-        this.id = new SimpleIntegerProperty();
-        this.medicalRecordId = new SimpleIntegerProperty();
-        this.doctorId = new SimpleIntegerProperty();
-        this.prescriptionDate = new SimpleObjectProperty<>();
-        this.note = new SimpleStringProperty();
+        this.idResep = new SimpleIntegerProperty();
+        this.idKunjungan = new SimpleIntegerProperty();
+        this.idDokter = new SimpleIntegerProperty();
+        this.idPasien = new SimpleIntegerProperty();
+        this.tanggalResep = new SimpleObjectProperty<>();
+        this.statusResep = new SimpleObjectProperty<>();
+        this.catatanResep = new SimpleStringProperty();
+        this.totalBiaya = new SimpleIntegerProperty();
         this.createdAt = new SimpleObjectProperty<>();
         this.updatedAt = new SimpleObjectProperty<>();
     }
 
-    public Prescription(int id, int medicalRecordId, int doctorId, LocalDate prescriptionDate, String note,
-            LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.id = new SimpleIntegerProperty(id);
-        this.medicalRecordId = new SimpleIntegerProperty(medicalRecordId);
-        this.doctorId = new SimpleIntegerProperty(doctorId);
-        this.prescriptionDate = new SimpleObjectProperty<>(prescriptionDate);
-        this.note = new SimpleStringProperty(note);
+    public Prescription(
+            int idResep,
+            int idKunjungan,
+            int idDokter,
+            int idPasien,
+            LocalDate tanggalResep,
+            PrescriptionStatus statusResep,
+            String catatanResep,
+            int totalBiaya,
+            LocalDateTime createdAt,
+            LocalDateTime updatedAt) {
+        this.idResep = new SimpleIntegerProperty();
+        this.idKunjungan = new SimpleIntegerProperty();
+        this.idDokter = new SimpleIntegerProperty();
+        this.idPasien = new SimpleIntegerProperty();
+        this.tanggalResep = new SimpleObjectProperty<>();
+        this.statusResep = new SimpleObjectProperty<>();
+        this.catatanResep = new SimpleStringProperty();
+        this.totalBiaya = new SimpleIntegerProperty();
         this.createdAt = new SimpleObjectProperty<>(createdAt);
         this.updatedAt = new SimpleObjectProperty<>(updatedAt);
     }
 
-    // Getter dan Setter untuk id
-    public int getId() {
-        return id.get();
+    // --- Property Methods, Getters, and Setters ---
+
+    // Id Resep
+    public IntegerProperty idResepProperty() {
+        return idResep;
     }
 
-    public IntegerProperty idProperty() {
-        return id;
+    public int getIdResep() {
+        return idResep.get();
     }
 
-    public void setId(int id) {
-        this.id.set(id);
+    public void setIdResep(int idResep) {
+        this.idResep.set(idResep);
     }
 
-    // Getter dan Setter untuk medicalRecordId
-    public int getMedicalRecordId() {
-        return medicalRecordId.get();
+    // Id Kunjungan
+    public IntegerProperty idKunjunganProperty() {
+        return idKunjungan;
     }
 
-    public IntegerProperty medicalRecordIdProperty() {
-        return medicalRecordId;
+    public int getIdKunjungan() {
+        return idKunjungan.get();
     }
 
-    public void setMedicalRecordId(int medicalRecordId) {
-        this.medicalRecordId.set(medicalRecordId);
+    public void setIdKunjungan(int idKunjungan) {
+        this.idKunjungan.set(idKunjungan);
     }
 
-    // Getter dan Setter untuk doctorId
-    public int getDoctorId() {
-        return doctorId.get();
+    // Id Dokter
+    public IntegerProperty idDokterProperty() {
+        return idDokter;
     }
 
-    public IntegerProperty doctorIdProperty() {
-        return doctorId;
+    public int getIdDokter() {
+        return idDokter.get();
     }
 
-    public void setDoctorId(int doctorId) {
-        this.doctorId.set(doctorId);
+    public void setIdDokter(int idDokter) {
+        this.idDokter.set(idDokter);
     }
 
-    // Getter dan Setter untuk prescriptionDate
-    public LocalDate getPrescriptionDate() {
-        return prescriptionDate.get();
+    // Id Pasien
+    public IntegerProperty idPasienProperty() {
+        return idPasien;
     }
 
-    public ObjectProperty<LocalDate> prescriptionDateProperty() {
-        return prescriptionDate;
+    public int getIdPasien() {
+        return idPasien.get();
     }
 
-    public void setPrescriptionDate(LocalDate prescriptionDate) {
-        this.prescriptionDate.set(prescriptionDate);
+    public void setIdPasien(int idPasien) {
+        this.idPasien.set(idPasien);
     }
 
-    // Getter dan Setter untuk note
-    public String getNote() {
-        return note.get();
+    // Tanggal Resep
+    public ObjectProperty<LocalDate> tanggalResepProperty() {
+        return tanggalResep;
     }
 
-    public StringProperty noteProperty() {
-        return note;
+    public LocalDate getTanggalResep() {
+        return tanggalResep.get();
     }
 
-    public void setNote(String note) {
-        this.note.set(note);
+    public void setTanggalResep(LocalDate tanggalResep) {
+        this.tanggalResep.set(tanggalResep);
     }
 
-    // Getter dan Setter untuk createdAt
+    // Status Resep
+    public ObjectProperty<PrescriptionStatus> statusResepProperty() {
+        return statusResep;
+    }
+
+    public PrescriptionStatus getStatusResep() {
+        return statusResep.get();
+    }
+
+    public void setStatusResep(PrescriptionStatus statusResep) {
+        this.statusResep.set(statusResep);
+    }
+
+    // Catatan Resep
+    public StringProperty catatanResepProperty() {
+        return catatanResep;
+    }
+
+    public String getCatatanResep() {
+        return catatanResep.get();
+    }
+
+    public void setCatatanResep(String catatanResep) {
+        this.catatanResep.set(catatanResep);
+    }
+
+    // Total Biaya
+    public IntegerProperty totalBiayaProperty() {
+        return totalBiaya;
+    }
+
+    public int getTotalBiaya() {
+        return totalBiaya.get();
+    }
+
+    public void setTotalBiaya(int totalBiaya) {
+        this.totalBiaya.set(totalBiaya);
+    }
+
+    // createdAt
     public LocalDateTime getCreatedAt() {
         return createdAt.get();
     }
@@ -118,7 +209,7 @@ public class Prescription {
         this.createdAt.set(createdAt);
     }
 
-    // Getter dan Setter untuk updatedAt
+    // updatedAt
     public LocalDateTime getUpdatedAt() {
         return updatedAt.get();
     }

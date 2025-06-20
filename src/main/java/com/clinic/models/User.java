@@ -2,58 +2,61 @@ package com.clinic.models;
 
 import java.time.LocalDateTime;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class User {
-    public enum Role {
-        ADMIN, NURSE, DOCTOR, DENTIST, PEDIATRICIAN, PHARMACY
-    }
-
-    public enum Status {
-        ACTIVE, INACTIVE
-    }
-
+    private final IntegerProperty idUser;
     private final StringProperty username;
     private final StringProperty password;
-    private final ObjectProperty<Role> role;
-    private final StringProperty name;
+    private final StringProperty namaLengkap;
+    private final StringProperty noTelepon;
     private final StringProperty email;
-    private final StringProperty phone;
-    private final ObjectProperty<Status> status;
     private final ObjectProperty<LocalDateTime> createdAt;
     private final ObjectProperty<LocalDateTime> updatedAt;
 
     // Konstruktor default
     public User() {
-        this.username = new SimpleStringProperty(null);
-        this.password = new SimpleStringProperty(null);
-        this.role = new SimpleObjectProperty<>(null);
-        this.name = new SimpleStringProperty(null);
-        this.email = new SimpleStringProperty(null);
-        this.phone = new SimpleStringProperty(null);
-        this.status = new SimpleObjectProperty<>(Status.ACTIVE);
-        this.createdAt = new SimpleObjectProperty<>(null);
-        this.updatedAt = new SimpleObjectProperty<>(null);
+        this.idUser = new SimpleIntegerProperty();
+        this.username = new SimpleStringProperty();
+        this.password = new SimpleStringProperty();
+        this.namaLengkap = new SimpleStringProperty();
+        this.noTelepon = new SimpleStringProperty();
+        this.email = new SimpleStringProperty();
+        this.createdAt = new SimpleObjectProperty<>();
+        this.updatedAt = new SimpleObjectProperty<>();
     }
 
     // Konstruktor parameter
-    public User(String username, String password, Role role, String name, String email, String phone,
-            Status status, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public User(int idUser, String username, String password, String namaLengkap, String noTelepon, String email,
+            LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.idUser = new SimpleIntegerProperty(idUser);
         this.username = new SimpleStringProperty(username);
         this.password = new SimpleStringProperty(password);
-        this.role = new SimpleObjectProperty<>(role);
-        this.name = new SimpleStringProperty(name);
+        this.namaLengkap = new SimpleStringProperty(namaLengkap);
+        this.noTelepon = new SimpleStringProperty(noTelepon);
         this.email = new SimpleStringProperty(email);
-        this.phone = new SimpleStringProperty(phone);
-        this.status = new SimpleObjectProperty<>(status);
         this.createdAt = new SimpleObjectProperty<>(createdAt);
         this.updatedAt = new SimpleObjectProperty<>(updatedAt);
     }
 
     // --- Property Methods, Getters, and Setters ---
+    // Id User
+    public IntegerProperty idUserProperty() {
+        return idUser;
+    }
+
+    public int getIdUser() {
+        return idUser.get();
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser.set(idUser);
+    }
 
     // Username
     public StringProperty usernameProperty() {
@@ -81,30 +84,30 @@ public class User {
         this.password.set(password);
     }
 
-    // Role
-    public ObjectProperty<Role> roleProperty() {
-        return role;
+    // Nama Lengkap
+    public StringProperty namaLengkapProperty() {
+        return namaLengkap;
     }
 
-    public Role getRole() {
-        return role.get();
+    public String getNamaLengkap() {
+        return namaLengkap.get();
     }
 
-    public void setRole(Role role) {
-        this.role.set(role);
+    public void setNamaLengkap(String namaLengkap) {
+        this.namaLengkap.set(namaLengkap);
     }
 
-    // Name
-    public StringProperty nameProperty() {
-        return name;
+    // No Telepon
+    public StringProperty noTeleponProperty() {
+        return noTelepon;
     }
 
-    public String getName() {
-        return name.get();
+    public String getNoTelepon() {
+        return noTelepon.get();
     }
 
-    public void setName(String name) {
-        this.name.set(name);
+    public void setNoTelepon(String noTelepon) {
+        this.noTelepon.set(noTelepon);
     }
 
     // Email
@@ -118,32 +121,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email.set(email);
-    }
-
-    // Phone
-    public StringProperty phoneProperty() {
-        return phone;
-    }
-
-    public String getPhone() {
-        return phone.get();
-    }
-
-    public void setPhone(String phone) {
-        this.phone.set(phone);
-    }
-
-    // Status
-    public ObjectProperty<Status> statusProperty() {
-        return status;
-    }
-
-    public Status getStatus() {
-        return status.get();
-    }
-
-    public void setStatus(Status status) {
-        this.status.set(status);
     }
 
     // CreatedAt

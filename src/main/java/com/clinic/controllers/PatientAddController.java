@@ -1,7 +1,9 @@
 package com.clinic.controllers;
 
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.clinic.manager.SceneManager;
@@ -22,7 +24,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
 public class PatientAddController {
-    @FXML private TextField medicalRecordField;
     @FXML private TextField nameField;
     @FXML private DatePicker dateOfBirthPicker;
     @FXML private RadioButton maleRadio;
@@ -44,7 +45,7 @@ public class PatientAddController {
         }
 
         Patient patient = new Patient();
-        patient.setMedicalRecord(medicalRecordField.getText());
+        patient.setMedicalRecord(generateMedicalRecord());
         patient.setName(nameField.getText());
         patient.setDateOfBirth(dateOfBirthPicker.getValue());
         patient.setGender(maleRadio.isSelected() ? Gender.MALE : Gender.FEMALE);
@@ -64,9 +65,6 @@ public class PatientAddController {
     private boolean validateInput() {
         StringBuilder errorMessage = new StringBuilder();
 
-        if (medicalRecordField.getText().isEmpty()) {
-            errorMessage.append("Medical Record is required.\n");
-        }
         if (nameField.getText().isEmpty()) {
             errorMessage.append("Name is required.\n");
         }
@@ -115,8 +113,32 @@ public class PatientAddController {
         }
     }
 
+    private String generateMedicalRecord() {
+        SecureRandom random = new SecureRandom();
+        String medicalRecord;
+        do {
+            int number = random.nextInt(100_000);         // 0–99999
+            medicalRecord = String.format("RM%05d", number);
+        } while (!isMedicalRecordUnique(medicalRecord));
+        return medicalRecord;
+    }
+
+    private boolean isMedicalRecordUnique(String medicalRecord) {
+        String sql = "SELECT COUNT(*) FROM patients WHERE medical_record = ?";
+        try (Connection conn = DatabaseUtil.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, medicalRecord);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) == 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     private void handleClear() {
-        medicalRecordField.clear();
         nameField.clear();
         dateOfBirthPicker.setValue(null);
         genderGroup.selectToggle(null);
@@ -154,5 +176,10 @@ public class PatientAddController {
     @FXML
     protected void handleDoctorLinkAction() {
         SceneManager.getInstance().switchToDoctorScene();
+    }
+
+    @FXML
+    protected void handleMedicalRecordLinkAction() {
+        SceneManager.getInstance().switchToMedicalRecordScene();
     }
 }

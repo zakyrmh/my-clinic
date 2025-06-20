@@ -3,10 +3,10 @@ package com.clinic.manager;
 import java.io.IOException;
 import java.net.URL;
 
-import com.clinic.controllers.PatientEditController;
 import com.clinic.controllers.DoctorEditController;
-import com.clinic.models.Patient;
+import com.clinic.controllers.PatientEditController;
 import com.clinic.models.Doctor;
+import com.clinic.models.Patient;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -57,6 +57,10 @@ public class SceneManager {
 
     public void switchToDoctorAddScene() {
         loadScene("/com/clinic/view/doctors/DoctorAdd.fxml");
+    }
+
+    public void switchToMedicalRecordScene() {
+        loadScene("/com/clinic/view/medicalRecords/MedicalRecordView.fxml");
     }
 
     public void switchToPatientEditScene(Patient patient) {

@@ -167,4 +167,9 @@ public class DoctorController {
     protected void handlePatientLinkAction() {
         SceneManager.getInstance().switchToPatientScene();
     }
+
+    @FXML
+    protected void handleMedicalRecordLinkAction() {
+        SceneManager.getInstance().switchToMedicalRecordScene();
+    }
 }

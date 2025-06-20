@@ -25,8 +25,7 @@
                         <Button text="Dashboard" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleDashboardLinkAction"/>
                         <Button text="Patients" styleClass="sidebar-button-active" maxWidth="Infinity"/>
                         <Button text="Doctors" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleDoctorLinkAction"/>
-                        <Button text="Appointments" styleClass="sidebar-button" maxWidth="Infinity"/>
-                        <Button text="Medical Records" styleClass="sidebar-button" maxWidth="Infinity"/>
+                        <Button text="Medical Records" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleMedicalRecordLinkAction"/>
                         <Button text="Reports" styleClass="sidebar-button" maxWidth="Infinity"/>
                     </children>
                 </VBox>

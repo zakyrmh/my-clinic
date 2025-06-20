@@ -25,8 +25,7 @@
                         <Button text="Dashboard" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleDashboardLinkAction"/>
                         <Button text="Patients" styleClass="sidebar-button-active" maxWidth="Infinity" onAction="#handlePatientLinkAction"/>
                         <Button text="Doctors" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleDoctorLinkAction"/>
-                        <Button text="Appointments" styleClass="sidebar-button" maxWidth="Infinity"/>
-                        <Button text="Medical Records" styleClass="sidebar-button" maxWidth="Infinity"/>
+                        <Button text="Medical Records" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleMedicalRecordLinkAction"/>
                         <Button text="Reports" styleClass="sidebar-button" maxWidth="Infinity"/>
                     </children>
                 </VBox>
@@ -71,22 +70,22 @@
                             </VBox.margin>
                             <children>
                                 <Label text="Patient Registration Form" styleClass="form-title"/>
-
+                                <!-- Nomor Identitas -->
                                 <HBox spacing="16" alignment="CENTER_LEFT">
-                                    <Label text="Medical Record" styleClass="label-form"/>
-                                    <TextField fx:id="medicalRecordField" promptText="Enter Medical Record Number" styleClass="text-field"/>
+                                    <Label text="Identity Number" styleClass="label-form"/>
+                                    <TextField fx:id="identityNumberField" promptText="Enter Identity Number" styleClass="text-field"/>
                                 </HBox>
-
+                                <!-- Nama Pasien -->
                                 <HBox spacing="16" alignment="CENTER_LEFT">
                                     <Label text="Name" styleClass="label-form"/>
                                     <TextField fx:id="nameField" promptText="Enter Full Name" styleClass="text-field"/>
                                 </HBox>
-
+                                <!-- Tanggal lahir -->
                                 <HBox spacing="16" alignment="CENTER_LEFT">
                                     <Label text="Date of Birth" styleClass="label-form"/>
                                     <DatePicker fx:id="dateOfBirthPicker" promptText="Select Date" styleClass="date-picker"/>
                                 </HBox>
-
+                                <!-- Jenis Kelamin -->
                                 <HBox spacing="16" alignment="CENTER_LEFT">
                                     <Label text="Gender" styleClass="label-form"/>
                                     <HBox spacing="16">
@@ -101,20 +100,15 @@
                                         <RadioButton fx:id="femaleRadio" text="Female" styleClass="radio-button" toggleGroup="$genderGroup"/>
                                     </HBox>
                                 </HBox>
-
+                                <!-- Alamat -->
                                 <HBox spacing="16" alignment="CENTER_LEFT">
                                     <Label text="Address" styleClass="label-form"/>
                                     <TextArea fx:id="addressField" promptText="Enter Address" styleClass="text-area" prefHeight="80"/>
                                 </HBox>
-
+                                <!-- No Telepon -->
                                 <HBox spacing="16" alignment="CENTER_LEFT">
                                     <Label text="Phone" styleClass="label-form"/>
                                     <TextField fx:id="phoneField" promptText="Enter Phone Number" styleClass="text-field"/>
-                                </HBox>
-
-                                <HBox spacing="16" alignment="CENTER_LEFT">
-                                    <Label text="Identity Number" styleClass="label-form"/>
-                                    <TextField fx:id="identityNumberField" promptText="Enter Identity Number" styleClass="text-field"/>
                                 </HBox>
 
                                 <HBox spacing="20" alignment="CENTER_RIGHT">
