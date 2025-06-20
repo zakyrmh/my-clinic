@@ -330,7 +330,6 @@
     -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-text-fill: #344054;
-    -fx-min-width: 120px;
 }
 
 .text-field {
@@ -433,4 +432,20 @@
 
 .delete-button:hover {
     -fx-background-color: #d92d20;
+}
+
+.required-star {
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+}
+
+.label-title-show {
+    -fx-font-size: 14px;
+    -fx-text-fill: #344054;
+}
+
+.label-data-show {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #344054;
 }

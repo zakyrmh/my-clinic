@@ -1,4 +1,6 @@
 com\clinic\models\Doctor$PracticeStatus.class
+com\clinic\controllers\PatientController$2.class
+com\clinic\controllers\PatientAddController.class
 com\clinic\controllers\DashboardController.class
 com\clinic\models\MedicalRecord.class
 com\clinic\models\Prescription.class
@@ -10,6 +12,8 @@ com\clinic\models\Payment.class
 com\clinic\models\Prescription$PrescriptionStatus.class
 com\clinic\Main.class
 com\clinic\manager\UserSession.class
+com\clinic\controllers\PatientController.class
+com\clinic\controllers\PatientEditController.class
 com\clinic\models\Visit$VisitStatus.class
 com\clinic\models\Doctor.class
 com\clinic\models\Patient$Gender.class
@@ -17,6 +21,7 @@ com\clinic\models\Patient$MaritalStatus.class
 com\clinic\controllers\LoginController.class
 com\clinic\controllers\RegisterController.class
 com\clinic\models\PrescriptionItem.class
+com\clinic\controllers\PatientController$1.class
 com\clinic\models\Visit.class
 com\clinic\manager\SceneManager.class
 com\clinic\models\Patient.class
@@ -25,3 +30,4 @@ com\clinic\models\Payment$PaymentStatus.class
 com\clinic\models\User.class
 com\clinic\models\Visit$PaymentMethod.class
 com\clinic\utils\DatabaseUtil.class
+com\clinic\controllers\PatientShowController.class
