@@ -11,7 +11,7 @@ import com.clinic.utils.SecurityUtil;
 
 public class AuthService {
     public void registerUser(User user) throws SQLException, IllegalArgumentException {
-        String checkUserSql = "SELECT id FROM user WHERE username = ?";
+        String checkUserSql = "SELECT id_user FROM user WHERE username = ?";
         String insertUserSql = "INSERT INTO user (username, password, nama_lengkap, no_telepon, email) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseUtil.getConnection()) {
@@ -52,9 +52,9 @@ public class AuthService {
                     
                     if (SecurityUtil.verifyPassword(storedHash, password)) {
                         int idUser = rs.getInt("id_user");
-                        String namaLengkap = rs.getString("name");
+                        String namaLengkap = rs.getString("nama_lengkap");
                         String email = rs.getString("email");
-                        String noTelepon = rs.getString("phone");
+                        String noTelepon = rs.getString("no_telepon");
                         
                         return new User(idUser, username, storedHash, namaLengkap, noTelepon, email, null, null);
                     }

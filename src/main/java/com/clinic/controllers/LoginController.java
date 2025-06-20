@@ -42,7 +42,7 @@ public class LoginController implements Initializable  {
         String password = passwordField.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            showError("Kesalahan: Kolom Userbane atau Password tidak boleh kosong.");
+            showError("Kesalahan: Kolom Username atau Password tidak boleh kosong.");
             return;
         }
 

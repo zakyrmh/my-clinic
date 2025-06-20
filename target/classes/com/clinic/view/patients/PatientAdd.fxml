@@ -70,44 +70,55 @@
                             </VBox.margin>
                             <children>
                                 <Label text="Patient Registration Form" styleClass="form-title"/>
-                                <!-- Nomor Identitas -->
+                                <!-- Nomor NIK -->
                                 <HBox spacing="16" alignment="CENTER_LEFT">
-                                    <Label text="Identity Number" styleClass="label-form"/>
+                                    <Label text="NIK" styleClass="label-form"/>
                                     <TextField fx:id="identityNumberField" promptText="Enter Identity Number" styleClass="text-field"/>
                                 </HBox>
-                                <!-- Nama Pasien -->
+                                <!-- Nama Lengkap -->
                                 <HBox spacing="16" alignment="CENTER_LEFT">
-                                    <Label text="Name" styleClass="label-form"/>
+                                    <Label text="Nama Lengkap" styleClass="label-form"/>
                                     <TextField fx:id="nameField" promptText="Enter Full Name" styleClass="text-field"/>
-                                </HBox>
-                                <!-- Tanggal lahir -->
-                                <HBox spacing="16" alignment="CENTER_LEFT">
-                                    <Label text="Date of Birth" styleClass="label-form"/>
-                                    <DatePicker fx:id="dateOfBirthPicker" promptText="Select Date" styleClass="date-picker"/>
                                 </HBox>
                                 <!-- Jenis Kelamin -->
                                 <HBox spacing="16" alignment="CENTER_LEFT">
-                                    <Label text="Gender" styleClass="label-form"/>
+                                    <Label text="Jenis Kelamin" styleClass="label-form"/>
                                     <HBox spacing="16">
                                         <VBox.margin>
                                             <Insets right="8" />
                                         </VBox.margin>
-                                        <RadioButton fx:id="maleRadio" text="Male" styleClass="radio-button">
-                                            <toggleGroup>
-                                                <ToggleGroup fx:id="genderGroup"/>
-                                            </toggleGroup>
-                                        </RadioButton>
-                                        <RadioButton fx:id="femaleRadio" text="Female" styleClass="radio-button" toggleGroup="$genderGroup"/>
+                                        <RadioButton fx:id="lakiLakiRadio" text="Laki-laki" styleClass="radio-button" toggleGroup="$jeniKelaminGroup"/>
+                                        <RadioButton fx:id="perempuanRadio" text="Perempuan" styleClass="radio-button" toggleGroup="$jeniKelaminGroup"/>
                                     </HBox>
+                                </HBox>
+                                <!-- Tanggal lahir -->
+                                <HBox spacing="16" alignment="CENTER_LEFT">
+                                    <Label text="Tanggal Lahir" styleClass="label-form"/>
+                                    <DatePicker fx:id="dateOfBirthPicker" promptText="Select Date" styleClass="date-picker"/>
+                                </HBox>
+                                <!-- Tempat Lahir -->
+                                <HBox spacing="16" alignment="CENTER_LEFT">
+                                    <Label text="Tempat Lahir" styleClass="label-form"/>
+                                    <TextArea fx:id="addressField" promptText="Enter Address" styleClass="text-area" prefHeight="80"/>
                                 </HBox>
                                 <!-- Alamat -->
                                 <HBox spacing="16" alignment="CENTER_LEFT">
-                                    <Label text="Address" styleClass="label-form"/>
+                                    <Label text="Alamat" styleClass="label-form"/>
                                     <TextArea fx:id="addressField" promptText="Enter Address" styleClass="text-area" prefHeight="80"/>
                                 </HBox>
                                 <!-- No Telepon -->
                                 <HBox spacing="16" alignment="CENTER_LEFT">
-                                    <Label text="Phone" styleClass="label-form"/>
+                                    <Label text="No Telepon" styleClass="label-form"/>
+                                    <TextField fx:id="phoneField" promptText="Enter Phone Number" styleClass="text-field"/>
+                                </HBox>
+                                <!-- Email -->
+                                <HBox spacing="16" alignment="CENTER_LEFT">
+                                    <Label text="Email" styleClass="label-form"/>
+                                    <TextField fx:id="phoneField" promptText="Enter Phone Number" styleClass="text-field"/>
+                                </HBox>
+                                <!-- Pekerjaan -->
+                                <HBox spacing="16" alignment="CENTER_LEFT">
+                                    <Label text="Pekerjaan" styleClass="label-form"/>
                                     <TextField fx:id="phoneField" promptText="Enter Phone Number" styleClass="text-field"/>
                                 </HBox>
 
