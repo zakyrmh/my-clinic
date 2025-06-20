@@ -11,8 +11,8 @@ import com.clinic.utils.SecurityUtil;
 
 public class AuthService {
     public void registerUser(User user) throws SQLException, IllegalArgumentException {
-        String checkUserSql = "SELECT id FROM users WHERE username = ?";
-        String insertUserSql = "INSERT INTO users (name, username, password, role, email, phone, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String checkUserSql = "SELECT id FROM user WHERE username = ?";
+        String insertUserSql = "INSERT INTO user (username, password, nama_lengkap, no_telepon, email) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseUtil.getConnection()) {
 
@@ -20,20 +20,18 @@ public class AuthService {
                 checkStmt.setString(1, user.getUsername());
                 try (ResultSet rs = checkStmt.executeQuery()) {
                     if (rs.next()) {
-                        throw new IllegalArgumentException("Username '" + user.getUsername() + "' has been used.");
+                        throw new IllegalArgumentException("Username '" + user.getUsername() + "' telah digunakan.");
                     }
                 }
             }
 
             try (PreparedStatement insertStmt = conn.prepareStatement(insertUserSql)) {
                 String hashedPassword = SecurityUtil.hashPassword(user.getPassword());
-                insertStmt.setString(1, user.getName());
-                insertStmt.setString(2, user.getUsername());
-                insertStmt.setString(3, hashedPassword);
-                insertStmt.setString(4, user.getRole().name());
+                insertStmt.setString(1, user.getUsername());
+                insertStmt.setString(2, hashedPassword);
+                insertStmt.setString(3, user.getNamaLengkap());
+                insertStmt.setString(4, user.getNoTelepon());
                 insertStmt.setString(5, user.getEmail());
-                insertStmt.setString(6, user.getPhone());
-                insertStmt.setString(7, user.getStatus().name());
 
                 insertStmt.executeUpdate();
             }
@@ -41,7 +39,7 @@ public class AuthService {
     }
 
     public User login(String username, String password) throws SQLException {
-        String sql = "SELECT id, password, role, name, email, phone, status FROM users WHERE username = ?";
+        String sql = "SELECT id_user, username, password, nama_lengkap, no_telepon, email FROM user WHERE username = ?";
         
         try (Connection conn = DatabaseUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -53,13 +51,12 @@ public class AuthService {
                     String storedHash = rs.getString("password");
                     
                     if (SecurityUtil.verifyPassword(storedHash, password)) {
-                        String name = rs.getString("name");
+                        int idUser = rs.getInt("id_user");
+                        String namaLengkap = rs.getString("name");
                         String email = rs.getString("email");
-                        String phone = rs.getString("phone");
-                        User.Role role = User.Role.valueOf(rs.getString("role").toUpperCase());
-                        User.Status status = User.Status.valueOf(rs.getString("status").toUpperCase());
+                        String noTelepon = rs.getString("phone");
                         
-                        return new User(username, storedHash, role, name, email, phone, status, null, null);
+                        return new User(idUser, username, storedHash, namaLengkap, noTelepon, email, null, null);
                     }
                 }
             }

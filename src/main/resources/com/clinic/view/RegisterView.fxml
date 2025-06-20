@@ -19,28 +19,24 @@
       <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
    </padding>
    <children>
-      <Label styleClass="title-label" text="Registration" />
+      <Label styleClass="title-label" text="Registerasi User Baru" />
       <VBox spacing="10.0">
          <children>
             <VBox spacing="5.0">
-               <Label styleClass="form-label" text="Full name"/>
-               <TextField fx:id="nameField" promptText="Enter full name"/>
+               <Label styleClass="form-label" text="Nama lengkap"/>
+               <TextField fx:id="namaLengkapField" promptText="Masukkan nama lengkap"/>
             </VBox>
             <VBox spacing="5.0">
                <Label styleClass="form-label" text="Username" />
-               <TextField fx:id="usernameField" promptText="Enter username" />
+               <TextField fx:id="usernameField" promptText="Masukkan username" />
             </VBox>
             <VBox spacing="5.0">
                <Label styleClass="form-label" text="Password" />
-               <PasswordField fx:id="passwordField" promptText="Minimum 8 characters" />
+               <PasswordField fx:id="passwordField" promptText="Minimal 8 karakter" />
             </VBox>
             <VBox spacing="5.0">
-               <Label styleClass="form-label" text="Confirm Password" />
-               <PasswordField fx:id="confirmPasswordField" promptText="Repeat password" />
-            </VBox>
-            <VBox spacing="5.0">
-               <Label styleClass="form-label" text="Role" />
-               <ComboBox fx:id="roleComboBox" prefWidth="300.0" promptText="Select a user role" />
+               <Label styleClass="form-label" text="Konfirmasi Password" />
+               <PasswordField fx:id="confirmPasswordField" promptText="Ulangi password" />
             </VBox>
          </children>
       </VBox>
@@ -48,9 +44,14 @@
       <Label fx:id="errorMessage" styleClass="error-message" text="Pesan Error Akan Muncul di Sini" visible="false" managed="false" />
       <HBox alignment="CENTER" spacing="15.0">
          <children>
-            <Button fx:id="registerButton" mnemonicParsing="false" onAction="#handleRegisterButtonAction" styleClass="primary-button" text="Sign Up" />
+            <Button fx:id="registerButton" mnemonicParsing="false" onAction="#handleRegisterButtonAction" styleClass="primary-button" text="Daftar" />
          </children>
       </HBox>
-      <Hyperlink fx:id="loginLink" onAction="#handleLoginLinkAction" text="Already have an account? Sign in here" />
+            <HBox alignment="CENTER">
+         <children>
+            <Label text="Sudah memiliki akun?" />
+            <Hyperlink fx:id="loginLink" onAction="#handleLoginLinkAction" text="Silahkan login" />
+         </children>
+      </HBox>
    </children>
 </VBox>

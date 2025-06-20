@@ -42,7 +42,7 @@ public class LoginController implements Initializable  {
         String password = passwordField.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            showError("Error: Username and Password fields cannot be empty.");
+            showError("Kesalahan: Kolom Userbane atau Password tidak boleh kosong.");
             return;
         }
 
@@ -50,11 +50,11 @@ public class LoginController implements Initializable  {
             User loggedInUser = authService.login(username, password);
 
             if (loggedInUser != null) {
-                showSuccess("Login successful! Welcome, " + loggedInUser.getName());
+                showSuccess("Login berhasil! Selamat datang, " + loggedInUser.getNamaLengkap());
                 UserSession.getInstance().startSession(loggedInUser);
                 SceneManager.getInstance().switchToDashboard();
             } else {
-                showError("Incorrect username or password.");
+                showError("Username atau Password salah.");
             }
         } catch (SQLException e) {
             showError("Error database: " + e.getMessage());

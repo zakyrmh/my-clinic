@@ -11,16 +11,14 @@ import com.clinic.services.AuthService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class RegisterController implements Initializable {
-    @FXML private TextField nameField;
+    @FXML private TextField namaLengkapField;
     @FXML private TextField usernameField;
     @FXML private TextField passwordField;
     @FXML private TextField confirmPasswordField;
-    @FXML private ComboBox<User.Role> roleComboBox;
     @FXML Label successMessage;
     @FXML Label errorMessage;
 
@@ -29,7 +27,6 @@ public class RegisterController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         authService = new AuthService();
-        roleComboBox.getItems().setAll(User.Role.values());
 
         successMessage.managedProperty().bind(successMessage.visibleProperty());
         errorMessage.managedProperty().bind(errorMessage.visibleProperty());
@@ -42,32 +39,31 @@ public class RegisterController implements Initializable {
         successMessage.setVisible(false);
         errorMessage.setVisible(false);
 
-        String name = nameField.getText();
+        String namaLengkap = namaLengkapField.getText();
         String username = usernameField.getText();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
-        User.Role role = roleComboBox.getValue();
 
-        if (name.isEmpty() || username.isEmpty() || password.isEmpty() || role == null) {
-            showError("Error: Name, Username, Password, and Role fields cannot be empty.");
+        if (namaLengkap.isEmpty() || username.isEmpty() || password.isEmpty()) {
+            showError("Kesalahan: Kolom Nama, Username, Password tidak boleh kosong.");
             return;
         }
 
         if (password.length() < 8) {
-            showError("Error: Password must be at least 8 characters long.");
+            showError("Kesalahan: Password harus terdiri dari minimal 8 karakter.");
             return;
         }
         
         if (!password.equals(confirmPassword)) {
-            showError("Error: Password and Confirm Password fields do not match.");
+            showError("Kesalahan: Kolom Password dan Konfirmasi Password tidak cocok.");
             return;
         }
 
-        User newUser = new User(username, password, role, name, null, null, User.Status.ACTIVE, null, null);
+        User newUser = new User(0, username, password, namaLengkap, null, null, null, null);
 
         try {
             authService.registerUser(newUser);
-            showSuccess("Registration successful!");
+            showSuccess("Registerasi berhasil!");
             clearForm();
         } catch (SQLException e) {
             showError("Error database: " + e.getMessage());
@@ -92,10 +88,9 @@ public class RegisterController implements Initializable {
     }
 
     private void clearForm() {
-        nameField.clear();
+        namaLengkapField.clear();
         usernameField.clear();
         passwordField.clear();
         confirmPasswordField.clear();
-        roleComboBox.getSelectionModel().clearSelection();
     }
 }

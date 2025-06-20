@@ -24,11 +24,11 @@
          <children>
             <VBox spacing="5.0">
                <Label styleClass="form-label" text="Username" />
-               <TextField fx:id="usernameField" promptText="Enter username" />
+               <TextField fx:id="usernameField" promptText="Masukkan username" />
             </VBox>
             <VBox spacing="5.0">
                <Label styleClass="form-label" text="Password" />
-               <PasswordField fx:id="passwordField" promptText="Enter password" />
+               <PasswordField fx:id="passwordField" promptText="Masukkan password" />
             </VBox>
          </children>
       </VBox>
@@ -41,8 +41,8 @@
       </HBox>
       <HBox alignment="CENTER">
          <children>
-            <Label text="Don't have an account yet?" />
-            <Hyperlink fx:id="registerLink" onAction="#handleRegisterLinkAction" text="Sign Up here" />
+            <Label text="Belum memiliki akun?" />
+            <Hyperlink fx:id="registerLink" onAction="#handleRegisterLinkAction" text="Daftar disini" />
          </children>
       </HBox>
    </children>
