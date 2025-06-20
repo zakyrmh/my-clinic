@@ -23,10 +23,10 @@
                 <VBox alignment="TOP_CENTER" spacing="16.0">
                     <children>
                         <Button text="Dashboard" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleDashboardLinkAction"/>
-                        <Button text="Patients" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handlePatientLinkAction"/>
-                        <Button text="Doctors" styleClass="sidebar-button-active" maxWidth="Infinity" onAction="#handleDoctorLinkAction"/>
-                        <Button text="Medical Records" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleMedicalRecordLinkAction"/>
-                        <Button text="Reports" styleClass="sidebar-button" maxWidth="Infinity"/>
+                        <Button text="Pasien" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handlePatientLinkAction"/>
+                        <Button text="Dokter" styleClass="sidebar-button-active" maxWidth="Infinity" onAction="#handleDoctorLinkAction"/>
+                        <Button text="Kunjungan" styleClass="sidebar-button" maxWidth="Infinity"/>
+                        <Button text="Rekam Medis" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleMedicalRecordLinkAction"/>
                     </children>
                 </VBox>
             </children>
