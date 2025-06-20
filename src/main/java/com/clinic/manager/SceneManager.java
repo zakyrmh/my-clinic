@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import com.clinic.controllers.PatientEditController;
+import com.clinic.controllers.PatientShowController;
 import com.clinic.models.Patient;
 
 import javafx.fxml.FXMLLoader;
@@ -61,8 +62,33 @@ public class SceneManager {
         loadScene("/com/clinic/view/medicalRecords/MedicalRecordView.fxml");
     }
 
-    public void switchToPatientShowScene() {
-        loadScene("/com/clinic/view/patients/PatientShow.fxml");
+    public void switchToPatientShowScene(Patient patient) {
+        try {
+            URL fxmlUrl = getClass().getResource("/com/clinic/view/patients/PatientShow.fxml");
+            if (fxmlUrl == null) {
+                System.err.println("Tidak dapat menemukan file FXML: /com/clinic/view/patients/PatientShow.fxml");
+                return;
+            }
+            FXMLLoader loader = new FXMLLoader(fxmlUrl);
+            Parent root = loader.load();
+
+            // Ambil controller dari loader dan set data pasien
+            PatientShowController controller = loader.getController();
+            controller.setPatientData(patient);
+
+            Scene scene = new Scene(root);
+            URL cssUrl = getClass().getResource("/com/clinic/css/style.css");
+            if (cssUrl != null) {
+                scene.getStylesheets().add(cssUrl.toExternalForm());
+            }
+
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Detail Pasien");
+            primaryStage.show();
+        } catch (IOException e) {
+            System.err.println("Gagal memuat scene: /com/clinic/view/patients/PatientShow.fxml");
+            e.printStackTrace();
+        }
     }
 
     public void switchToPatientEditScene(Patient patient) {
@@ -86,7 +112,7 @@ public class SceneManager {
             }
 
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Edit Patient");
+            primaryStage.setTitle("Edit Pasien");
             primaryStage.show();
         } catch (IOException e) {
             System.err.println("Gagal memuat scene: /com/clinic/view/patients/PatientEdit.fxml");

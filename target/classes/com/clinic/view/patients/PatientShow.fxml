@@ -87,37 +87,37 @@
                                                         <VBox spacing="8">
                                                             <children>
                                                                 <Label text="No Rekam Medis" styleClass="label-title-show"/>
-                                                                <Label text="RM00001" styleClass="label-data-show"/>
+                                                                <Label fx:id="noRmLabel" styleClass="label-data-show"/>
                                                             </children>
                                                         </VBox>
                                                         <VBox spacing="8">
                                                             <children>
                                                                 <Label text="NIK" styleClass="label-title-show"/>
-                                                                <Label text="1301020611040001" styleClass="label-data-show"/>
+                                                                <Label fx:id="nikLabel" styleClass="label-data-show"/>
                                                             </children>
                                                         </VBox>
                                                         <VBox spacing="8">
                                                             <children>
                                                                 <Label text="Nama Lengkap" styleClass="label-title-show"/>
-                                                                <Label text="Zaky Ramadhan" styleClass="label-data-show"/>
+                                                                <Label fx:id="namaLengkapLabel" styleClass="label-data-show"/>
                                                             </children>
                                                         </VBox>
                                                         <VBox spacing="8">
                                                             <children>
                                                                 <Label text="Jenis Kelamin" styleClass="label-title-show"/>
-                                                                <Label text="Laki-laki" styleClass="label-data-show"/>
+                                                                <Label fx:id="jenisKelaminLabel" styleClass="label-data-show"/>
                                                             </children>
                                                         </VBox>
                                                         <VBox spacing="8">
                                                             <children>
                                                                 <Label text="Tempat, Tanggal Lahir" styleClass="label-title-show"/>
-                                                                <Label text="Sungai Liku, 11/06/2004" styleClass="label-data-show"/>
+                                                                <Label fx:id="ttlLabel" styleClass="label-data-show"/>
                                                             </children>
                                                         </VBox>
                                                         <VBox spacing="8">
                                                             <children>
                                                                 <Label text="Alamat" styleClass="label-title-show"/>
-                                                                <Label text="Padang" styleClass="label-data-show"/>
+                                                                <Label fx:id="alamatLabel" styleClass="label-data-show"/>
                                                             </children>
                                                         </VBox>
                                                     </children>
@@ -127,31 +127,31 @@
                                                         <VBox spacing="8">
                                                             <children>
                                                                 <Label text="No Telepon" styleClass="label-title-show"/>
-                                                                <Label text="085172461010" styleClass="label-data-show"/>
+                                                                <Label fx:id="noTeleponLabel" styleClass="label-data-show"/>
                                                             </children>
                                                         </VBox>
                                                         <VBox spacing="8">
                                                             <children>
                                                                 <Label text="Email" styleClass="label-title-show"/>
-                                                                <Label text="zaky@gmail.com" styleClass="label-data-show"/>
+                                                                <Label fx:id="emailLabel" styleClass="label-data-show"/>
                                                             </children>
                                                         </VBox>
                                                         <VBox spacing="8">
                                                             <children>
                                                                 <Label text="Pekerjaan" styleClass="label-title-show"/>
-                                                                <Label text="Mahasiswa" styleClass="label-data-show"/>
+                                                                <Label fx:id="pekerjaanLabel" styleClass="label-data-show"/>
                                                             </children>
                                                         </VBox>
                                                         <VBox spacing="8">
                                                             <children>
                                                                 <Label text="Status Pernikahan" styleClass="label-title-show"/>
-                                                                <Label text="Belum Menikah" styleClass="label-data-show"/>
+                                                                <Label fx:id="statusPernikahanLabel" styleClass="label-data-show"/>
                                                             </children>
                                                         </VBox>
                                                         <VBox spacing="8">
                                                             <children>
                                                                 <Label text="Golongan Darah" styleClass="label-title-show"/>
-                                                                <Label text="O" styleClass="label-data-show"/>
+                                                                <Label fx:id="golonganDarahLabel" styleClass="label-data-show"/>
                                                             </children>
                                                         </VBox>
                                                     </children>

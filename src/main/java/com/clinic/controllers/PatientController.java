@@ -155,7 +155,7 @@ public class PatientController {
     private void handleViewAction(Patient patient) {
         // TODO: Implementasi navigasi ke halaman detail pasien
         System.out.println("View patient: " + patient.getNamaLengkap());
-        SceneManager.getInstance().switchToPatientShowScene();
+        SceneManager.getInstance().switchToPatientShowScene(patient);
     }
 
     // Handler untuk aksi Edit
