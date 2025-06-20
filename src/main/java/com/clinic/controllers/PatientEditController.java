@@ -134,10 +134,10 @@ public class PatientEditController {
 
                 int rowsAffected = stmt.executeUpdate();
                 if (rowsAffected > 0) {
-                    showAlert(AlertType.INFORMATION, "Success", "Patient updated successfully.");
+                    showAlert(AlertType.INFORMATION, "Success", "Data pasien berhasil diperbarui.");
                     SceneManager.getInstance().switchToPatientScene();
                 } else {
-                    showAlert(AlertType.ERROR, "Error", "Failed to update patient.");
+                    showAlert(AlertType.ERROR, "Error", "Gagal memperbarui data pasien.");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

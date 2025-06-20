@@ -8,7 +8,9 @@
 <?import javafx.scene.shape.*?>
 
 <BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/style.css" fx:controller="com.clinic.controllers.DoctorEditController">
-
+    <fx:define>
+        <ToggleGroup fx:id="statusPraktikgGroup"/>
+    </fx:define>
     <left>
         <VBox alignment="TOP_CENTER" spacing="25.0" styleClass="sidebar">
             <padding>
@@ -70,25 +72,102 @@
                             </VBox.margin>
                             <children>
                                 <Label text="Edit Data Dokter" styleClass="form-title"/>
+                                <HBox spacing="32">
+                                    <children>
+                                        <VBox spacing="16">
+                                            <children>
+                                                <VBox spacing="8" alignment="CENTER_LEFT">
+                                                    <HBox spacing="4" alignment="CENTER_LEFT">
+                                                        <children>
+                                                            <Label text="No SIP" styleClass="label-form"/>
+                                                            <Label text="*"  styleClass="required-star"/>
+                                                        </children>
+                                                    </HBox>
+                                                    <TextField fx:id="noSipField" promptText="Masukkan No SIP" styleClass="text-field"/>
+                                                </VBox>
 
-                                <HBox spacing="16" alignment="CENTER_LEFT">
-                                    <Label text="No Lisensi" styleClass="label-form"/>
-                                    <TextField fx:id="licenseNoField" promptText="Masukkan No Lisensi" styleClass="text-field"/>
-                                </HBox>
+                                                <VBox spacing="8" alignment="CENTER_LEFT">
+                                                    <HBox spacing="4" alignment="CENTER_LEFT">
+                                                        <children>
+                                                            <Label text="Nama Lengkap" styleClass="label-form"/>
+                                                            <Label text="*"  styleClass="required-star"/>
+                                                        </children>
+                                                    </HBox>
+                                                    <TextField fx:id="namaLengkapField" promptText="Masukkan Nama Lengkap" styleClass="text-field"/>
+                                                </VBox>
 
-                                <HBox spacing="16" alignment="CENTER_LEFT">
-                                    <Label text="Nama" styleClass="label-form"/>
-                                    <TextField fx:id="nameField" promptText="Masukkan Nama Lengkap" styleClass="text-field"/>
-                                </HBox>
+                                                <VBox spacing="8" alignment="CENTER_LEFT">
+                                                    <HBox spacing="4" alignment="CENTER_LEFT">
+                                                        <children>
+                                                            <Label text="Spesialisasi" styleClass="label-form"/>
+                                                            <Label text="*"  styleClass="required-star"/>
+                                                        </children>
+                                                    </HBox>
+                                                    <TextField fx:id="spesialisasiField" promptText="Masukkan Spesialisasi" styleClass="text-field"/>
+                                                </VBox>
 
-                                <HBox spacing="16" alignment="CENTER_LEFT">
-                                    <Label text="Spesialisasi" styleClass="label-form"/>
-                                    <TextField fx:id="specializationField" promptText="Masukkan Spesialisasi" styleClass="text-field"/>
-                                </HBox>
+                                                <VBox spacing="8" alignment="CENTER_LEFT">
+                                                    <HBox spacing="4" alignment="CENTER_LEFT">
+                                                        <children>
+                                                            <Label text="No Telepon" styleClass="label-form"/>
+                                                            <Label text="*"  styleClass="required-star"/>
+                                                        </children>
+                                                    </HBox>
+                                                    <TextField fx:id="noTeleponField" promptText="Masukkan No Telepon" styleClass="text-field"/>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+                                        <VBox spacing="16">
+                                            <children>
+                                                <VBox spacing="8" alignment="CENTER_LEFT">
+                                                    <HBox spacing="4" alignment="CENTER_LEFT">
+                                                        <children>
+                                                            <Label text="Email" styleClass="label-form"/>
+                                                            <Label text="*"  styleClass="required-star"/>
+                                                        </children>
+                                                    </HBox>
+                                                    <TextField fx:id="emailField" promptText="Masukkan Email" styleClass="text-field"/>
+                                                </VBox>
 
-                                <HBox spacing="16" alignment="CENTER_LEFT">
-                                    <Label text="Phone" styleClass="label-form"/>
-                                    <TextField fx:id="phoneField" promptText="Enter Phone Number" styleClass="text-field"/>
+                                                <VBox spacing="8" alignment="CENTER_LEFT">
+                                                    <HBox spacing="4" alignment="CENTER_LEFT">
+                                                        <children>
+                                                            <Label text="Alamat" styleClass="label-form"/>
+                                                            <Label text="*"  styleClass="required-star"/>
+                                                        </children>
+                                                    </HBox>
+                                                    <TextArea fx:id="alamatField" promptText="Masukkan Alamat" styleClass="text-area" prefHeight="80"/>
+                                                </VBox>
+
+                                                <VBox spacing="8" alignment="CENTER_LEFT">
+                                                    <HBox spacing="4" alignment="CENTER_LEFT">
+                                                        <children>
+                                                            <Label text="Tanggal Bergabung" styleClass="label-form"/>
+                                                            <Label text="*"  styleClass="required-star"/>
+                                                        </children>
+                                                    </HBox>
+                                                    <DatePicker fx:id="tanggalBergabungPicker" promptText="MM/DD/YYYY" styleClass="date-picker"/>
+                                                </VBox>
+
+                                                <VBox spacing="8" alignment="CENTER_LEFT">
+                                                    <HBox spacing="4" alignment="CENTER_LEFT">
+                                                        <children>
+                                                            <Label text="Status Praktik" styleClass="label-form"/>
+                                                            <Label text="*"  styleClass="required-star"/>
+                                                        </children>
+                                                    </HBox>
+                                                    <HBox spacing="16">
+                                                        <VBox.margin>
+                                                            <Insets right="8" />
+                                                        </VBox.margin>
+                                                        <RadioButton fx:id="aktifRadio" userData="Aktif" text="Aktif" styleClass="radio-button" toggleGroup="$statusPraktikgGroup"/>
+                                                        <RadioButton fx:id="tidakAktifRadio" userData="Tidak Aktif" text="Tidak Aktif" styleClass="radio-button" toggleGroup="$statusPraktikgGroup"/>
+                                                        <RadioButton fx:id="cutiRadio" userData="Cuti" text="Cuti" styleClass="radio-button" toggleGroup="$statusPraktikgGroup"/>
+                                                    </HBox>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+                                    </children>
                                 </HBox>
 
                                 <HBox spacing="20" alignment="CENTER_RIGHT">

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/style.css" fx:controller="com.clinic.controllers.DoctorShowController">
+    <fx:define>
+        <ToggleGroup fx:id="statusPraktikgGroup"/>
+    </fx:define>
+    <left>
+        <VBox alignment="TOP_CENTER" spacing="25.0" styleClass="sidebar">
+            <padding>
+                <Insets top="20.0" />
+            </padding>
+            <children>
+                <ImageView fitHeight="32.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/default-profile.jpg" />
+                    </image>
+                </ImageView>
+                <VBox alignment="TOP_CENTER" spacing="16.0">
+                    <children>
+                        <Button text="Dashboard" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleDashboardLinkAction"/>
+                        <Button text="Pasien" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handlePatientLinkAction"/>
+                        <Button text="Dokter" styleClass="sidebar-button-active" maxWidth="Infinity" onAction="#handleDoctorLinkAction"/>
+                        <Button text="Kunjungan" styleClass="sidebar-button" maxWidth="Infinity"/>
+                        <Button text="Rekam Medis" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleMedicalRecordLinkAction"/>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <BorderPane>
+            <top>
+                <HBox alignment="CENTER_RIGHT" prefHeight="80.0" styleClass="header">
+                <padding>
+                    <Insets right="30.0" />
+                </padding>
+                <children>
+                    <MenuButton styleClass="user-profile-button" text="" nodeOrientation="RIGHT_TO_LEFT">
+                        <graphic>
+                            <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../images/default-profile.jpg" />
+                            </image>
+                            <clip>
+                                <Circle centerX="21.0" centerY="21.0" radius="21.0" />
+                            </clip>
+                            </ImageView>
+                        </graphic>
+                        <items>
+                            <MenuItem text="Edit profile"/>
+                            <MenuItem text="Sign out" onAction="#handleLogout"/>
+                        </items>
+                    </MenuButton>
+                </children>
+                </HBox>
+            </top>
+    
+            <center>
+                <VBox>
+                    <children>                
+                        <VBox styleClass="form-container" spacing="16">
+                            <VBox.margin>
+                                <Insets top="16" right="16" bottom="16" left="16"/>
+                            </VBox.margin>
+                            <children>
+                                <Label text="Detail Data Dokter" styleClass="form-title"/>
+                                <HBox spacing="32">
+                                    <children>
+                                        <VBox>
+                                            <children>
+                                                <ImageView fitHeight="200" fitWidth="200" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../../images/default-profile.jpg" />
+                                                    </image>
+                                                </ImageView>
+                                            </children>
+                                        </VBox>
+                                        <HBox spacing="80">
+                                            <children>
+                                                <VBox spacing="16">
+                                                    <children>
+                                                        <VBox spacing="8">
+                                                            <children>
+                                                                <Label text="No SIP" styleClass="label-title-show"/>
+                                                                <Label fx:id="noSipLabel" styleClass="label-data-show"/>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox spacing="8">
+                                                            <children>
+                                                                <Label text="Nama Lengkap" styleClass="label-title-show"/>
+                                                                <Label fx:id="namaLengkapLabel" styleClass="label-data-show"/>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox spacing="8">
+                                                            <children>
+                                                                <Label text="Spesialisasi" styleClass="label-title-show"/>
+                                                                <Label fx:id="spesialisasiLabel" styleClass="label-data-show"/>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox spacing="8">
+                                                            <children>
+                                                                <Label text="No Telepon" styleClass="label-title-show"/>
+                                                                <Label fx:id="noTeleponLabel" styleClass="label-data-show"/>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="16">
+                                                    <children>
+                                                        <VBox spacing="8">
+                                                            <children>
+                                                                <Label text="Email" styleClass="label-title-show"/>
+                                                                <Label fx:id="emailLabel" styleClass="label-data-show"/>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox spacing="8">
+                                                            <children>
+                                                                <Label text="Alamat" styleClass="label-title-show"/>
+                                                                <Label fx:id="alamatLabel" styleClass="label-data-show"/>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox spacing="8">
+                                                            <children>
+                                                                <Label text="Tanggal Bergabung" styleClass="label-title-show"/>
+                                                                <Label fx:id="tanggalBergabungLabel" styleClass="label-data-show"/>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox spacing="8">
+                                                            <children>
+                                                                <Label text="Status Praktik" styleClass="label-title-show"/>
+                                                                <Label fx:id="statusPraktikLabel" styleClass="label-data-show"/>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </center>
+        </BorderPane>
+    </center>
+    
+</BorderPane>

@@ -73,7 +73,7 @@
                                 <Insets top="16" right="16" bottom="16" left="16"/>
                             </VBox.margin>
                             <children>
-                                <Label text="Patient Registration Form" styleClass="form-title"/>
+                                <Label text="Tambah Data Pasien" styleClass="form-title"/>
                                 <HBox spacing="32">
                                     <children>                                    
                                         <VBox spacing="16">

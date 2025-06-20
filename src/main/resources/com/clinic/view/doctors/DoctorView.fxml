@@ -77,10 +77,11 @@
                             </VBox.margin>
                             <columns>
                                 <TableColumn fx:id="no" text="No" prefWidth="80" styleClass="no-table"/>
-                                <TableColumn fx:id="licenseNo" text="No Lisensi"/>
-                                <TableColumn fx:id="name" text="Nama"/>
-                                <TableColumn fx:id="specialization" text="Spesialisasi"/>
-                                <TableColumn fx:id="phone" text="No Telp"/>
+                                <TableColumn fx:id="noSip" text="No SIP"/>
+                                <TableColumn fx:id="namaLengkap" text="Nama Lengkap"/>
+                                <TableColumn fx:id="spesialisasi" text="Spesialisasi"/>
+                                <TableColumn fx:id="noTelepon" text="No Telpon"/>
+                                <TableColumn fx:id="statusPraktik" text="Status Praktik"/>
                                 <TableColumn fx:id="action" text="Action" prefWidth="200"/>
                             </columns>
                         </TableView>
