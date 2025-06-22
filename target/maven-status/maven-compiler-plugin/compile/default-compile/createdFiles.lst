@@ -12,6 +12,7 @@ com\clinic\models\Doctor.class
 com\clinic\models\Patient$Gender.class
 com\clinic\models\Patient$MaritalStatus.class
 com\clinic\controllers\LoginController.class
+com\clinic\controllers\DashboardController$AntrianRecord.class
 com\clinic\models\Visit.class
 com\clinic\controllers\VisitController.class
 com\clinic\models\Patient.class
