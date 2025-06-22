@@ -79,7 +79,7 @@
                                 <TableColumn fx:id="no" text="No" prefWidth="80" styleClass="no-table"/>
                                 <TableColumn fx:id="namaPasien" text="Nama Pasien"/>
                                 <TableColumn fx:id="namaDokter" text="Nama Dokter"/>
-                                <TableColumn fx:id="noAntrian" text="No Antrian"/>
+                                <TableColumn fx:id="noAntrian" text="No Antrian" styleClass="no-table"/>
                                 <TableColumn fx:id="tanggalKunjungan" text="Tanggal Kunjungan"/>
                                 <TableColumn fx:id="statusKunjungan" text="Status Kunjungan"/>
                                 <TableColumn fx:id="action" text="Action" prefWidth="200"/>
