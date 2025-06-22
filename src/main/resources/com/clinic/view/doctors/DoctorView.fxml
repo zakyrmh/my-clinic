@@ -25,7 +25,7 @@
                         <Button text="Dashboard" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleDashboardLinkAction"/>
                         <Button text="Pasien" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handlePatientLinkAction"/>
                         <Button text="Dokter" styleClass="sidebar-button-active" maxWidth="Infinity"/>
-                        <Button text="Kunjungan" styleClass="sidebar-button" maxWidth="Infinity"/>
+                        <Button text="Kunjungan" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleVisitLinkAction"/>
                         <Button text="Rekam Medis" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleMedicalRecordLinkAction"/>
                     </children>
                 </VBox>

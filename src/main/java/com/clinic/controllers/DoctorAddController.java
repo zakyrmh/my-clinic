@@ -176,6 +176,11 @@ public class DoctorAddController {
     protected void handleDoctorLinkAction() {
         SceneManager.getInstance().switchToDoctorScene();
     }
+
+    @FXML
+    protected void handleVisitLinkAction() {
+        SceneManager.getInstance().switchToVisitScene();
+    }
     
     @FXML
     protected void handleMedicalRecordLinkAction() {

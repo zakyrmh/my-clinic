@@ -13,6 +13,7 @@ com\clinic\models\Patient$Gender.class
 com\clinic\models\Patient$MaritalStatus.class
 com\clinic\controllers\LoginController.class
 com\clinic\models\Visit.class
+com\clinic\controllers\VisitController.class
 com\clinic\models\Patient.class
 com\clinic\utils\SecurityUtil.class
 com\clinic\models\Payment$PaymentStatus.class
@@ -31,8 +32,10 @@ com\clinic\controllers\PatientEditController.class
 com\clinic\controllers\RegisterController.class
 com\clinic\models\PrescriptionItem.class
 com\clinic\controllers\PatientController$1.class
+com\clinic\controllers\VisitController$1.class
 com\clinic\controllers\DoctorController.class
 com\clinic\manager\SceneManager.class
 com\clinic\controllers\DoctorAddController.class
 com\clinic\controllers\DoctorShowController.class
 com\clinic\utils\DatabaseUtil.class
+com\clinic\controllers\VisitAddController.class
