@@ -41,8 +41,8 @@
       </HBox>
       <HBox alignment="CENTER">
          <children>
-            <Label text="Belum memiliki akun?" />
-            <Hyperlink fx:id="registerLink" onAction="#handleRegisterLinkAction" text="Daftar disini" />
+            <Label text="Don't have an account?" />
+            <Hyperlink fx:id="registerLink" onAction="#handleRegisterLinkAction" text="Please register" />
          </children>
       </HBox>
    </children>
