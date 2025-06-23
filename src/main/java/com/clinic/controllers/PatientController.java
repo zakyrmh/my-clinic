@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 
@@ -40,6 +41,8 @@ public class PatientController {
     private TableColumn<Patient, String> tanggalLahir;
     @FXML
     private TableColumn<Patient, Void> action;
+    @FXML
+    private TextField searchField;
 
     @FXML
     public void initialize() {
@@ -56,14 +59,16 @@ public class PatientController {
             String label;
             if (null == g) {
                 label = "";
-            } else label = switch (g) {
-                case MALE -> "Laki-laki";
-                case FEMALE -> "Perempuan";
-                default -> "";
-            };
+            } else
+                label = switch (g) {
+                    case MALE -> "Laki-laki";
+                    case FEMALE -> "Perempuan";
+                    default -> "";
+                };
             return new SimpleStringProperty(label);
         });
         tanggalLahir.setCellValueFactory(new PropertyValueFactory<>("tanggalLahir"));
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> handleSearchAction());
 
         configureActionColumn();
 
@@ -149,6 +154,59 @@ public class PatientController {
                 setGraphic(empty ? null : pane);
             }
         });
+    }
+
+    @FXML
+    private void handleSearchAction() {
+        String keyword = searchField.getText().trim();
+
+        if (keyword.isEmpty()) {
+            loadPatientData(); // tampilkan semua data jika input kosong
+            return;
+        }
+
+        ObservableList<Patient> filteredList = FXCollections.observableArrayList();
+
+        String sql = "SELECT * FROM pasien WHERE LOWER(nama_lengkap) LIKE ?";
+
+        try (Connection conn = DatabaseUtil.getConnection();
+                var pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, "%" + keyword.toLowerCase() + "%");
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Patient.Gender gender = Patient.Gender.fromString(rs.getString("jenis_kelamin"));
+                Patient.MaritalStatus status = Patient.MaritalStatus.fromString(rs.getString("status_pernikahan"));
+                Patient.BloodType bloodType = Patient.BloodType.fromString(rs.getString("golongan_darah"));
+
+                Patient patient = new Patient(
+                        rs.getInt("id_pasien"),
+                        rs.getString("no_rm"),
+                        rs.getString("nik"),
+                        rs.getString("nama_lengkap"),
+                        gender,
+                        rs.getDate("tanggal_lahir").toLocalDate(),
+                        rs.getString("tempat_lahir"),
+                        rs.getString("alamat"),
+                        rs.getString("no_telepon"),
+                        rs.getString("email"),
+                        rs.getString("pekerjaan"),
+                        status,
+                        bloodType,
+                        rs.getTimestamp("created_at") != null ? rs.getTimestamp("created_at").toLocalDateTime() : null,
+                        rs.getTimestamp("updated_at") != null ? rs.getTimestamp("updated_at").toLocalDateTime() : null);
+
+                filteredList.add(patient);
+            }
+
+            tableView.setItems(filteredList);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("Error searching patient data: " + e.getMessage());
+        }
     }
 
     // Handler untuk aksi Lihat

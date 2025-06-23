@@ -68,6 +68,15 @@
                             <children>
                                 <Label text="Data Pasien" styleClass="header-title"/>
                                 <Region HBox.hgrow="ALWAYS"/>
+                                <StackPane maxWidth="300">
+                                    <TextField fx:id="searchField" promptText="Cari data..." />
+                                    <Button text="🔍"
+                                            onAction="#handleSearchAction"
+                                            styleClass="btn-search"
+                                            StackPane.alignment="CENTER_RIGHT"
+                                            translateX="-5"
+                                            translateY="0" />
+                                </StackPane>
                                 <Button text="Add" styleClass="primary-button" onAction="#handlePatientAddAction"/>
                             </children>
                         </HBox>
