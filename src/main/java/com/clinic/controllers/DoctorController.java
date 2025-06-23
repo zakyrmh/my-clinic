@@ -41,7 +41,7 @@ public class DoctorController {
         noSip.setCellValueFactory(new PropertyValueFactory<>("noSip"));
         namaLengkap.setCellValueFactory(new PropertyValueFactory<>("namaLengkap"));
         spesialisasi.setCellValueFactory(new PropertyValueFactory<>("spesialisasi"));
-        noTelepon.setCellValueFactory(new PropertyValueFactory<>("spesialisasi"));
+        noTelepon.setCellValueFactory(new PropertyValueFactory<>("noTelepon"));
         statusPraktik.setCellValueFactory(new PropertyValueFactory<>("statusPraktik"));
 
         configureActionColumn();

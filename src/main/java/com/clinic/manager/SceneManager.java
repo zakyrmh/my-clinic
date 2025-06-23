@@ -7,8 +7,10 @@ import com.clinic.controllers.DoctorEditController;
 import com.clinic.controllers.DoctorShowController;
 import com.clinic.controllers.PatientEditController;
 import com.clinic.controllers.PatientShowController;
+import com.clinic.controllers.VisitEditController;
 import com.clinic.models.Doctor;
 import com.clinic.models.Patient;
+import com.clinic.models.Visit;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -181,6 +183,34 @@ public class SceneManager {
             primaryStage.show();
         } catch (IOException e) {
             System.err.println("Gagal memuat scene: /com/clinic/view/doctors/DoctorShow.fxml");
+            e.printStackTrace();
+        }
+    }
+
+    public void switchToVisitEditScene(Visit visit) {
+        try {
+            URL fxmlUrl = getClass().getResource("/com/clinic/view/visits/VisitEdit.fxml");
+            if (fxmlUrl == null) {
+                System.err.println("Tidak dapat menemukan file FXML: /com/clinic/view/visits/VisitEdit.fxml");
+                return;
+            }
+            FXMLLoader loader = new FXMLLoader(fxmlUrl);
+            Parent root = loader.load();
+
+            // Ambil controller dari loader dan set data pasien
+            VisitEditController controller = loader.getController();
+            controller.setVisitData(visit);
+
+            Scene scene = new Scene(root);
+            URL cssUrl = getClass().getResource("/com/clinic/css/style.css");
+            if (cssUrl != null) {
+                scene.getStylesheets().add(cssUrl.toExternalForm());
+            }
+
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            System.err.println("Gagal memuat scene: /com/clinic/view/visits/VisitEdit.fxml");
             e.printStackTrace();
         }
     }

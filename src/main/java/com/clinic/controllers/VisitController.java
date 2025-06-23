@@ -217,8 +217,9 @@ public class VisitController {
     }
 
     private void handleEditAction(Visit visit) {
-        // Logika untuk mengedit kunjungan
+        SceneManager.getInstance().switchToVisitEditScene(visit);
     }
+
 
     private void handleDeleteAction(Visit visit) {
         try (Connection conn = DatabaseUtil.getConnection();
