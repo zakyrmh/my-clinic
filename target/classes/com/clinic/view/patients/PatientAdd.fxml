@@ -180,7 +180,12 @@
                                     <children>
                                         <!-- Status Pernikahan -->
                                         <VBox spacing="8" alignment="CENTER_LEFT">
-                                            <Label text="Status Pernikahan" styleClass="label-form"/>
+                                            <HBox spacing="4" alignment="CENTER_LEFT">
+                                                <children>
+                                                    <Label text="Status Pernikahan" styleClass="label-form"/>
+                                                    <Label text="*"  styleClass="required-star"/>
+                                                </children>
+                                            </HBox>
                                             <HBox spacing="16">
                                                 <VBox.margin>
                                                     <Insets right="8" />
@@ -193,7 +198,12 @@
                                         </VBox>
                                         <!-- Golongan Darah -->
                                         <VBox spacing="8" alignment="CENTER_LEFT">
-                                            <Label text="Golongan Darah" styleClass="label-form"/>
+                                            <HBox spacing="4" alignment="CENTER_LEFT">
+                                                <children>
+                                                    <Label text="Golongan Darah" styleClass="label-form"/>
+                                                    <Label text="*"  styleClass="required-star"/>
+                                                </children>
+                                            </HBox>
                                             <HBox spacing="16">
                                                 <VBox.margin>
                                                     <Insets right="8" />

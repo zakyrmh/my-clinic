@@ -112,6 +112,10 @@ public class PatientAddController {
 
         if (nikField.getText().isEmpty()) {
             errorMessage.append("Diperlukan NIK.\n");
+        } else if (nikField.getText().length() != 16) {
+            errorMessage.append("NIK harus terdiri dari 16 karakter.\n");
+        } else if (!nikField.getText().matches("\\d+")) {
+            errorMessage.append("NIK harus berupa angka.\n");
         }
         if (namaLengkapField.getText().isEmpty()) {
             errorMessage.append("Diperlukan Nama Lengkap.\n");
@@ -130,6 +134,16 @@ public class PatientAddController {
         }
         if (noTeleponField.getText().isEmpty()) {
             errorMessage.append("Diperlukan No Telepon.\n");
+        } else if (!noTeleponField.getText().matches("\\d+")) {
+            errorMessage.append("No telepon harus berupa angka.\n");
+        } else if (noTeleponField.getText().length() > 13) {
+            errorMessage.append("No telepon harus terdiri maksimal 13 karakter.\n");
+        }
+        if (statusPernikahanGroup.getSelectedToggle() == null) {
+            errorMessage.append("Diperlukan Status Pernikahan.\n");
+        }
+        if (golonganDarahGroup.getSelectedToggle() == null) {
+            errorMessage.append("Diperlukan Golongan Darah.\n");
         }
 
         if (errorMessage.length() > 0) {
