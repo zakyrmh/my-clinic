@@ -2,9 +2,11 @@ package com.clinic.manager;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.function.Consumer;
 
 import com.clinic.controllers.DoctorEditController;
 import com.clinic.controllers.DoctorShowController;
+import com.clinic.controllers.MainLayoutController;
 import com.clinic.controllers.PatientEditController;
 import com.clinic.controllers.PatientShowController;
 import com.clinic.controllers.VisitEditController;
@@ -21,9 +23,11 @@ public class SceneManager {
 
     private static SceneManager instance;
     private Stage primaryStage;
+    private MainLayoutController mainLayoutController;
 
-    private SceneManager() {}
-    
+    private SceneManager() {
+    }
+
     public static SceneManager getInstance() {
         if (instance == null) {
             instance = new SceneManager();
@@ -35,6 +39,10 @@ public class SceneManager {
         this.primaryStage = primaryStage;
     }
 
+    // ————————————————
+    // 1) SCENES TANPA LAYOUT
+    // ————————————————
+
     public void switchToLoginScene() {
         loadScene("/com/clinic/view/LoginView.fxml");
     }
@@ -43,198 +51,168 @@ public class SceneManager {
         loadScene("/com/clinic/view/RegisterView.fxml");
     }
 
+    /**
+     * Utility untuk load FXML biasa (login/register)
+     */
+    private void loadScene(String fxmlPath) {
+        try {
+            URL url = getClass().getResource(fxmlPath);
+            if (url == null) {
+                System.err.println("FXML not found: " + fxmlPath);
+                return;
+            }
+            Parent root = FXMLLoader.load(url);
+            Scene scene = new Scene(root);
+            // stylesheet global (jika ada)
+            URL css = getClass().getResource("/com/clinic/css/style.css");
+            if (css != null)
+                scene.getStylesheets().add(css.toExternalForm());
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            System.err.println("Failed to load scene: " + fxmlPath);
+            e.printStackTrace();
+        }
+    }
+
+    // ————————————————
+    // 2) INISIALISASI MAIN LAYOUT (hanya sekali)
+    // ————————————————
+
+    /**
+     * Dipanggil sekali setelah login sukses.
+     * Load MainLayout.fxml, simpan controller, dan tampilkan scene.
+     * Lalu otomatis navigasi ke Dashboard.
+     */
+    public void showMainLayout() { // ← baru
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/clinic/view/layout/MainLayout.fxml"));
+            Parent root = loader.load();
+            mainLayoutController = loader.getController();
+
+            Scene scene = new Scene(root);
+            URL css = getClass().getResource("/com/clinic/css/style.css");
+            if (css != null)
+                scene.getStylesheets().add(css.toExternalForm());
+
+            primaryStage.setScene(scene);
+            primaryStage.show();
+
+            // load default content → langsung Dashboard
+            switchToDashboard(); // ← memanfaatkan controller yang sudah ada
+
+        } catch (IOException e) {
+            System.err.println("Failed to load MainLayout.fxml");
+            e.printStackTrace();
+        }
+    }
+
+    // ————————————————
+    // 3) NAVIGASI DENGAN MAIN LAYOUT (swap konten + set aktif)
+    // ————————————————
+
     public void switchToDashboard() {
-        loadScene("/com/clinic/view/DashboardView.fxml");
+        // hanya swap content, tidak reload layout
+        mainLayoutController.setPageContent("/com/clinic/view/DashboardView.fxml");
+        mainLayoutController.setActive("btnDashboard");
     }
 
     public void switchToPatientScene() {
-        loadScene("/com/clinic/view/patients/PatientView.fxml");
+        mainLayoutController.setPageContent("/com/clinic/view/patients/PatientView.fxml");
+        mainLayoutController.setActive("btnPasien");
     }
 
     public void switchToPatientAddScene() {
-        loadScene("/com/clinic/view/patients/PatientAdd.fxml");
+        mainLayoutController.setPageContent("/com/clinic/view/patients/PatientAdd.fxml");
+        mainLayoutController.setActive("btnPasien");
     }
 
     public void switchToDoctorScene() {
-        loadScene("/com/clinic/view/doctors/DoctorView.fxml");
+        mainLayoutController.setPageContent("/com/clinic/view/doctors/DoctorView.fxml");
+        mainLayoutController.setActive("btnDokter");
     }
 
     public void switchToDoctorAddScene() {
-        loadScene("/com/clinic/view/doctors/DoctorAdd.fxml");
-    }
-
-    public void switchToMedicalRecordScene() {
-        loadScene("/com/clinic/view/medicalRecords/MedicalRecordView.fxml");
+        mainLayoutController.setPageContent("/com/clinic/view/doctors/DoctorAdd.fxml");
+        mainLayoutController.setActive("btnDokter");
     }
 
     public void switchToVisitScene() {
-        loadScene("/com/clinic/view/visits/VisitView.fxml");
+        mainLayoutController.setPageContent("/com/clinic/view/visits/VisitView.fxml");
+        mainLayoutController.setActive("btnKunjungan");
     }
 
     public void switchToVisitAddScene() {
-        loadScene("/com/clinic/view/visits/VisitAdd.fxml");
+        mainLayoutController.setPageContent("/com/clinic/view/visits/VisitAdd.fxml");
+        mainLayoutController.setActive("btnKunjungan");
+    }
+
+    public void switchToMedicalRecordScene() {
+        mainLayoutController.setPageContent("/com/clinic/view/medicalRecords/MedicalRecordView.fxml");
+        mainLayoutController.setActive("btnRekamMedis");
+    }
+
+    public void switchToPaymentScene() {
+        mainLayoutController.setPageContent("/com/clinic/view/payments/PaymentView.fxml");
+        mainLayoutController.setActive("btnPembayaran");
+    }
+
+    // ————————————————
+    // 4) HALAMAN DENGAN PARAMETER (model injection)
+    // ————————————————
+
+    /**
+     * Generic injector: load pageFxml, inject ke controller, lalu tampilkan
+     */
+    private <C> void loadPageWithController(String pageFxml, Consumer<C> injector) { // ← baru
+        try {
+            FXMLLoader pageLoader = new FXMLLoader(getClass().getResource(pageFxml));
+            Parent pageRoot = pageLoader.load();
+
+            @SuppressWarnings("unchecked")
+            C controller = (C) pageLoader.getController();
+            injector.accept(controller);
+
+            mainLayoutController.getContentArea().getChildren().setAll(pageRoot);
+        } catch (IOException e) {
+            System.err.println("Failed to load page: " + pageFxml);
+            e.printStackTrace();
+        }
     }
 
     public void switchToPatientShowScene(Patient patient) {
-        try {
-            URL fxmlUrl = getClass().getResource("/com/clinic/view/patients/PatientShow.fxml");
-            if (fxmlUrl == null) {
-                System.err.println("Tidak dapat menemukan file FXML: /com/clinic/view/patients/PatientShow.fxml");
-                return;
-            }
-            FXMLLoader loader = new FXMLLoader(fxmlUrl);
-            Parent root = loader.load();
-
-            // Ambil controller dari loader dan set data pasien
-            PatientShowController controller = loader.getController();
-            controller.setPatientData(patient);
-
-            Scene scene = new Scene(root);
-            URL cssUrl = getClass().getResource("/com/clinic/css/style.css");
-            if (cssUrl != null) {
-                scene.getStylesheets().add(cssUrl.toExternalForm());
-            }
-
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            System.err.println("Gagal memuat scene: /com/clinic/view/patients/PatientShow.fxml");
-            e.printStackTrace();
-        }
+        loadPageWithController(
+                "/com/clinic/view/patients/PatientShow.fxml",
+                (PatientShowController ctrl) -> ctrl.setPatientData(patient));
+        mainLayoutController.setActive("btnPasien");
     }
 
     public void switchToPatientEditScene(Patient patient) {
-        try {
-            URL fxmlUrl = getClass().getResource("/com/clinic/view/patients/PatientEdit.fxml");
-            if (fxmlUrl == null) {
-                System.err.println("Tidak dapat menemukan file FXML: /com/clinic/view/patients/PatientEdit.fxml");
-                return;
-            }
-            FXMLLoader loader = new FXMLLoader(fxmlUrl);
-            Parent root = loader.load();
-
-            // Ambil controller dari loader dan set data pasien
-            PatientEditController controller = loader.getController();
-            controller.setPatientData(patient);
-
-            Scene scene = new Scene(root);
-            URL cssUrl = getClass().getResource("/com/clinic/css/style.css");
-            if (cssUrl != null) {
-                scene.getStylesheets().add(cssUrl.toExternalForm());
-            }
-
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            System.err.println("Gagal memuat scene: /com/clinic/view/patients/PatientEdit.fxml");
-            e.printStackTrace();
-        }
+        loadPageWithController(
+                "/com/clinic/view/patients/PatientEdit.fxml",
+                (PatientEditController ctrl) -> ctrl.setPatientData(patient));
+        mainLayoutController.setActive("btnPasien");
     }
 
     public void switchToDoctorEditScene(Doctor doctor) {
-        try {
-            URL fxmlUrl = getClass().getResource("/com/clinic/view/doctors/DoctorEdit.fxml");
-            if (fxmlUrl == null) {
-                System.err.println("Tidak dapat menemukan file FXML: /com/clinic/view/doctors/DoctorEdit.fxml");
-                return;
-            }
-            FXMLLoader loader = new FXMLLoader(fxmlUrl);
-            Parent root = loader.load();
-
-            // Ambil controller dari loader dan set data pasien
-            DoctorEditController controller = loader.getController();
-            controller.setDoctorData(doctor);
-
-            Scene scene = new Scene(root);
-            URL cssUrl = getClass().getResource("/com/clinic/css/style.css");
-            if (cssUrl != null) {
-                scene.getStylesheets().add(cssUrl.toExternalForm());
-            }
-
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            System.err.println("Gagal memuat scene: /com/clinic/view/doctors/DoctorEdit.fxml");
-            e.printStackTrace();
-        }
+        loadPageWithController(
+                "/com/clinic/view/doctors/DoctorEdit.fxml",
+                (DoctorEditController ctrl) -> ctrl.setDoctorData(doctor));
+        mainLayoutController.setActive("btnDokter");
     }
 
     public void switchToDoctorShowScene(Doctor doctor) {
-        try {
-            URL fxmlUrl = getClass().getResource("/com/clinic/view/doctors/DoctorShow.fxml");
-            if (fxmlUrl == null) {
-                System.err.println("Tidak dapat menemukan file FXML: /com/clinic/view/doctors/DoctorShow.fxml");
-                return;
-            }
-            FXMLLoader loader = new FXMLLoader(fxmlUrl);
-            Parent root = loader.load();
-
-            // Ambil controller dari loader dan set data pasien
-            DoctorShowController controller = loader.getController();
-            controller.setDoctorData(doctor);
-
-            Scene scene = new Scene(root);
-            URL cssUrl = getClass().getResource("/com/clinic/css/style.css");
-            if (cssUrl != null) {
-                scene.getStylesheets().add(cssUrl.toExternalForm());
-            }
-
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            System.err.println("Gagal memuat scene: /com/clinic/view/doctors/DoctorShow.fxml");
-            e.printStackTrace();
-        }
+        loadPageWithController(
+                "/com/clinic/view/doctors/DoctorShow.fxml",
+                (DoctorShowController ctrl) -> ctrl.setDoctorData(doctor));
+        mainLayoutController.setActive("btnDokter");
     }
 
     public void switchToVisitEditScene(Visit visit) {
-        try {
-            URL fxmlUrl = getClass().getResource("/com/clinic/view/visits/VisitEdit.fxml");
-            if (fxmlUrl == null) {
-                System.err.println("Tidak dapat menemukan file FXML: /com/clinic/view/visits/VisitEdit.fxml");
-                return;
-            }
-            FXMLLoader loader = new FXMLLoader(fxmlUrl);
-            Parent root = loader.load();
-
-            // Ambil controller dari loader dan set data pasien
-            VisitEditController controller = loader.getController();
-            controller.setVisitData(visit);
-
-            Scene scene = new Scene(root);
-            URL cssUrl = getClass().getResource("/com/clinic/css/style.css");
-            if (cssUrl != null) {
-                scene.getStylesheets().add(cssUrl.toExternalForm());
-            }
-
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            System.err.println("Gagal memuat scene: /com/clinic/view/visits/VisitEdit.fxml");
-            e.printStackTrace();
-        }
-    }
-    
-    private void loadScene(String fxmlPath) {
-        try {
-            URL fxmlUrl = getClass().getResource(fxmlPath);
-            if (fxmlUrl == null) {
-                System.err.println("Tidak dapat menemukan file FXML: " + fxmlPath);
-                return;
-            }
-            Parent root = FXMLLoader.load(fxmlUrl);
-            Scene scene = new Scene(root);
-            
-            URL cssUrl = getClass().getResource("/com/clinic/css/style.css");
-            if (cssUrl != null) {
-                scene.getStylesheets().add(cssUrl.toExternalForm());
-            }
-
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            System.err.println("Gagal memuat scene: " + fxmlPath);
-            e.printStackTrace();
-        }
+        loadPageWithController(
+                "/com/clinic/view/visits/VisitEdit.fxml",
+                (VisitEditController ctrl) -> ctrl.setVisitData(visit));
+        mainLayoutController.setActive("btnKunjungan");
     }
 }

@@ -25,6 +25,7 @@ com\clinic\models\Doctor$PracticeStatus.class
 com\clinic\controllers\PatientController$2.class
 com\clinic\controllers\DoctorEditController.class
 com\clinic\controllers\VisitEditController.class
+com\clinic\controllers\MainLayoutController.class
 com\clinic\models\MedicalRecord.class
 com\clinic\models\Patient$BloodType.class
 com\clinic\models\Payment$PaymentMethod.class

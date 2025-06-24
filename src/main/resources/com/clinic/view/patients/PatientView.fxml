@@ -8,96 +8,40 @@
 <?import javafx.scene.shape.*?>
 
 <BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/style.css" fx:controller="com.clinic.controllers.PatientController">
-
-    <left>
-        <VBox alignment="TOP_CENTER" spacing="25.0" styleClass="sidebar">
-            <padding>
-                <Insets top="20.0" />
-            </padding>
+    <center>
+        <VBox VBox.vgrow="ALWAYS">
             <children>
-                <ImageView fitHeight="32.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../images/default-profile.jpg" />
-                    </image>
-                </ImageView>
-                <VBox alignment="TOP_CENTER" spacing="16.0">
+                <HBox styleClass="header-container">
                     <children>
-                        <Button text="Dashboard" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleDashboardLinkAction"/>
-                        <Button text="Pasien" styleClass="sidebar-button-active" maxWidth="Infinity"/>
-                        <Button text="Dokter" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleDoctorLinkAction"/>
-                        <Button text="Kunjungan" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleVisitLinkAction"/>
-                        <Button text="Rekam Medis" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleMedicalRecordLinkAction"/>
+                        <Label text="Data Pasien" styleClass="header-title"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <StackPane maxWidth="300">
+                            <TextField fx:id="searchField" promptText="Cari data..." />
+                            <Button text="🔍"
+                                    onAction="#handleSearchAction"
+                                    styleClass="btn-search"
+                                    StackPane.alignment="CENTER_RIGHT"
+                                    translateX="-5"
+                                    translateY="0" />
+                        </StackPane>
+                        <Button text="Add" styleClass="primary-button" onAction="#handlePatientAddAction"/>
                     </children>
-                </VBox>
+                </HBox>
+                <TableView fx:id="tableView" styleClass="custom-table">
+                    <VBox.margin>
+                        <Insets left="16" right="16"/>
+                    </VBox.margin>
+                    <columns>
+                        <TableColumn fx:id="no" text="No" prefWidth="80" styleClass="no-table"/>
+                        <TableColumn fx:id="noRm" text="No. RM"/>
+                        <TableColumn fx:id="namaLengkap" text="Nama Lengkap"/>
+                        <TableColumn fx:id="nik" text="NIK"/>
+                        <TableColumn fx:id="jenisKelamin" text="Jenis Kelamin"/>
+                        <TableColumn fx:id="tanggalLahir" text="Tanggal Lahir"/>
+                        <TableColumn fx:id="action" text="Action" prefWidth="200"/>
+                    </columns>
+                </TableView>
             </children>
         </VBox>
-    </left>
-
-    <center>
-        <BorderPane>
-            <top>
-                <HBox alignment="CENTER_RIGHT" prefHeight="80.0" styleClass="header">
-                <padding>
-                    <Insets right="30.0" />
-                </padding>
-                <children>
-                    <MenuButton styleClass="user-profile-button" text="" nodeOrientation="RIGHT_TO_LEFT">
-                        <graphic>
-                            <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../../images/default-profile.jpg" />
-                            </image>
-                            <clip>
-                                <Circle centerX="21.0" centerY="21.0" radius="21.0" />
-                            </clip>
-                            </ImageView>
-                        </graphic>
-                        <items>
-                            <MenuItem text="Edit profile"/>
-                            <MenuItem text="Sign out" onAction="#handleLogout"/>
-                        </items>
-                    </MenuButton>
-                </children>
-                </HBox>
-            </top>
-    
-            <center>
-                <VBox>
-                    <children>
-                        <HBox styleClass="header-container">
-                            <children>
-                                <Label text="Data Pasien" styleClass="header-title"/>
-                                <Region HBox.hgrow="ALWAYS"/>
-                                <StackPane maxWidth="300">
-                                    <TextField fx:id="searchField" promptText="Cari data..." />
-                                    <Button text="🔍"
-                                            onAction="#handleSearchAction"
-                                            styleClass="btn-search"
-                                            StackPane.alignment="CENTER_RIGHT"
-                                            translateX="-5"
-                                            translateY="0" />
-                                </StackPane>
-                                <Button text="Add" styleClass="primary-button" onAction="#handlePatientAddAction"/>
-                            </children>
-                        </HBox>
-                        <TableView fx:id="tableView" styleClass="custom-table">
-                            <VBox.margin>
-                                <Insets left="16" right="16"/>
-                            </VBox.margin>
-                            <columns>
-                                <TableColumn fx:id="no" text="No" prefWidth="80" styleClass="no-table"/>
-                                <TableColumn fx:id="noRm" text="No. RM"/>
-                                <TableColumn fx:id="namaLengkap" text="Nama Lengkap"/>
-                                <TableColumn fx:id="nik" text="NIK"/>
-                                <TableColumn fx:id="jenisKelamin" text="Jenis Kelamin"/>
-                                <TableColumn fx:id="tanggalLahir" text="Tanggal Lahir"/>
-                                <TableColumn fx:id="action" text="Action" prefWidth="200"/>
-                            </columns>
-                        </TableView>
-                    </children>
-                </VBox>
-            </center>
-        </BorderPane>
     </center>
-    
 </BorderPane>

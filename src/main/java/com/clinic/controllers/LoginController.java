@@ -52,7 +52,7 @@ public class LoginController implements Initializable  {
             if (loggedInUser != null) {
                 showSuccess("Login berhasil! Selamat datang, " + loggedInUser.getNamaLengkap());
                 UserSession.getInstance().startSession(loggedInUser);
-                SceneManager.getInstance().switchToDashboard();
+                SceneManager.getInstance().showMainLayout();
             } else {
                 showError("Username atau Password salah.");
             }

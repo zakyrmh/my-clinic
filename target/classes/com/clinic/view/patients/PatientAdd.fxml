@@ -7,233 +7,235 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/style.css" fx:controller="com.clinic.controllers.PatientAddController">
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/style.css"
+    fx:controller="com.clinic.controllers.PatientAddController">
     <fx:define>
-        <ToggleGroup fx:id="jenisKelaminGroup"/>
-        <ToggleGroup fx:id="statusPernikahanGroup"/>
-        <ToggleGroup fx:id="golonganDarahGroup"/>
+        <ToggleGroup fx:id="jenisKelaminGroup" />
+        <ToggleGroup fx:id="statusPernikahanGroup" />
+        <ToggleGroup fx:id="golonganDarahGroup" />
     </fx:define>
-    <left>
-        <VBox alignment="TOP_CENTER" spacing="25.0" styleClass="sidebar">
-            <padding>
-                <Insets top="20.0" />
-            </padding>
-            <children>
-                <ImageView fitHeight="32.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../images/default-profile.jpg" />
-                    </image>
-                </ImageView>
-                <VBox alignment="TOP_CENTER" spacing="16.0">
-                    <children>
-                        <Button text="Dashboard" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleDashboardLinkAction"/>
-                        <Button text="Pasien" styleClass="sidebar-button-active" maxWidth="Infinity" onAction="#handlePatientLinkAction"/>
-                        <Button text="Dokter" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleDoctorLinkAction"/>
-                        <Button text="Kunjungan" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleVisitLinkAction"/>
-                        <Button text="Rekam Medis" styleClass="sidebar-button" maxWidth="Infinity" onAction="#handleMedicalRecordLinkAction"/>
-                    </children>
-                </VBox>
-            </children>
-        </VBox>
-    </left>
-
     <center>
-        <BorderPane>
-            <top>
-                <HBox alignment="CENTER_RIGHT" prefHeight="80.0" styleClass="header">
-                <padding>
-                    <Insets right="30.0" />
-                </padding>
-                <children>
-                    <MenuButton styleClass="user-profile-button" text="" nodeOrientation="RIGHT_TO_LEFT">
-                        <graphic>
-                            <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../../images/default-profile.jpg" />
-                            </image>
-                            <clip>
-                                <Circle centerX="21.0" centerY="21.0" radius="21.0" />
-                            </clip>
-                            </ImageView>
-                        </graphic>
-                        <items>
-                            <MenuItem text="Edit profile"/>
-                            <MenuItem text="Sign out" onAction="#handleLogout"/>
-                        </items>
-                    </MenuButton>
-                </children>
-                </HBox>
-            </top>
-    
-            <center>
-                <VBox>
-                    <children>                
-                        <VBox styleClass="form-container" spacing="16">
-                            <VBox.margin>
-                                <Insets top="16" right="16" bottom="16" left="16"/>
-                            </VBox.margin>
+        <VBox VBox.vgrow="ALWAYS">
+            <children>
+                <VBox styleClass="form-container" spacing="16">
+                    <VBox.margin>
+                        <Insets top="16" right="16" bottom="16" left="16" />
+                    </VBox.margin>
+                    <children>
+                        <Label text="Tambah Data Pasien" styleClass="form-title" />
+                        <HBox spacing="32">
                             <children>
-                                <Label text="Tambah Data Pasien" styleClass="form-title"/>
-                                <HBox spacing="32">
-                                    <children>                                    
-                                        <VBox spacing="16">
-                                            <children>
-                                                <!-- Nomor NIK -->
-                                                <VBox spacing="8" alignment="CENTER_LEFT">
-                                                    <HBox spacing="4" alignment="CENTER_LEFT">
-                                                        <children>
-                                                            <Label text="NIK" styleClass="label-form"/>
-                                                            <Label text="*"  styleClass="required-star"/>
-                                                        </children>
-                                                    </HBox>
-                                                    <TextField fx:id="nikField" promptText="Masukkan No NIK" styleClass="text-field"/>
-                                                </VBox>
-                                                <!-- Nama Lengkap -->
-                                                <VBox spacing="8" alignment="CENTER_LEFT">
-                                                    <HBox spacing="4" alignment="CENTER_LEFT">
-                                                        <children>
-                                                            <Label text="Nama Lengkap" styleClass="label-form"/>
-                                                            <Label text="*"  styleClass="required-star"/>
-                                                        </children>
-                                                    </HBox>
-                                                    <TextField fx:id="namaLengkapField" promptText="Masukkan Nama Lengkap" styleClass="text-field"/>
-                                                </VBox>
-                                                <!-- Jenis Kelamin -->
-                                                <VBox spacing="8" alignment="CENTER_LEFT">
-                                                    <HBox spacing="4" alignment="CENTER_LEFT">
-                                                        <children>
-                                                            <Label text="Jenis Kelamin" styleClass="label-form"/>
-                                                            <Label text="*"  styleClass="required-star"/>
-                                                        </children>
-                                                    </HBox>
-                                                    <HBox spacing="16">
-                                                        <VBox.margin>
-                                                            <Insets right="8" />
-                                                        </VBox.margin>
-                                                        <RadioButton fx:id="lakiLakiRadio" userData="L" text="Laki-laki" styleClass="radio-button" toggleGroup="$jenisKelaminGroup"/>
-                                                        <RadioButton fx:id="perempuanRadio" userData="P" text="Perempuan" styleClass="radio-button" toggleGroup="$jenisKelaminGroup"/>
-                                                    </HBox>
-                                                </VBox>
-                                            </children>
-                                        </VBox>
-                                        <VBox spacing="16">
-                                            <children>
-                                                <!-- Tanggal lahir -->
-                                                <VBox spacing="8" alignment="CENTER_LEFT">
-                                                    <HBox spacing="4" alignment="CENTER_LEFT">
-                                                        <children>
-                                                            <Label text="Tanggal Lahir" styleClass="label-form"/>
-                                                            <Label text="*"  styleClass="required-star"/>
-                                                        </children>
-                                                    </HBox>
-                                                    <DatePicker fx:id="tanggalLahirPicker" promptText="MM/DD/YYYY" styleClass="date-picker"/>
-                                                </VBox>
-                                                <!-- Tempat Lahir -->
-                                                <VBox spacing="8" alignment="CENTER_LEFT">
-                                                    <HBox spacing="4" alignment="CENTER_LEFT">
-                                                        <children>
-                                                            <Label text="Tempat Lahir" styleClass="label-form"/>
-                                                            <Label text="*"  styleClass="required-star"/>
-                                                        </children>
-                                                    </HBox>
-                                                    <TextArea fx:id="tempatLahirField" promptText="Masukkan Tempat Lahir" styleClass="text-area" prefHeight="80"/>
-                                                </VBox>                                            
-                                                <!-- Alamat -->
-                                                <VBox spacing="8" alignment="CENTER_LEFT">
-                                                    <HBox spacing="4" alignment="CENTER_LEFT">
-                                                        <children>
-                                                            <Label text="Alamat" styleClass="label-form"/>
-                                                            <Label text="*"  styleClass="required-star"/>
-                                                        </children>
-                                                    </HBox>
-                                                    <TextArea fx:id="alamatField" promptText="Masukkan Alamat" styleClass="text-area" prefHeight="80"/>
-                                                </VBox>
-                                            </children>
-                                        </VBox>
-                                        <VBox spacing="16">
-                                            <children>
-                                                <!-- No Telepon -->
-                                                <VBox spacing="8" alignment="CENTER_LEFT">
-                                                    <HBox spacing="4" alignment="CENTER_LEFT">
-                                                        <children>
-                                                            <Label text="No Telepon" styleClass="label-form"/>
-                                                            <Label text="*"  styleClass="required-star"/>
-                                                        </children>
-                                                    </HBox>
-                                                    <TextField fx:id="noTeleponField" promptText="Masukkan No Telepon" styleClass="text-field"/>
-                                                </VBox>
-                                                <!-- Email -->
-                                                <VBox spacing="8" alignment="CENTER_LEFT">
-                                                    <Label text="Email" styleClass="label-form"/>
-                                                    <TextField fx:id="emailField" promptText="Masukkan Email" styleClass="text-field"/>
-                                                </VBox>
-                                                <!-- Pekerjaan -->
-                                                <VBox spacing="8" alignment="CENTER_LEFT">
-                                                    <Label text="Pekerjaan" styleClass="label-form"/>
-                                                    <TextField fx:id="pekerjaanField" promptText="Masukkan Pekerjaan" styleClass="text-field"/>
-                                                </VBox>
-                                            </children>
-                                        </VBox>
-                                    </children>
-                                </HBox>
                                 <VBox spacing="16">
                                     <children>
-                                        <!-- Status Pernikahan -->
+                                        <!-- Nomor NIK -->
                                         <VBox spacing="8" alignment="CENTER_LEFT">
                                             <HBox spacing="4" alignment="CENTER_LEFT">
                                                 <children>
-                                                    <Label text="Status Pernikahan" styleClass="label-form"/>
-                                                    <Label text="*"  styleClass="required-star"/>
+                                                    <Label text="NIK" styleClass="label-form" />
+                                                    <Label text="*" styleClass="required-star" />
                                                 </children>
                                             </HBox>
-                                            <HBox spacing="16">
-                                                <VBox.margin>
-                                                    <Insets right="8" />
-                                                </VBox.margin>
-                                                <RadioButton fx:id="belumMenikahRadio" userData="Belum Menikah" text="Belum Menikah" styleClass="radio-button" toggleGroup="$statusPernikahanGroup"/>
-                                                <RadioButton fx:id="menikahRadio" userData="Menikah" text="Menikah" styleClass="radio-button" toggleGroup="$statusPernikahanGroup"/>
-                                                <RadioButton fx:id="ceraiHidupRadio" userData="Cerai Hidup" text="Cerai Hidup" styleClass="radio-button" toggleGroup="$statusPernikahanGroup"/>
-                                                <RadioButton fx:id="ceraiMatiRadio" userData="Cerai Mati" text="Cerai Mati" styleClass="radio-button" toggleGroup="$statusPernikahanGroup"/>
-                                            </HBox>
+                                            <TextField fx:id="nikField" promptText="Masukkan No NIK"
+                                                styleClass="text-field" />
                                         </VBox>
-                                        <!-- Golongan Darah -->
+                                        <!-- Nama Lengkap -->
                                         <VBox spacing="8" alignment="CENTER_LEFT">
                                             <HBox spacing="4" alignment="CENTER_LEFT">
                                                 <children>
-                                                    <Label text="Golongan Darah" styleClass="label-form"/>
-                                                    <Label text="*"  styleClass="required-star"/>
+                                                    <Label text="Nama Lengkap"
+                                                        styleClass="label-form" />
+                                                    <Label text="*" styleClass="required-star" />
+                                                </children>
+                                            </HBox>
+                                            <TextField fx:id="namaLengkapField"
+                                                promptText="Masukkan Nama Lengkap"
+                                                styleClass="text-field" />
+                                        </VBox>
+                                        <!-- Jenis Kelamin -->
+                                        <VBox spacing="8" alignment="CENTER_LEFT">
+                                            <HBox spacing="4" alignment="CENTER_LEFT">
+                                                <children>
+                                                    <Label text="Jenis Kelamin"
+                                                        styleClass="label-form" />
+                                                    <Label text="*" styleClass="required-star" />
                                                 </children>
                                             </HBox>
                                             <HBox spacing="16">
                                                 <VBox.margin>
                                                     <Insets right="8" />
                                                 </VBox.margin>
-                                                    <RadioButton fx:id="aRadio" userData="A" text="A" styleClass="radio-button" toggleGroup="$golonganDarahGroup"/>
-                                                    <RadioButton fx:id="bRadio" userData="B" text="B" styleClass="radio-button" toggleGroup="$golonganDarahGroup"/>
-                                                    <RadioButton fx:id="abRadio" userData="AB" text="AB" styleClass="radio-button" toggleGroup="$golonganDarahGroup"/>
-                                                    <RadioButton fx:id="oRadio" userData="O" text="O" styleClass="radio-button" toggleGroup="$golonganDarahGroup"/>
-                                                    <RadioButton fx:id="aPlusRadio" userData="A+" text="A+" styleClass="radio-button" toggleGroup="$golonganDarahGroup"/>
-                                                    <RadioButton fx:id="aMinusRadio" userData="A-" text="A−" styleClass="radio-button" toggleGroup="$golonganDarahGroup"/>
-                                                    <RadioButton fx:id="bPlusRadio" userData="B+" text="B+" styleClass="radio-button" toggleGroup="$golonganDarahGroup"/>
-                                                    <RadioButton fx:id="bMinusRadio" userData="B-" text="B−" styleClass="radio-button" toggleGroup="$golonganDarahGroup"/>
-                                                    <RadioButton fx:id="abPlusRadio" userData="AB+" text="AB+" styleClass="radio-button" toggleGroup="$golonganDarahGroup"/>
-                                                    <RadioButton fx:id="abMinusRadio" userData="AB-" text="AB−" styleClass="radio-button" toggleGroup="$golonganDarahGroup"/>
-                                                    <RadioButton fx:id="oPlusRadio" userData="O+" text="O+" styleClass="radio-button" toggleGroup="$golonganDarahGroup"/>
-                                                    <RadioButton fx:id="oMinusRadio" userData="O-" text="O−" styleClass="radio-button" toggleGroup="$golonganDarahGroup"/>
+                                                <RadioButton fx:id="lakiLakiRadio" userData="L"
+                                                    text="Laki-laki" styleClass="radio-button"
+                                                    toggleGroup="$jenisKelaminGroup" />
+                                                <RadioButton fx:id="perempuanRadio" userData="P"
+                                                    text="Perempuan" styleClass="radio-button"
+                                                    toggleGroup="$jenisKelaminGroup" />
                                             </HBox>
                                         </VBox>
                                     </children>
                                 </VBox>
-                                <HBox spacing="20" alignment="CENTER_RIGHT">
-                                    <Button fx:id="cancel" text="Cancel" styleClass="secondary-button" onAction="#handlePatientLinkAction"/>
-                                    <Button fx:id="submitButton" text="Save" styleClass="primary-button"/>
-                                </HBox>
+                                <VBox spacing="16">
+                                    <children>
+                                        <!-- Tanggal lahir -->
+                                        <VBox spacing="8" alignment="CENTER_LEFT">
+                                            <HBox spacing="4" alignment="CENTER_LEFT">
+                                                <children>
+                                                    <Label text="Tanggal Lahir"
+                                                        styleClass="label-form" />
+                                                    <Label text="*" styleClass="required-star" />
+                                                </children>
+                                            </HBox>
+                                            <DatePicker fx:id="tanggalLahirPicker"
+                                                promptText="MM/DD/YYYY" styleClass="date-picker" />
+                                        </VBox>
+                                        <!-- Tempat Lahir -->
+                                        <VBox spacing="8" alignment="CENTER_LEFT">
+                                            <HBox spacing="4" alignment="CENTER_LEFT">
+                                                <children>
+                                                    <Label text="Tempat Lahir"
+                                                        styleClass="label-form" />
+                                                    <Label text="*" styleClass="required-star" />
+                                                </children>
+                                            </HBox>
+                                            <TextArea fx:id="tempatLahirField"
+                                                promptText="Masukkan Tempat Lahir"
+                                                styleClass="text-area" prefHeight="80" />
+                                        </VBox>
+                                        <!-- Alamat -->
+                                        <VBox spacing="8" alignment="CENTER_LEFT">
+                                            <HBox spacing="4" alignment="CENTER_LEFT">
+                                                <children>
+                                                    <Label text="Alamat" styleClass="label-form" />
+                                                    <Label text="*" styleClass="required-star" />
+                                                </children>
+                                            </HBox>
+                                            <TextArea fx:id="alamatField"
+                                                promptText="Masukkan Alamat" styleClass="text-area"
+                                                prefHeight="80" />
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                                <VBox spacing="16">
+                                    <children>
+                                        <!-- No Telepon -->
+                                        <VBox spacing="8" alignment="CENTER_LEFT">
+                                            <HBox spacing="4" alignment="CENTER_LEFT">
+                                                <children>
+                                                    <Label text="No Telepon" styleClass="label-form" />
+                                                    <Label text="*" styleClass="required-star" />
+                                                </children>
+                                            </HBox>
+                                            <TextField fx:id="noTeleponField"
+                                                promptText="Masukkan No Telepon"
+                                                styleClass="text-field" />
+                                        </VBox>
+                                        <!-- Email -->
+                                        <VBox spacing="8" alignment="CENTER_LEFT">
+                                            <Label text="Email" styleClass="label-form" />
+                                            <TextField fx:id="emailField"
+                                                promptText="Masukkan Email" styleClass="text-field" />
+                                        </VBox>
+                                        <!-- Pekerjaan -->
+                                        <VBox spacing="8" alignment="CENTER_LEFT">
+                                            <Label text="Pekerjaan" styleClass="label-form" />
+                                            <TextField fx:id="pekerjaanField"
+                                                promptText="Masukkan Pekerjaan"
+                                                styleClass="text-field" />
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                        <VBox spacing="16">
+                            <children>
+                                <!-- Status Pernikahan -->
+                                <VBox spacing="8" alignment="CENTER_LEFT">
+                                    <HBox spacing="4" alignment="CENTER_LEFT">
+                                        <children>
+                                            <Label text="Status Pernikahan" styleClass="label-form" />
+                                            <Label text="*" styleClass="required-star" />
+                                        </children>
+                                    </HBox>
+                                    <HBox spacing="16">
+                                        <VBox.margin>
+                                            <Insets right="8" />
+                                        </VBox.margin>
+                                        <RadioButton fx:id="belumMenikahRadio"
+                                            userData="Belum Menikah" text="Belum Menikah"
+                                            styleClass="radio-button"
+                                            toggleGroup="$statusPernikahanGroup" />
+                                        <RadioButton fx:id="menikahRadio" userData="Menikah"
+                                            text="Menikah" styleClass="radio-button"
+                                            toggleGroup="$statusPernikahanGroup" />
+                                        <RadioButton fx:id="ceraiHidupRadio" userData="Cerai Hidup"
+                                            text="Cerai Hidup" styleClass="radio-button"
+                                            toggleGroup="$statusPernikahanGroup" />
+                                        <RadioButton fx:id="ceraiMatiRadio" userData="Cerai Mati"
+                                            text="Cerai Mati" styleClass="radio-button"
+                                            toggleGroup="$statusPernikahanGroup" />
+                                    </HBox>
+                                </VBox>
+                                <!-- Golongan Darah -->
+                                <VBox spacing="8" alignment="CENTER_LEFT">
+                                    <HBox spacing="4" alignment="CENTER_LEFT">
+                                        <children>
+                                            <Label text="Golongan Darah" styleClass="label-form" />
+                                            <Label text="*" styleClass="required-star" />
+                                        </children>
+                                    </HBox>
+                                    <HBox spacing="16">
+                                        <VBox.margin>
+                                            <Insets right="8" />
+                                        </VBox.margin>
+                                        <RadioButton fx:id="aRadio" userData="A" text="A"
+                                            styleClass="radio-button"
+                                            toggleGroup="$golonganDarahGroup" />
+                                        <RadioButton fx:id="bRadio" userData="B" text="B"
+                                            styleClass="radio-button"
+                                            toggleGroup="$golonganDarahGroup" />
+                                        <RadioButton fx:id="abRadio" userData="AB" text="AB"
+                                            styleClass="radio-button"
+                                            toggleGroup="$golonganDarahGroup" />
+                                        <RadioButton fx:id="oRadio" userData="O" text="O"
+                                            styleClass="radio-button"
+                                            toggleGroup="$golonganDarahGroup" />
+                                        <RadioButton fx:id="aPlusRadio" userData="A+" text="A+"
+                                            styleClass="radio-button"
+                                            toggleGroup="$golonganDarahGroup" />
+                                        <RadioButton fx:id="aMinusRadio" userData="A-" text="A−"
+                                            styleClass="radio-button"
+                                            toggleGroup="$golonganDarahGroup" />
+                                        <RadioButton fx:id="bPlusRadio" userData="B+" text="B+"
+                                            styleClass="radio-button"
+                                            toggleGroup="$golonganDarahGroup" />
+                                        <RadioButton fx:id="bMinusRadio" userData="B-" text="B−"
+                                            styleClass="radio-button"
+                                            toggleGroup="$golonganDarahGroup" />
+                                        <RadioButton fx:id="abPlusRadio" userData="AB+" text="AB+"
+                                            styleClass="radio-button"
+                                            toggleGroup="$golonganDarahGroup" />
+                                        <RadioButton fx:id="abMinusRadio" userData="AB-" text="AB−"
+                                            styleClass="radio-button"
+                                            toggleGroup="$golonganDarahGroup" />
+                                        <RadioButton fx:id="oPlusRadio" userData="O+" text="O+"
+                                            styleClass="radio-button"
+                                            toggleGroup="$golonganDarahGroup" />
+                                        <RadioButton fx:id="oMinusRadio" userData="O-" text="O−"
+                                            styleClass="radio-button"
+                                            toggleGroup="$golonganDarahGroup" />
+                                    </HBox>
+                                </VBox>
                             </children>
                         </VBox>
+                        <HBox spacing="20" alignment="CENTER_RIGHT">
+                            <Button fx:id="cancel" text="Cancel" styleClass="secondary-button"
+                                onAction="#handlePatientLinkAction" />
+                            <Button fx:id="submitButton" text="Save" styleClass="primary-button" />
+                        </HBox>
                     </children>
                 </VBox>
-            </center>
-        </BorderPane>
+            </children>
+        </VBox>
     </center>
-    
 </BorderPane>
