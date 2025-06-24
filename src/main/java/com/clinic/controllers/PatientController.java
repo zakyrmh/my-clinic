@@ -167,12 +167,13 @@ public class PatientController {
 
         ObservableList<Patient> filteredList = FXCollections.observableArrayList();
 
-        String sql = "SELECT * FROM pasien WHERE LOWER(nama_lengkap) LIKE ?";
+        String sql = "SELECT * FROM pasien WHERE LOWER(nama_lengkap) LIKE ? OR LOWER(no_rm) LIKE ?";
 
         try (Connection conn = DatabaseUtil.getConnection();
                 var pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, "%" + keyword.toLowerCase() + "%");
+            pstmt.setString(2, "%" + keyword.toLowerCase() + "%");
 
             ResultSet rs = pstmt.executeQuery();
 
