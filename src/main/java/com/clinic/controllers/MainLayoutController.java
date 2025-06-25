@@ -35,7 +35,7 @@ public class MainLayoutController {
 
     @FXML
     private void initialize() {
-        allButtons = new Button[] { btnDashboard, btnPasien, btnDokter, btnKunjungan, btnRekamMedis };
+        allButtons = new Button[] { btnDashboard, btnPasien, btnDokter, btnKunjungan, btnRekamMedis, btnPembayaran };
         setPageContent("/com/clinic/view/DashboardView.fxml");
         setActive("btnDashboard");
     }

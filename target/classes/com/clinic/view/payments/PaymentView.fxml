@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/style.css" fx:controller="com.clinic.controllers.PaymentController">
+    <center>
+        <VBox VBox.vgrow="ALWAYS">
+            <children>
+                <HBox styleClass="header-container">
+                    <children>
+                        <Label text="Data Pembayaran" styleClass="header-title"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <StackPane maxWidth="300">
+                            <TextField fx:id="searchField" promptText="Cari data..." />
+                            <Button text="🔍"
+                                    onAction="#handleSearchAction"
+                                    styleClass="btn-search"
+                                    StackPane.alignment="CENTER_RIGHT"
+                                    translateX="-5"
+                                    translateY="0" />
+                        </StackPane>
+                    </children>
+                </HBox>
+                <TableView fx:id="tableView" styleClass="custom-table">
+                    <VBox.margin>
+                        <Insets left="16" right="16"/>
+                    </VBox.margin>
+                    <columns>
+                        <TableColumn fx:id="no" text="No" prefWidth="80" styleClass="no-table"/>
+                        <TableColumn fx:id="noInvoice" text="No. Invoice"/>
+                        <TableColumn fx:id="namaPasien" text="Nama Pasien"/>
+                        <TableColumn fx:id="biayaKonsultasi" text="Biaya Konsultasi"/>
+                        <TableColumn fx:id="biayaObat" text="Biaya Obat"/>
+                        <TableColumn fx:id="biayaTindakan" text="Biaya Tindakan"/>
+                        <TableColumn fx:id="totalBiaya" text="Total Biaya"/>
+                        <TableColumn fx:id="action" text="Action" prefWidth="200"/>
+                    </columns>
+                </TableView>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

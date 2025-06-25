@@ -1,11 +1,13 @@
 package com.clinic.controllers;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import com.clinic.manager.SceneManager;
 import com.clinic.manager.UserSession;
@@ -19,7 +21,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -44,8 +48,8 @@ public class VisitController {
     @FXML
     private TableColumn<Visit, Void> action;
 
-    private Map<Integer, Patient> patientMap = new HashMap<>();
-    private Map<Integer, Doctor> doctorMap = new HashMap<>();
+    private final Map<Integer, Patient> patientMap = new HashMap<>();
+    private final Map<Integer, Doctor> doctorMap = new HashMap<>();
 
     @FXML
     public void initialize() {
@@ -220,15 +224,62 @@ public class VisitController {
         SceneManager.getInstance().switchToVisitEditScene(visit);
     }
 
-
     private void handleDeleteAction(Visit visit) {
+        // 1) Tampilkan konfirmasi
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Konfirmasi Hapus");
+        confirm.setHeaderText(null);
+        confirm.setContentText("Yakin ingin menghapus kunjungan dengan ID "
+                + visit.getIdKunjungan() + " beserta data rekam medis & pembayaran?");
+
+        // Tunggu pilihan user
+        Optional<ButtonType> pilihan = confirm.showAndWait();
+        if (pilihan.isEmpty() || pilihan.get() != ButtonType.OK) {
+            // Jika bukan OK, batalkan
+            return;
+        }
+
+        // 2) Jika OK, lanjutkan hapus
+        String sqlDeletePembayaran = "DELETE FROM pembayaran WHERE id_kunjungan = ?";
+        String sqlDeleteRekamMedis = "DELETE FROM rekam_medis WHERE id_kunjungan = ?";
+        String sqlDeleteKunjungan = "DELETE FROM kunjungan WHERE id_kunjungan = ?";
+
         try (Connection conn = DatabaseUtil.getConnection();
-                Statement stmt = conn.createStatement()) {
-            stmt.executeUpdate("DELETE FROM kunjungan WHERE id_kunjungan = " + visit.getIdKunjungan());
+                PreparedStatement psPemb = conn.prepareStatement(sqlDeletePembayaran);
+                PreparedStatement psRekm = conn.prepareStatement(sqlDeleteRekamMedis);
+                PreparedStatement psKunj = conn.prepareStatement(sqlDeleteKunjungan)) {
+
+            conn.setAutoCommit(false); // transaksi
+
+            // Hapus pembayaran
+            psPemb.setInt(1, visit.getIdKunjungan());
+            psPemb.executeUpdate();
+
+            // Hapus rekam medis
+            psRekm.setInt(1, visit.getIdKunjungan());
+            psRekm.executeUpdate();
+
+            // Hapus kunjungan
+            psKunj.setInt(1, visit.getIdKunjungan());
+            psKunj.executeUpdate();
+
+            conn.commit();
+            conn.setAutoCommit(true);
+
+            // Update UI
             tableView.getItems().remove(visit);
-            System.out.println("Deleted visit: " + visit.getIdKunjungan());
+            System.out.println("Deleted visit and related data: " + visit.getIdKunjungan());
+
         } catch (SQLException e) {
             e.printStackTrace();
+            try {
+                // rollback jika error
+                Connection conn = DatabaseUtil.getConnection();
+                conn.rollback();
+                conn.setAutoCommit(true);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
             System.out.println("Error deleting visit: " + e.getMessage());
         }
     }

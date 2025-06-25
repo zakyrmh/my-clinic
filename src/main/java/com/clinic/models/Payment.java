@@ -22,48 +22,10 @@ public class Payment {
     private final IntegerProperty totalBiaya;
     private final IntegerProperty jumlahBayar;
     private final IntegerProperty kembalian;
-    private final ObjectProperty<PaymentMethod> metodePembayaran;
     private final ObjectProperty<PaymentStatus> statusPembayaran;
     private final ObjectProperty<LocalDate> tanggalPembayaran;
-    private final StringProperty kasir;
-    private final StringProperty keterangan;
     private final ObjectProperty<LocalDateTime> createdAt;
     private final ObjectProperty<LocalDateTime> updatedAt;
-
-    // Enum untuk metode pembayaran
-    // 'Tunai', 'Debit', 'Kredit', 'Transfer', 'BPJS', 'Asuransi'
-    public enum PaymentMethod {
-        CASH("Tunai"),
-        DEBIT("Debit"),
-        CREDIT("Kredit"),
-        TRANSFER("Transfer"),
-        BPJS("BPJS"),
-        ASURANSI("Asuransi");
-
-        private final String value;
-
-        PaymentMethod(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        public static PaymentMethod fromString(String value) {
-            for (PaymentMethod paymentMethod : PaymentMethod.values()) {
-                if (paymentMethod.value.equalsIgnoreCase(value)) {
-                    return paymentMethod;
-                }
-            }
-            throw new IllegalArgumentException("Invalid payment method value: " + value);
-        }
-
-        @Override
-        public String toString() {
-            return value;
-        }
-    }
 
     // Enum untuk status pembayaran
     // 'Pending', 'Lunas', 'Partial', 'Refund'
@@ -108,11 +70,8 @@ public class Payment {
         this.totalBiaya = new SimpleIntegerProperty();
         this.jumlahBayar = new SimpleIntegerProperty();
         this.kembalian = new SimpleIntegerProperty();
-        this.metodePembayaran = new SimpleObjectProperty<>();
         this.statusPembayaran = new SimpleObjectProperty<>();
         this.tanggalPembayaran = new SimpleObjectProperty<>();
-        this.kasir = new SimpleStringProperty();
-        this.keterangan = new SimpleStringProperty();
         this.createdAt = new SimpleObjectProperty<>();
         this.updatedAt = new SimpleObjectProperty<>();
     }
@@ -127,11 +86,8 @@ public class Payment {
             int totalBiaya,
             int jumlahBayar,
             int kembalian,
-            PaymentMethod metodePembayaran,
             PaymentStatus statusPembayaran,
             LocalDate tanggalPembayaran,
-            String kasir,
-            String keterangan,
             LocalDateTime createdAt,
             LocalDateTime updatedAt) {
         this.idPembayaran = new SimpleIntegerProperty(idPembayaran);
@@ -143,11 +99,8 @@ public class Payment {
         this.totalBiaya = new SimpleIntegerProperty(totalBiaya);
         this.jumlahBayar = new SimpleIntegerProperty(jumlahBayar);
         this.kembalian = new SimpleIntegerProperty(kembalian);
-        this.metodePembayaran = new SimpleObjectProperty<>(metodePembayaran);
         this.statusPembayaran = new SimpleObjectProperty<>(statusPembayaran);
         this.tanggalPembayaran = new SimpleObjectProperty<>(tanggalPembayaran);
-        this.kasir = new SimpleStringProperty(kasir);
-        this.keterangan = new SimpleStringProperty(keterangan);
         this.createdAt = new SimpleObjectProperty<>(createdAt);
         this.updatedAt = new SimpleObjectProperty<>(updatedAt);
     }
@@ -271,19 +224,6 @@ public class Payment {
         this.kembalian.set(kembalian);
     }
 
-    // Metode Pembayaran
-    public ObjectProperty<PaymentMethod> metodePembayaranProperty() {
-        return metodePembayaran;
-    }
-
-    public PaymentMethod getMetodePembayaran() {
-        return metodePembayaran.get();
-    }
-
-    public void setMetodePembayaran(PaymentMethod metodePembayaran) {
-        this.metodePembayaran.set(metodePembayaran);
-    }
-
     // Status Pembayaran
     public ObjectProperty<PaymentStatus> statusPembayaranProperty() {
         return statusPembayaran;
@@ -308,32 +248,6 @@ public class Payment {
 
     public void setTanggalPembayaran(LocalDate tanggalPembayaran) {
         this.tanggalPembayaran.set(tanggalPembayaran);
-    }
-
-    // Kasir
-    public StringProperty kasirProperty() {
-        return kasir;
-    }
-
-    public String getKasir() {
-        return kasir.get();
-    }
-
-    public void setKasir(String kasir) {
-        this.kasir.set(kasir);
-    }
-
-    // Keterangan
-    public StringProperty keteranganProperty() {
-        return keterangan;
-    }
-
-    public String getKeterangan() {
-        return keterangan.get();
-    }
-
-    public void setKeterangan(String keterangan) {
-        this.keterangan.set(keterangan);
     }
 
     // CreatedAt

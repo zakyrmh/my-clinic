@@ -9,9 +9,11 @@ import com.clinic.controllers.DoctorShowController;
 import com.clinic.controllers.MainLayoutController;
 import com.clinic.controllers.PatientEditController;
 import com.clinic.controllers.PatientShowController;
+import com.clinic.controllers.PaymentEditController;
 import com.clinic.controllers.VisitEditController;
 import com.clinic.models.Doctor;
 import com.clinic.models.Patient;
+import com.clinic.models.Payment;
 import com.clinic.models.Visit;
 
 import javafx.fxml.FXMLLoader;
@@ -214,5 +216,12 @@ public class SceneManager {
                 "/com/clinic/view/visits/VisitEdit.fxml",
                 (VisitEditController ctrl) -> ctrl.setVisitData(visit));
         mainLayoutController.setActive("btnKunjungan");
+    }
+
+    public void switchToPaymentEditScene(Payment payment) {
+        loadPageWithController(
+                "/com/clinic/view/payments/PaymentEdit.fxml",
+                (PaymentEditController ctrl) -> ctrl.setPaymentData(payment));
+        mainLayoutController.setActive("btnPembayaran");
     }
 }
