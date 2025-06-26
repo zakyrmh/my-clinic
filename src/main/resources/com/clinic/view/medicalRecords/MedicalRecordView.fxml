@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/style.css"
+    fx:controller="com.clinic.controllers.MedicalRecordController">
+    <center>
+        <VBox VBox.vgrow="ALWAYS">
+            <children>
+                <HBox styleClass="header-container">
+                    <children>
+                        <Label text="Data Rekam Medis" styleClass="header-title" />
+                        <Region HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+                <TableView fx:id="tableView" styleClass="custom-table">
+                    <VBox.margin>
+                        <Insets left="16" right="16" />
+                    </VBox.margin>
+                    <columns>
+                        <TableColumn fx:id="no" text="No" prefWidth="80" styleClass="no-table" />
+                        <TableColumn fx:id="noRekamMedis" text="No Rekam Medis" />
+                        <TableColumn fx:id="namaPasien" text="Nama Pasien" />
+                        <TableColumn fx:id="namaDokter" text="Nama Dokter" />
+                        <TableColumn fx:id="diagnosisUtama" text="Diagnosisi Utama" />
+                        <TableColumn fx:id="action" text="Action" prefWidth="200" />
+                    </columns>
+                </TableView>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

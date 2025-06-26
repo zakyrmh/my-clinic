@@ -22,8 +22,8 @@ public class MedicalRecord {
     private final IntegerProperty respirasi;
     private final IntegerProperty beratBadan;
     private final IntegerProperty tinggiBadan;
-    private final StringProperty diagnosaUtama;
-    private final StringProperty diagnosaSekunder;
+    private final StringProperty diagnosisUtama;
+    private final StringProperty diagnosisSekunder;
     private final StringProperty tindakan;
     private final StringProperty terapi;
     private final StringProperty catatanDokter;
@@ -43,8 +43,8 @@ public class MedicalRecord {
         this.respirasi = new SimpleIntegerProperty();
         this.beratBadan = new SimpleIntegerProperty();
         this.tinggiBadan = new SimpleIntegerProperty();
-        this.diagnosaUtama = new SimpleStringProperty();
-        this.diagnosaSekunder = new SimpleStringProperty();
+        this.diagnosisUtama = new SimpleStringProperty();
+        this.diagnosisSekunder = new SimpleStringProperty();
         this.tindakan = new SimpleStringProperty();
         this.terapi = new SimpleStringProperty();
         this.catatanDokter = new SimpleStringProperty();
@@ -65,8 +65,8 @@ public class MedicalRecord {
         int respirasi,
         int beratBadan,
         int tinggiBadan,
-        String diagnosaUtama,
-        String diagnosaSekunder,
+        String diagnosisUtama,
+        String diagnosisSekunder,
         String tindakan,
         String terapi,
         String catatanDokter,
@@ -85,8 +85,8 @@ public class MedicalRecord {
         this.respirasi = new SimpleIntegerProperty(respirasi);
         this.beratBadan = new SimpleIntegerProperty(beratBadan);
         this.tinggiBadan = new SimpleIntegerProperty(tinggiBadan);
-        this.diagnosaUtama = new SimpleStringProperty(diagnosaUtama);
-        this.diagnosaSekunder = new SimpleStringProperty(diagnosaSekunder);
+        this.diagnosisUtama = new SimpleStringProperty(diagnosisUtama);
+        this.diagnosisSekunder = new SimpleStringProperty(diagnosisSekunder);
         this.tindakan = new SimpleStringProperty(tindakan);
         this.terapi = new SimpleStringProperty(terapi);
         this.catatanDokter = new SimpleStringProperty(catatanDokter);
@@ -251,30 +251,30 @@ public class MedicalRecord {
         this.tinggiBadan.set(tinggiBadan);
     }
 
-    // diagnosaUtama
-    public String getDiagnosaUtama() {
-        return diagnosaUtama.get();
+    // diagnosisUtama
+    public String getDiagnosisUtama() {
+        return diagnosisUtama.get();
     }
 
-    public StringProperty diagnosaUtamaProperty() {
-        return diagnosaUtama;
+    public StringProperty diagnosisUtamaProperty() {
+        return diagnosisUtama;
     }
 
-    public void setDiagnosaUtama(String diagnosaUtama) {
-        this.diagnosaUtama.set(diagnosaUtama);
+    public void setDiagnosisUtama(String diagnosisUtama) {
+        this.diagnosisUtama.set(diagnosisUtama);
     }
 
-    // diagnosaSekunder
-    public String getDiagnosaSekunder() {
-        return diagnosaSekunder.get();
+    // diagnosisSekunder
+    public String getDiagnosisSekunder() {
+        return diagnosisSekunder.get();
     }
 
-    public StringProperty diagnosaSekunderProperty() {
-        return diagnosaSekunder;
+    public StringProperty diagnosisSekunderProperty() {
+        return diagnosisSekunder;
     }
 
-    public void setDiagnosaSekunder(String diagnosaSekunder) {
-        this.diagnosaSekunder.set(diagnosaSekunder);
+    public void setDiagnosisSekunder(String diagnosisSekunder) {
+        this.diagnosisSekunder.set(diagnosisSekunder);
     }
 
     // tindakan

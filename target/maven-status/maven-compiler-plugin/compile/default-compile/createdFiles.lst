@@ -30,10 +30,12 @@ com\clinic\controllers\VisitEditController.class
 com\clinic\controllers\MainLayoutController.class
 com\clinic\models\MedicalRecord.class
 com\clinic\models\Patient$BloodType.class
+com\clinic\controllers\MedicalRecordController.class
 com\clinic\controllers\PaymentEditController.class
 com\clinic\manager\UserSession.class
 com\clinic\controllers\DoctorController$1.class
 com\clinic\controllers\PatientEditController.class
+com\clinic\controllers\MedicalRecordController$1.class
 com\clinic\controllers\RegisterController.class
 com\clinic\models\PrescriptionItem.class
 com\clinic\controllers\PatientController$1.class
