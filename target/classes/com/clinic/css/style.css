@@ -4,7 +4,7 @@
 
 /* --- GENERAL & ROOT STYLING --- */
 .root {
-    -fx-background-color: #F4F7FC;
+    -fx-background-color: #FFFFFF;
     -fx-font-family: "Segoe UI", "Inter", Arial, sans-serif;
 }
 
@@ -219,6 +219,10 @@
 }
 
 /* Header Container Styles */
+.container {
+    -fx-background-color: #F4F7FC;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+}
 .header-container {
     -fx-padding: 20 20 15 20;
     -fx-spacing: 10;

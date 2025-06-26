@@ -13,7 +13,7 @@ public class Main extends Application {
         sceneManager.setPrimaryStage(primaryStage);
         
         primaryStage.setTitle("Aplikasi Klinik");
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         
         sceneManager.switchToLoginScene();
     }

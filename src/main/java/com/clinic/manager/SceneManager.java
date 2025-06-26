@@ -17,8 +17,11 @@ import com.clinic.models.Payment;
 import com.clinic.models.Visit;
 
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class SceneManager {
@@ -58,6 +61,14 @@ public class SceneManager {
      */
     private void loadScene(String fxmlPath) {
         try {
+            Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+            double screenWidth = screenBounds.getWidth();
+            double screenHeight = screenBounds.getHeight();
+
+            Pane pane = new Pane();
+            pane.setPrefWidth(screenWidth);
+            pane.setPrefHeight(screenHeight);
+
             URL url = getClass().getResource(fxmlPath);
             if (url == null) {
                 System.err.println("FXML not found: " + fxmlPath);
@@ -70,6 +81,10 @@ public class SceneManager {
             if (css != null)
                 scene.getStylesheets().add(css.toExternalForm());
             primaryStage.setScene(scene);
+            primaryStage.setX(screenBounds.getMinX());
+            primaryStage.setY(screenBounds.getMinY());
+            primaryStage.setWidth(screenWidth);
+            primaryStage.setHeight(screenHeight);
             primaryStage.show();
         } catch (IOException e) {
             System.err.println("Failed to load scene: " + fxmlPath);
