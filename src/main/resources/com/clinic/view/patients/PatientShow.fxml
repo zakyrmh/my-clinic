@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
@@ -67,6 +67,10 @@
                                                             styleClass="label-data-show" />
                                                     </children>
                                                 </VBox>
+                                            </children>
+                                        </VBox>
+                                        <VBox spacing="16">
+                                            <children>
                                                 <VBox spacing="8">
                                                     <children>
                                                         <Label text="Tempat, Tanggal Lahir"
@@ -83,10 +87,6 @@
                                                             styleClass="label-data-show" />
                                                     </children>
                                                 </VBox>
-                                            </children>
-                                        </VBox>
-                                        <VBox spacing="16">
-                                            <children>
                                                 <VBox spacing="8">
                                                     <children>
                                                         <Label text="No Telepon"
@@ -103,6 +103,10 @@
                                                             styleClass="label-data-show" />
                                                     </children>
                                                 </VBox>
+                                            </children>
+                                        </VBox>
+                                        <VBox spacing="16">
+                                            <children>
                                                 <VBox spacing="8">
                                                     <children>
                                                         <Label text="Pekerjaan"
@@ -133,6 +137,27 @@
                                 </HBox>
                             </children>
                         </HBox>
+                        <VBox spacing="8">
+                            <VBox.margin>
+                                <Insets top="16" />
+                            </VBox.margin>
+                            <children>
+                                <Label text="Data Kunjungan" styleClass="section-title" />
+                                <TableView fx:id="tableView" styleClass="custom-table">
+                                    <columns>
+                                        <TableColumn fx:id="no" text="No" prefWidth="80"
+                                            styleClass="no-table" />
+                                        <TableColumn fx:id="tanggalKunjungan" text="Tanggal Kunjungan" />
+                                        <TableColumn fx:id="jamDaftar" text="Jam Daftar" />
+                                        <TableColumn fx:id="jamPeriksa" text="Jam Periksa" />
+                                        <TableColumn fx:id="jamSelesai" text="Jam Selesai" />
+                                        <TableColumn fx:id="jenisKunjungan" text="Jenis Kunjungan" />
+                                        <TableColumn fx:id="statusKunjungan" text="Status Kunjungan" />
+                                        <TableColumn fx:id="keluhanUtama" text="Keluhan Utama" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </VBox>
                     </children>
                 </VBox>
             </children>
