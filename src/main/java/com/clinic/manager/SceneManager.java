@@ -175,6 +175,11 @@ public class SceneManager {
         mainLayoutController.setActive("btnPembayaran");
     }
 
+    public void switchToEditProfileScene() {
+        mainLayoutController.setPageContent("/com/clinic/view/profile/EditProfile.fxml");
+        mainLayoutController.setActive("");
+    }
+
     // ————————————————
     // 4) HALAMAN DENGAN PARAMETER (model injection)
     // ————————————————

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/style.css"
+    fx:controller="com.clinic.controllers.ProfileEditController">
+    <center>
+        <VBox VBox.vgrow="ALWAYS">
+            <children>
+                <VBox styleClass="form-container" spacing="16">
+                    <VBox.margin>
+                        <Insets top="16" right="16" bottom="16" left="16" />
+                    </VBox.margin>
+                    <children>
+                        <Label text="Settings" styleClass="form-title" />
+                        <HBox spacing="64">
+                            <children>
+                                <VBox spacing="16">
+                                    <children>
+                                        <Label text="Informasi Profil" styleClass="section-title" />
+
+                                        <VBox spacing="8" alignment="CENTER_LEFT">
+                                            <Label text="Nama Lengkap"
+                                                styleClass="label-form" />
+                                            <TextField fx:id="namaLengkapField"
+                                                styleClass="text-field" />
+                                        </VBox>
+
+                                        <VBox spacing="8" alignment="CENTER_LEFT">
+                                            <Label text="Email"
+                                                styleClass="label-form" />
+                                            <TextField fx:id="emailField"
+                                                styleClass="text-field" />
+                                        </VBox>
+
+                                        <VBox spacing="8" alignment="CENTER_LEFT">
+                                            <Label text="No Telepon"
+                                                styleClass="label-form" />
+                                            <TextField fx:id="noTeleponField"
+                                                styleClass="text-field" />
+                                        </VBox>
+                                        <Button fx:id="submitButton" text="Simpan"
+                                            styleClass="primary-button"
+                                            onAction="#handleEditProfileAction" />
+                                    </children>
+                                </VBox>
+                                <VBox spacing="16">
+                                    <children>
+                                        <Label text="Edit Password" styleClass="section-title" />
+
+                                        <VBox spacing="8" alignment="CENTER_LEFT">
+                                            <Label text="Password Sekarang"
+                                                styleClass="label-form" />
+                                            <PasswordField fx:id="passwordSekarangField"
+                                                styleClass="text-field" />
+                                        </VBox>
+                                        <VBox spacing="8" alignment="CENTER_LEFT">
+                                            <Label text="Password Baru"
+                                                styleClass="label-form" />
+                                            <PasswordField fx:id="passwordBaruField"
+                                                styleClass="text-field" />
+                                        </VBox>
+                                        <VBox spacing="8" alignment="CENTER_LEFT">
+                                            <Label text="Konfirmasi Password"
+                                                styleClass="label-form" />
+                                            <PasswordField fx:id="konfirmasiPasswordField"
+                                                styleClass="text-field" />
+                                        </VBox>
+                                        <Button fx:id="submitButton" text="Simpan"
+                                            styleClass="primary-button"
+                                            onAction="#handleEditPasswordAction" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

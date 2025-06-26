@@ -22,6 +22,7 @@ com\clinic\utils\SecurityUtil.class
 com\clinic\models\Payment$PaymentStatus.class
 com\clinic\models\User.class
 com\clinic\models\Visit$PaymentMethod.class
+com\clinic\controllers\ProfileEditController.class
 com\clinic\controllers\PatientShowController.class
 com\clinic\models\Doctor$PracticeStatus.class
 com\clinic\controllers\PatientController$2.class

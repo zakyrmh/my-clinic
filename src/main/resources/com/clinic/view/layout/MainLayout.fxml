@@ -23,9 +23,9 @@
             </padding>
 
             <children>
-                <ImageView fitHeight="32.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="80" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../images/default-profile.jpg" />
+                        <Image url="@../../images/logo.png" />
                     </image>
                 </ImageView>
 
@@ -89,7 +89,7 @@
                                 </ImageView>
                             </graphic>
                             <items>
-                                <MenuItem text="Edit profile" />
+                                <MenuItem text="Edit profile" onAction="#handleEditProfile" />
                                 <MenuItem text="Sign out" onAction="#handleLogout" />
                             </items>
                         </MenuButton>
