@@ -10,10 +10,12 @@ import com.clinic.controllers.MainLayoutController;
 import com.clinic.controllers.PatientEditController;
 import com.clinic.controllers.PatientShowController;
 import com.clinic.controllers.PaymentEditController;
+import com.clinic.controllers.ProfileEditController;
 import com.clinic.controllers.VisitEditController;
 import com.clinic.models.Doctor;
 import com.clinic.models.Patient;
 import com.clinic.models.Payment;
+import com.clinic.models.User;
 import com.clinic.models.Visit;
 
 import javafx.fxml.FXMLLoader;
@@ -175,11 +177,6 @@ public class SceneManager {
         mainLayoutController.setActive("btnPembayaran");
     }
 
-    public void switchToEditProfileScene() {
-        mainLayoutController.setPageContent("/com/clinic/view/profile/EditProfile.fxml");
-        mainLayoutController.setActive("");
-    }
-
     // ————————————————
     // 4) HALAMAN DENGAN PARAMETER (model injection)
     // ————————————————
@@ -243,5 +240,11 @@ public class SceneManager {
                 "/com/clinic/view/payments/PaymentEdit.fxml",
                 (PaymentEditController ctrl) -> ctrl.setPaymentData(payment));
         mainLayoutController.setActive("btnPembayaran");
+    }
+
+    public void switchToEditProfileScene(User user) {
+        loadPageWithController(
+            "/com/clinic/view/profile/EditProfile.fxml",
+            (ProfileEditController ctrl) -> ctrl.setUserData(user));
     }
 }

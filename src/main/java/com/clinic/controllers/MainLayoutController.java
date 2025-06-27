@@ -113,6 +113,6 @@ public class MainLayoutController {
 
     @FXML
     private void handleEditProfile() {
-        SceneManager.getInstance().switchToEditProfileScene();
+        SceneManager.getInstance().switchToEditProfileScene(UserSession.getInstance().getCurrentUser());
     }
 }
