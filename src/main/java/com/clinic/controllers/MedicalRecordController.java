@@ -70,6 +70,7 @@ public class MedicalRecordController {
             return new SimpleStringProperty(doctor != null ? doctor.getNamaLengkap() : "Unknown");
         });
         diagnosisUtama.setCellValueFactory(new PropertyValueFactory<>("diagnosisUtama"));
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> handleSearchAction());
 
         configureActionColumn();
 

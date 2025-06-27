@@ -1,6 +1,7 @@
 package com.clinic.controllers;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,19 +19,31 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 
 public class DoctorController {
-    @FXML private TableView<Doctor> tableView;
-    @FXML private TableColumn<Doctor, Integer> no;
-    @FXML private TableColumn<Doctor, String> noSip;
-    @FXML private TableColumn<Doctor, String> namaLengkap;
-    @FXML private TableColumn<Doctor, String> spesialisasi;
-    @FXML private TableColumn<Doctor, String> noTelepon;
-    @FXML private TableColumn<Doctor, String> statusPraktik;
-    @FXML private TableColumn<Doctor, Void> action;
-    
+
+    @FXML
+    private TableView<Doctor> tableView;
+    @FXML
+    private TableColumn<Doctor, Integer> no;
+    @FXML
+    private TableColumn<Doctor, String> noSip;
+    @FXML
+    private TableColumn<Doctor, String> namaLengkap;
+    @FXML
+    private TableColumn<Doctor, String> spesialisasi;
+    @FXML
+    private TableColumn<Doctor, String> noTelepon;
+    @FXML
+    private TableColumn<Doctor, String> statusPraktik;
+    @FXML
+    private TableColumn<Doctor, Void> action;
+    @FXML
+    private TextField searchField;
+
     @FXML
     public void initialize() {
         no.setCellValueFactory(cellData -> {
@@ -43,6 +56,7 @@ public class DoctorController {
         spesialisasi.setCellValueFactory(new PropertyValueFactory<>("spesialisasi"));
         noTelepon.setCellValueFactory(new PropertyValueFactory<>("noTelepon"));
         statusPraktik.setCellValueFactory(new PropertyValueFactory<>("statusPraktik"));
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> handleSearchAction());
 
         configureActionColumn();
 
@@ -54,24 +68,22 @@ public class DoctorController {
     private void loadDoctorData() {
         ObservableList<Doctor> doctorList = FXCollections.observableArrayList();
 
-        try (Connection conn = DatabaseUtil.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM dokter")) {
+        try (Connection conn = DatabaseUtil.getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery("SELECT * FROM dokter")) {
 
             while (rs.next()) {
                 Doctor.PracticeStatus statusPraktik = Doctor.PracticeStatus.fromString(rs.getString("status_praktik"));
                 Doctor doctor = new Doctor(
-                    rs.getInt("id_dokter"),
-                    rs.getString("no_sip"),
-                    rs.getString("nama_lengkap"),
-                    rs.getString("spesialisasi"),
-                    rs.getString("no_telepon"),
-                    rs.getString("email"),
-                    rs.getString("alamat"),
-                    rs.getDate("tanggal_bergabung").toLocalDate(),
-                    statusPraktik,
-                    rs.getTimestamp("created_at") != null ? rs.getTimestamp("created_at").toLocalDateTime() : null,
-                    rs.getTimestamp("updated_at") != null ? rs.getTimestamp("updated_at").toLocalDateTime() : null
+                        rs.getInt("id_dokter"),
+                        rs.getString("no_sip"),
+                        rs.getString("nama_lengkap"),
+                        rs.getString("spesialisasi"),
+                        rs.getString("no_telepon"),
+                        rs.getString("email"),
+                        rs.getString("alamat"),
+                        rs.getDate("tanggal_bergabung").toLocalDate(),
+                        statusPraktik,
+                        rs.getTimestamp("created_at") != null ? rs.getTimestamp("created_at").toLocalDateTime() : null,
+                        rs.getTimestamp("updated_at") != null ? rs.getTimestamp("updated_at").toLocalDateTime() : null
                 );
                 doctorList.add(doctor);
             }
@@ -139,14 +151,60 @@ public class DoctorController {
 
     // Handler untuk aksi Hapus
     private void handleDeleteAction(Doctor doctor) {
-        try (Connection conn = DatabaseUtil.getConnection();
-             Statement stmt = conn.createStatement()) {
+        try (Connection conn = DatabaseUtil.getConnection(); Statement stmt = conn.createStatement()) {
             stmt.executeUpdate("DELETE FROM dokter WHERE id_dokter = " + doctor.getIdDokter());
             tableView.getItems().remove(doctor);
             System.out.println("Deleted doctor: " + doctor.getNamaLengkap());
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error deleting doctor: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void handleSearchAction() {
+        String keyword = searchField.getText().trim();
+
+        if (keyword.isEmpty()) {
+            loadDoctorData();
+            return;
+        }
+
+        ObservableList<Doctor> filteredList = FXCollections.observableArrayList();
+
+        String sql = "SELECT * FROM dokter WHERE LOWER(nama_lengkap) LIKE ? OR LOWER(no_sip) LIKE ?";
+
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, "%" + keyword.toLowerCase() + "%");
+            pstmt.setString(2, "%" + keyword.toLowerCase() + "%");
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Doctor.PracticeStatus statusPraktik = Doctor.PracticeStatus.fromString(rs.getString("status_praktik"));
+                Doctor doctor = new Doctor(
+                        rs.getInt("id_dokter"),
+                        rs.getString("no_sip"),
+                        rs.getString("nama_lengkap"),
+                        rs.getString("spesialisasi"),
+                        rs.getString("no_telepon"),
+                        rs.getString("email"),
+                        rs.getString("alamat"),
+                        rs.getDate("tanggal_bergabung").toLocalDate(),
+                        statusPraktik,
+                        rs.getTimestamp("created_at") != null ? rs.getTimestamp("created_at").toLocalDateTime() : null,
+                        rs.getTimestamp("updated_at") != null ? rs.getTimestamp("updated_at").toLocalDateTime() : null
+                );
+                filteredList.add(doctor);
+            }
+
+            tableView.setItems(filteredList);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error searching doctor data: " + e.getMessage());
         }
     }
 

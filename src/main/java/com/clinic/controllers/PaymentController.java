@@ -69,7 +69,8 @@ public class PaymentController {
         biayaObat.setCellValueFactory(new PropertyValueFactory<>("biayaObat"));
         biayaTindakan.setCellValueFactory(new PropertyValueFactory<>("biayaTindakan"));
         totalBiaya.setCellValueFactory(new PropertyValueFactory<>("totalBiaya"));
-
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> handleSearchAction());
+        
         configureActionColumn();
 
         if (UserSession.getInstance().isLoggedIn()) {
