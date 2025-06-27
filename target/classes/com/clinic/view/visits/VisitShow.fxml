@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/style.css"
+    fx:controller="com.clinic.controllers.VisitShowController">
+    <center>
+        <VBox VBox.vgrow="ALWAYS">
+            <children>
+                <VBox styleClass="form-container" spacing="16">
+                    <VBox.margin>
+                        <Insets top="16" right="16" bottom="16" left="16" />
+                    </VBox.margin>
+                    <children>
+                        <Label text="Detail Data Pasien" styleClass="form-title" />
+                        <HBox spacing="64">
+                            <children>
+                                <VBox alignment="CENTER">
+                                    <children>
+                                        <Label text="No Antrian"
+                                            styleClass="label-title-show" />
+                                        <Label fx:id="noAntrian"
+                                            styleClass="section-title" />
+                                    </children>
+                                </VBox>
+                                <HBox spacing="80">
+                                    <children>
+                                        <VBox spacing="16">
+                                            <children>
+                                                <VBox spacing="8">
+                                                    <children>
+                                                        <Label text="No Rekam Medis"
+                                                            styleClass="label-title-show" />
+                                                        <Label fx:id="noRmLabel"
+                                                            styleClass="label-data-show" />
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="8">
+                                                    <children>
+                                                        <Label text="Nama Pasien"
+                                                            styleClass="label-title-show" />
+                                                        <Label fx:id="namaPasienLabel"
+                                                            styleClass="label-data-show" />
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="8">
+                                                    <children>
+                                                        <Label text="Nama Dokter"
+                                                            styleClass="label-title-show" />
+                                                        <Label fx:id="namaDokterLabel"
+                                                            styleClass="label-data-show" />
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+                                        <VBox spacing="16">
+                                            <children>
+                                                <VBox spacing="8">
+                                                    <children>
+                                                        <Label text="Tanggal Kunjungan"
+                                                            styleClass="label-title-show" />
+                                                        <Label fx:id="tanggalKunjunganLabel"
+                                                            styleClass="label-data-show" />
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="8">
+                                                    <children>
+                                                        <Label text="Jam Daftar"
+                                                            styleClass="label-title-show" />
+                                                        <Label fx:id="jamDaftarLabel"
+                                                            styleClass="label-data-show" />
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="8">
+                                                    <children>
+                                                        <Label text="Jam Periksa"
+                                                            styleClass="label-title-show" />
+                                                        <Label fx:id="jamPeriksaLabel"
+                                                            styleClass="label-data-show" />
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+                                        <VBox spacing="16">
+                                            <children>
+                                                <VBox spacing="8">
+                                                    <children>
+                                                        <Label text="Jam Selesai"
+                                                            styleClass="label-title-show" />
+                                                        <Label fx:id="jamSelesaiLabel"
+                                                            styleClass="label-data-show" />
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="8">
+                                                    <children>
+                                                        <Label text="Jenis Kunjungan"
+                                                            styleClass="label-title-show" />
+                                                        <Label fx:id="jenisKunjunganLabel"
+                                                            styleClass="label-data-show" />
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="8">
+                                                    <children>
+                                                        <Label text="Keluhan Utama"
+                                                            styleClass="label-title-show" />
+                                                        <Label fx:id="keluhanUtamaLabel"
+                                                            styleClass="label-data-show" />
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

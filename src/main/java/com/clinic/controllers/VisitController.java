@@ -221,7 +221,7 @@ public class VisitController {
     }
 
     private void handleViewAction(Visit visit) {
-        // Logika untuk menampilkan detail kunjungan
+        SceneManager.getInstance().switchToVisitShowScene(visit);
     }
 
     private void handleEditAction(Visit visit) {
