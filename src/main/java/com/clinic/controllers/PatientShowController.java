@@ -129,10 +129,8 @@ public class PatientShowController {
         ttlLabel.setText(patient.getTanggalLahir().toString());
         alamatLabel.setText(patient.getAlamat());
         noTeleponLabel.setText(patient.getNoTelepon());
-        emailLabel.setText(patient.getEmail());
         pekerjaanLabel.setText(patient.getPekerjaan());
         statusPernikahanLabel.setText(patient.getStatusPernikahan().toString());
-        golonganDarahLabel.setText(patient.getGolonganDarah().toString());
 
         loadVisitData();
     }

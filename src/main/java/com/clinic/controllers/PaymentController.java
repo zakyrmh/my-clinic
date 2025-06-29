@@ -137,21 +137,22 @@ public class PaymentController {
                         Patient.Gender gender = Patient.Gender.fromString(rs.getString("pa.jenis_kelamin"));
                         Patient.MaritalStatus statusPernikahan = Patient.MaritalStatus
                                 .fromString(rs.getString("pa.status_pernikahan"));
-                        Patient.BloodType bloodType = Patient.BloodType.fromString(rs.getString("pa.golongan_darah"));
                         Patient patient = new Patient(
                                 patientId,
                                 rs.getString("pa.no_rm"),
                                 rs.getString("pa.nik"),
                                 rs.getString("pa.nama_lengkap"),
-                                gender,
-                                rs.getDate("pa.tanggal_lahir").toLocalDate(),
                                 rs.getString("pa.tempat_lahir"),
+                                rs.getDate("pa.tanggal_lahir").toLocalDate(),
+                                gender,
                                 rs.getString("pa.alamat"),
                                 rs.getString("pa.no_telepon"),
-                                rs.getString("pa.email"),
                                 rs.getString("pa.pekerjaan"),
                                 statusPernikahan,
-                                bloodType,
+                                rs.getString("pa.agama"),
+                                rs.getString("pa.pendidikan"),
+                                rs.getString("pa.kontak_darurat"),
+                                rs.getString("pa.no_telepon_darurat"),
                                 rs.getTimestamp("pa.created_at") != null
                                         ? rs.getTimestamp("pa.created_at").toLocalDateTime()
                                         : null,
@@ -286,21 +287,22 @@ public class PaymentController {
                         Patient.Gender gender = Patient.Gender.fromString(rs.getString("pa.jenis_kelamin"));
                         Patient.MaritalStatus statusPernikahan = Patient.MaritalStatus
                                 .fromString(rs.getString("pa.status_pernikahan"));
-                        Patient.BloodType bloodType = Patient.BloodType.fromString(rs.getString("pa.golongan_darah"));
                         Patient patient = new Patient(
                                 patientId,
                                 rs.getString("pa.no_rm"),
                                 rs.getString("pa.nik"),
                                 rs.getString("pa.nama_lengkap"),
-                                gender,
-                                rs.getDate("pa.tanggal_lahir").toLocalDate(),
                                 rs.getString("pa.tempat_lahir"),
+                                rs.getDate("pa.tanggal_lahir").toLocalDate(),
+                                gender,
                                 rs.getString("pa.alamat"),
                                 rs.getString("pa.no_telepon"),
-                                rs.getString("pa.email"),
                                 rs.getString("pa.pekerjaan"),
                                 statusPernikahan,
-                                bloodType,
+                                rs.getString("pa.agama"),
+                                rs.getString("pa.pendidikan"),
+                                rs.getString("pa.kontak_darurat"),
+                                rs.getString("pa.no_telepon_darurat"),
                                 rs.getTimestamp("pa.created_at") != null
                                         ? rs.getTimestamp("pa.created_at").toLocalDateTime()
                                         : null,

@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import com.clinic.manager.SceneManager;
 import com.clinic.manager.UserSession;
 import com.clinic.models.Patient;
-import com.clinic.models.Patient.BloodType;
 import com.clinic.models.Patient.Gender;
 import com.clinic.models.Patient.MaritalStatus;
 import com.clinic.utils.DatabaseUtil;
@@ -82,7 +81,6 @@ public class PatientAddController {
         patient.setTempatLahir(tempatLahirField.getText());
         patient.setAlamat(alamatField.getText());
         patient.setNoTelepon(noTeleponField.getText());
-        patient.setEmail(emailField.getText());
         patient.setPekerjaan(pekerjaanField.getText());
 
         // Ambil jenis kelamin
@@ -93,10 +91,6 @@ public class PatientAddController {
         // Ambil status pernikahan
         RadioButton selectedStatus = (RadioButton) statusPernikahanGroup.getSelectedToggle();
         patient.setStatusPernikahan(MaritalStatus.fromString(selectedStatus.getUserData().toString()));
-
-        // Ambil golongan darah
-        RadioButton selectedBlood = (RadioButton) golonganDarahGroup.getSelectedToggle();
-        patient.setGolonganDarah(BloodType.fromString(selectedBlood.getUserData().toString()));
 
         if (saveToDatabase(patient)) {
             showAlert(AlertType.INFORMATION, "Success", "Data pasien berhasil disimpan.");
@@ -166,10 +160,8 @@ public class PatientAddController {
             pstmt.setString(5, patient.getTempatLahir());
             pstmt.setString(6, patient.getAlamat());
             pstmt.setString(7, patient.getNoTelepon());
-            pstmt.setString(8, patient.getEmail());
             pstmt.setString(9, patient.getPekerjaan());
             pstmt.setString(10, patient.getStatusPernikahan().toString());
-            pstmt.setString(11, patient.getGolonganDarah().toString());
 
             int rowsAffected = pstmt.executeUpdate();
             return rowsAffected > 0;

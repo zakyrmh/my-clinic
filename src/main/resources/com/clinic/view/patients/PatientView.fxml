@@ -35,9 +35,9 @@
                         <TableColumn fx:id="no" text="No" prefWidth="80" styleClass="no-table"/>
                         <TableColumn fx:id="noRm" text="No. RM"/>
                         <TableColumn fx:id="namaLengkap" text="Nama Lengkap"/>
-                        <TableColumn fx:id="nik" text="NIK"/>
                         <TableColumn fx:id="jenisKelamin" text="Jenis Kelamin"/>
                         <TableColumn fx:id="tanggalLahir" text="Tanggal Lahir"/>
+                        <TableColumn fx:id="noTelepon" text="No Telepon"/>
                         <TableColumn fx:id="action" text="Action" prefWidth="200"/>
                     </columns>
                 </TableView>

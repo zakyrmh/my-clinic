@@ -81,7 +81,6 @@ public class PatientEditController {
         tempatLahirField.setText(patient.getTempatLahir());
         alamatField.setText(patient.getAlamat());
         noTeleponField.setText(patient.getNoTelepon());
-        emailField.setText(patient.getEmail());
         pekerjaanField.setText(patient.getPekerjaan());
 
         // Jenis kelamin
@@ -97,13 +96,6 @@ public class PatientEditController {
                 .findFirst().orElse(null);
         if (selStatus != null) {
             statusPernikahanGroup.selectToggle(selStatus);
-        }
-
-        Toggle selBlood = golonganDarahGroup.getToggles().stream()
-                .filter(t -> t.getUserData().equals(currentPatient.getGolonganDarah().getValue()))
-                .findFirst().orElse(null);
-        if (selBlood != null) {
-            golonganDarahGroup.selectToggle(selBlood);
         }
 
     }

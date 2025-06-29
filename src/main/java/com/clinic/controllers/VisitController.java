@@ -32,6 +32,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 
 public class VisitController {
+
     @FXML
     private TableView<Visit> tableView;
     @FXML
@@ -87,14 +88,12 @@ public class VisitController {
     private void loadVisitData() {
         ObservableList<Visit> visitList = FXCollections.observableArrayList();
 
-        String sql = "SELECT k.*, p.*, d.* " +
-                "FROM kunjungan k " +
-                "LEFT JOIN pasien p ON k.id_pasien = p.id_pasien " +
-                "LEFT JOIN dokter d ON k.id_dokter = d.id_dokter";
+        String sql = "SELECT k.*, p.*, d.* "
+                + "FROM kunjungan k "
+                + "LEFT JOIN pasien p ON k.id_pasien = p.id_pasien "
+                + "LEFT JOIN dokter d ON k.id_dokter = d.id_dokter";
 
-        try (Connection conn = DatabaseUtil.getConnection();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(sql)) {
+        try (Connection conn = DatabaseUtil.getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 Visit.VisitStatus status = Visit.VisitStatus.fromString(rs.getString("status_kunjungan"));
@@ -123,25 +122,28 @@ public class VisitController {
                     Patient.Gender gender = Patient.Gender.fromString(rs.getString("p.jenis_kelamin"));
                     Patient.MaritalStatus statusPernikahan = Patient.MaritalStatus
                             .fromString(rs.getString("p.status_pernikahan"));
-                    Patient.BloodType bloodType = Patient.BloodType.fromString(rs.getString("p.golongan_darah"));
                     Patient patient = new Patient(
                             patientId,
                             rs.getString("p.no_rm"),
                             rs.getString("p.nik"),
                             rs.getString("p.nama_lengkap"),
-                            gender,
-                            rs.getDate("p.tanggal_lahir").toLocalDate(),
                             rs.getString("p.tempat_lahir"),
+                            rs.getDate("p.tanggal_lahir").toLocalDate(),
+                            gender,
                             rs.getString("p.alamat"),
                             rs.getString("p.no_telepon"),
-                            rs.getString("p.email"),
                             rs.getString("p.pekerjaan"),
                             statusPernikahan,
-                            bloodType,
-                            rs.getTimestamp("p.created_at") != null ? rs.getTimestamp("p.created_at").toLocalDateTime()
-                                    : null,
-                            rs.getTimestamp("p.updated_at") != null ? rs.getTimestamp("p.updated_at").toLocalDateTime()
-                                    : null);
+                            rs.getString("p.agama"),
+                            rs.getString("p.pendidikan"),
+                            rs.getString("p.kontak_darurat"),
+                            rs.getString("p.no_telepon_darurat"),
+                            rs.getTimestamp("p.created_at") != null
+                            ? rs.getTimestamp("p.created_at").toLocalDateTime()
+                            : null,
+                            rs.getTimestamp("p.updated_at") != null
+                            ? rs.getTimestamp("p.updated_at").toLocalDateTime()
+                            : null);
                     patientMap.put(patientId, patient);
                 }
 
@@ -161,9 +163,9 @@ public class VisitController {
                             rs.getDate("d.tanggal_bergabung").toLocalDate(),
                             statusPraktik,
                             rs.getTimestamp("d.created_at") != null ? rs.getTimestamp("d.created_at").toLocalDateTime()
-                                    : null,
+                            : null,
                             rs.getTimestamp("d.updated_at") != null ? rs.getTimestamp("d.updated_at").toLocalDateTime()
-                                    : null);
+                            : null);
                     doctorMap.put(doctorId, doctor);
                 }
             }
@@ -248,10 +250,7 @@ public class VisitController {
         String sqlDeleteRekamMedis = "DELETE FROM rekam_medis WHERE id_kunjungan = ?";
         String sqlDeleteKunjungan = "DELETE FROM kunjungan WHERE id_kunjungan = ?";
 
-        try (Connection conn = DatabaseUtil.getConnection();
-                PreparedStatement psPemb = conn.prepareStatement(sqlDeletePembayaran);
-                PreparedStatement psRekm = conn.prepareStatement(sqlDeleteRekamMedis);
-                PreparedStatement psKunj = conn.prepareStatement(sqlDeleteKunjungan)) {
+        try (Connection conn = DatabaseUtil.getConnection(); PreparedStatement psPemb = conn.prepareStatement(sqlDeletePembayaran); PreparedStatement psRekm = conn.prepareStatement(sqlDeleteRekamMedis); PreparedStatement psKunj = conn.prepareStatement(sqlDeleteKunjungan)) {
 
             conn.setAutoCommit(false); // transaksi
 
@@ -299,14 +298,13 @@ public class VisitController {
 
         ObservableList<Visit> filteredList = FXCollections.observableArrayList();
 
-        String sql = "SELECT k.*, p.*, d.* " +
-                "FROM kunjungan k " +
-                "LEFT JOIN pasien p ON k.id_pasien = p.id_pasien " +
-                "LEFT JOIN dokter d ON k.id_dokter = d.id_dokter " +
-                "WHERE LOWER(p.nama_lengkap) LIKE ? OR LOWER(d.nama_lengkap) LIKE ? OR LOWER(k.no_antrian) LIKE ?;";
+        String sql = "SELECT k.*, p.*, d.* "
+                + "FROM kunjungan k "
+                + "LEFT JOIN pasien p ON k.id_pasien = p.id_pasien "
+                + "LEFT JOIN dokter d ON k.id_dokter = d.id_dokter "
+                + "WHERE LOWER(p.nama_lengkap) LIKE ? OR LOWER(d.nama_lengkap) LIKE ? OR LOWER(k.no_antrian) LIKE ?;";
 
-        try (Connection conn = DatabaseUtil.getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = DatabaseUtil.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, "%" + keyword.toLowerCase() + "%");
             ps.setString(2, "%" + keyword.toLowerCase() + "%");
@@ -341,25 +339,28 @@ public class VisitController {
                     Patient.Gender gender = Patient.Gender.fromString(rs.getString("p.jenis_kelamin"));
                     Patient.MaritalStatus statusPernikahan = Patient.MaritalStatus
                             .fromString(rs.getString("p.status_pernikahan"));
-                    Patient.BloodType bloodType = Patient.BloodType.fromString(rs.getString("p.golongan_darah"));
                     Patient patient = new Patient(
                             patientId,
                             rs.getString("p.no_rm"),
                             rs.getString("p.nik"),
                             rs.getString("p.nama_lengkap"),
-                            gender,
-                            rs.getDate("p.tanggal_lahir").toLocalDate(),
                             rs.getString("p.tempat_lahir"),
+                            rs.getDate("p.tanggal_lahir").toLocalDate(),
+                            gender,
                             rs.getString("p.alamat"),
                             rs.getString("p.no_telepon"),
-                            rs.getString("p.email"),
                             rs.getString("p.pekerjaan"),
                             statusPernikahan,
-                            bloodType,
-                            rs.getTimestamp("p.created_at") != null ? rs.getTimestamp("p.created_at").toLocalDateTime()
-                                    : null,
-                            rs.getTimestamp("p.updated_at") != null ? rs.getTimestamp("p.updated_at").toLocalDateTime()
-                                    : null);
+                            rs.getString("p.agama"),
+                            rs.getString("p.pendidikan"),
+                            rs.getString("p.kontak_darurat"),
+                            rs.getString("p.no_telepon_darurat"),
+                            rs.getTimestamp("p.created_at") != null
+                            ? rs.getTimestamp("p.created_at").toLocalDateTime()
+                            : null,
+                            rs.getTimestamp("p.updated_at") != null
+                            ? rs.getTimestamp("p.updated_at").toLocalDateTime()
+                            : null);
                     patientMap.put(patientId, patient);
                 }
 
@@ -379,9 +380,9 @@ public class VisitController {
                             rs.getDate("d.tanggal_bergabung").toLocalDate(),
                             statusPraktik,
                             rs.getTimestamp("d.created_at") != null ? rs.getTimestamp("d.created_at").toLocalDateTime()
-                                    : null,
+                            : null,
                             rs.getTimestamp("d.updated_at") != null ? rs.getTimestamp("d.updated_at").toLocalDateTime()
-                                    : null);
+                            : null);
                     doctorMap.put(doctorId, doctor);
                 }
             }

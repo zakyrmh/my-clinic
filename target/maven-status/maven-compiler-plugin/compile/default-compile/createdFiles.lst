@@ -30,7 +30,6 @@ com\clinic\controllers\DoctorEditController.class
 com\clinic\controllers\VisitEditController.class
 com\clinic\controllers\MainLayoutController.class
 com\clinic\models\MedicalRecord.class
-com\clinic\models\Patient$BloodType.class
 com\clinic\controllers\MedicalRecordController.class
 com\clinic\controllers\PaymentEditController.class
 com\clinic\controllers\VisitShowController.class

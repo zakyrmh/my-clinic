@@ -3,7 +3,6 @@ package com.clinic.models;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import com.clinic.models.Patient.BloodType;
 import com.clinic.models.Patient.Gender;
 import com.clinic.models.Patient.MaritalStatus;
 
@@ -19,15 +18,17 @@ public class Patient {
     private final StringProperty noRm;
     private final StringProperty nik;
     private final StringProperty namaLengkap;
-    private final ObjectProperty<Gender> jenisKelamin;
-    private final ObjectProperty<LocalDate> tanggalLahir;
     private final StringProperty tempatLahir;
+    private final ObjectProperty<LocalDate> tanggalLahir;
+    private final ObjectProperty<Gender> jenisKelamin;
     private final StringProperty alamat;
     private final StringProperty noTelepon;
-    private final StringProperty email;
     private final StringProperty pekerjaan;
     private final ObjectProperty<MaritalStatus> statusPernikahan;
-    private final ObjectProperty<BloodType> golonganDarah;
+    private final StringProperty agama;
+    private final StringProperty pendidikan;
+    private final StringProperty kontakDarurat;
+    private final StringProperty noTeleponDarurat;
     private final ObjectProperty<LocalDateTime> createdAt;
     private final ObjectProperty<LocalDateTime> updatedAt;
 
@@ -89,51 +90,23 @@ public class Patient {
         }
     }
 
-    // Enum untuk golongan darah agar sesuai dengan database
-    public enum BloodType {
-        // ENUM('A', 'B', 'AB', 'O', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-')
-        A("A"), B("B"), AB("AB"), O("O"), AP("A+"), AM("A-"), BP("B+"), BM("B-"), ABP("AB+"), ABM("AB-"), OP("O+"), OM("O-");
-    
-        private final String value;
-    
-        BloodType(String value) {
-            this.value = value;
-        }
-    
-        public String getValue() {
-            return value;
-        }
-    
-        public static BloodType fromString(String value) {
-            for (BloodType bloodType : BloodType.values()) {
-                if (bloodType.value.equalsIgnoreCase(value)) {
-                    return bloodType;
-                }
-            }
-            throw new IllegalArgumentException("Invalid blood type value: " + value);
-        }
-    
-        @Override
-        public String toString() {
-            return value;
-        }
-    }
-
     // Constructor
     public Patient() {
         this.idPasien = new SimpleIntegerProperty();
         this.noRm = new SimpleStringProperty();
         this.nik = new SimpleStringProperty();
         this.namaLengkap = new SimpleStringProperty();
-        this.jenisKelamin = new SimpleObjectProperty<>();
-        this.tanggalLahir = new SimpleObjectProperty<>();
         this.tempatLahir = new SimpleStringProperty();
+        this.tanggalLahir = new SimpleObjectProperty<>();
+        this.jenisKelamin = new SimpleObjectProperty<>();
         this.alamat = new SimpleStringProperty();
         this.noTelepon = new SimpleStringProperty();
-        this.email = new SimpleStringProperty();
         this.pekerjaan = new SimpleStringProperty();
         this.statusPernikahan = new SimpleObjectProperty<>();
-        this.golonganDarah = new SimpleObjectProperty<>();
+        this.agama = new SimpleStringProperty();
+        this.pendidikan = new SimpleStringProperty();
+        this.kontakDarurat = new SimpleStringProperty();
+        this.noTeleponDarurat = new SimpleStringProperty();
         this.createdAt = new SimpleObjectProperty<>();
         this.updatedAt = new SimpleObjectProperty<>();
     }
@@ -143,30 +116,34 @@ public class Patient {
             String noRm,
             String nik,
             String namaLengkap,
-            Gender jenisKelamin,
-            LocalDate tanggalLahir,
             String tempatLahir,
+            LocalDate tanggalLahir,
+            Gender jenisKelamin,
             String alamat,
             String noTelepon,
-            String email,
             String pekerjaan,
             MaritalStatus statusPernikahan,
-            BloodType golonganDarah,
+            String agama,
+            String pendidikan,
+            String kontakDarurat,
+            String noTeleponDarurat,
             LocalDateTime createdAt,
             LocalDateTime updatedAt) {
         this.idPasien = new SimpleIntegerProperty(idPasien);
         this.noRm = new SimpleStringProperty(noRm);
         this.nik = new SimpleStringProperty(nik);
         this.namaLengkap = new SimpleStringProperty(namaLengkap);
-        this.jenisKelamin = new SimpleObjectProperty<>(jenisKelamin);
-        this.tanggalLahir = new SimpleObjectProperty<>(tanggalLahir);
         this.tempatLahir = new SimpleStringProperty(tempatLahir);
+        this.tanggalLahir = new SimpleObjectProperty<>(tanggalLahir);
+        this.jenisKelamin = new SimpleObjectProperty<>(jenisKelamin);
         this.alamat = new SimpleStringProperty(alamat);
         this.noTelepon = new SimpleStringProperty(noTelepon);
-        this.email = new SimpleStringProperty(email);
         this.pekerjaan = new SimpleStringProperty(pekerjaan);
         this.statusPernikahan = new SimpleObjectProperty<>(statusPernikahan);
-        this.golonganDarah = new SimpleObjectProperty<>(golonganDarah);
+        this.agama = new SimpleStringProperty(agama);
+        this.pendidikan = new SimpleStringProperty(pendidikan);
+        this.kontakDarurat = new SimpleStringProperty(kontakDarurat);
+        this.noTeleponDarurat = new SimpleStringProperty(noTeleponDarurat);
         this.createdAt = new SimpleObjectProperty<>(createdAt);
         this.updatedAt = new SimpleObjectProperty<>(updatedAt);
     }
@@ -223,17 +200,17 @@ public class Patient {
         this.namaLengkap.set(namaLengkap);
     }
 
-    // Getter dan Setter untuk jenis kelamin
-    public Gender getJenisKelamin() {
-        return jenisKelamin.get();
+    // Getter dan Setter untuk tempat lahir
+    public String getTempatLahir() {
+        return tempatLahir.get();
     }
 
-    public ObjectProperty<Gender> jenisKelaminProperty() {
-        return jenisKelamin;
+    public StringProperty tempatLahirProperty() {
+        return tempatLahir;
     }
 
-    public void setJenisKelamin(Gender jenisKelamin) {
-        this.jenisKelamin.set(jenisKelamin);
+    public void setTempatLahir(String tempatLahir) {
+        this.tempatLahir.set(tempatLahir);
     }
 
     // Getter dan Setter untuk tanggal lahir
@@ -249,17 +226,17 @@ public class Patient {
         this.tanggalLahir.set(tanggalLahir);
     }
 
-    // Getter dan Setter untuk tempat lahir
-    public String getTempatLahir() {
-        return tempatLahir.get();
+    // Getter dan Setter untuk jenis kelamin
+    public Gender getJenisKelamin() {
+        return jenisKelamin.get();
     }
 
-    public StringProperty tempatLahirProperty() {
-        return tempatLahir;
+    public ObjectProperty<Gender> jenisKelaminProperty() {
+        return jenisKelamin;
     }
 
-    public void setTempatLahir(String tempatLahir) {
-        this.tempatLahir.set(tempatLahir);
+    public void setJenisKelamin(Gender jenisKelamin) {
+        this.jenisKelamin.set(jenisKelamin);
     }
 
     // Getter dan Setter untuk alamat
@@ -288,19 +265,6 @@ public class Patient {
         this.noTelepon.set(noTelepon);
     }
 
-    // Getter dan Setter untuk email
-    public String getEmail() {
-        return email.get();
-    }
-
-    public StringProperty emailProperty() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email.set(email);
-    }
-
     // Getter dan Setter untuk pekerjaan
     public String getPekerjaan() {
         return pekerjaan.get();
@@ -327,17 +291,56 @@ public class Patient {
         this.statusPernikahan.set(statusPernikahan);
     }
 
-    // Getter dan Setter untuk golongan darah
-    public BloodType getGolonganDarah() {
-        return golonganDarah.get();
+    // Getter dan Setter untuk agama
+    public String getAgama() {
+        return agama.get();
     }
 
-    public ObjectProperty<BloodType> golonganDarahProperty() {
-        return golonganDarah;
+    public StringProperty agamaProperty() {
+        return agama;
     }
 
-    public void setGolonganDarah(BloodType golonganDarah) {
-        this.golonganDarah.set(golonganDarah);
+    public void setAgama(String agama) {
+        this.agama.set(agama);
+    }
+
+    // Getter dan Setter untuk pendidikan
+    public String getPendidikan() {
+        return pendidikan.get();
+    }
+
+    public StringProperty pendidikanProperty() {
+        return pendidikan;
+    }
+
+    public void setPendidikan(String pendidikan) {
+        this.pendidikan.set(pendidikan);
+    }
+
+    // Getter dan Setter untuk kontak darurat
+    public String getKontakDarurat() {
+        return kontakDarurat.get();
+    }
+
+    public StringProperty kontakDaruratProperty() {
+        return kontakDarurat;
+    }
+
+    public void setKontakDarurat(String kontakDarurat) {
+        this.kontakDarurat.set(kontakDarurat);
+    }
+
+    // Getter dan Setter untuk no telepon darurat
+    public String getNoTeleponDarurat() {
+        return noTeleponDarurat.get();
+    }
+
+    public StringProperty noTeleponDaruratProperty() {
+        return noTeleponDarurat;
+    }
+
+    public void setNoTeleponDarurat(String noTeleponDarurat) {
+        this.noTeleponDarurat.set(noTeleponDarurat);
     }
 
     // Getter dan Setter untuk createdAt

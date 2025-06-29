@@ -14,7 +14,6 @@ import com.clinic.utils.DatabaseUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
@@ -25,6 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 
 public class PatientController {
+
     @FXML
     private TableView<Patient> tableView;
     @FXML
@@ -34,11 +34,11 @@ public class PatientController {
     @FXML
     private TableColumn<Patient, String> namaLengkap;
     @FXML
-    private TableColumn<Patient, String> nik;
-    @FXML
     private TableColumn<Patient, String> jenisKelamin;
     @FXML
     private TableColumn<Patient, String> tanggalLahir;
+    @FXML
+    private TableColumn<Patient, String> noTelepon;
     @FXML
     private TableColumn<Patient, Void> action;
     @FXML
@@ -53,21 +53,25 @@ public class PatientController {
         no.setSortable(false);
         noRm.setCellValueFactory(new PropertyValueFactory<>("noRm"));
         namaLengkap.setCellValueFactory(new PropertyValueFactory<>("namaLengkap"));
-        nik.setCellValueFactory(new PropertyValueFactory<>("nik"));
         jenisKelamin.setCellValueFactory(cellData -> {
             Gender g = cellData.getValue().getJenisKelamin();
             String label;
             if (null == g) {
                 label = "";
-            } else
+            } else {
                 label = switch (g) {
-                    case MALE -> "Laki-laki";
-                    case FEMALE -> "Perempuan";
-                    default -> "";
+                    case MALE ->
+                        "Laki-laki";
+                    case FEMALE ->
+                        "Perempuan";
+                    default ->
+                        "";
                 };
+            }
             return new SimpleStringProperty(label);
         });
         tanggalLahir.setCellValueFactory(new PropertyValueFactory<>("tanggalLahir"));
+        noTelepon.setCellValueFactory(new PropertyValueFactory<>("noTelepon"));
         searchField.textProperty().addListener((observable, oldValue, newValue) -> handleSearchAction());
 
         configureActionColumn();
@@ -80,34 +84,32 @@ public class PatientController {
     private void loadPatientData() {
         ObservableList<Patient> patientList = FXCollections.observableArrayList();
 
-        try (Connection conn = DatabaseUtil.getConnection();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT * FROM pasien")) {
+        try (Connection conn = DatabaseUtil.getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery("SELECT * FROM pasien")) {
 
             while (rs.next()) {
                 Patient.Gender gender = Patient.Gender.fromString(rs.getString("jenis_kelamin"));
-                Patient.MaritalStatus status = Patient.MaritalStatus.fromString(rs.getString("status_pernikahan"));
-                Patient.BloodType bloodType = Patient.BloodType.fromString(rs.getString("golongan_darah"));
+                Patient.MaritalStatus maritalStatus = Patient.MaritalStatus.fromString(rs.getString("status_pernikahan"));
                 Patient patient = new Patient(
                         rs.getInt("id_pasien"),
                         rs.getString("no_rm"),
                         rs.getString("nik"),
                         rs.getString("nama_lengkap"),
-                        gender,
-                        rs.getDate("tanggal_lahir").toLocalDate(),
                         rs.getString("tempat_lahir"),
+                        rs.getDate("tanggal_lahir").toLocalDate(),
+                        gender,
                         rs.getString("alamat"),
                         rs.getString("no_telepon"),
-                        rs.getString("email"),
                         rs.getString("pekerjaan"),
-                        status,
-                        bloodType,
+                        maritalStatus,
+                        rs.getString("agama"),
+                        rs.getString("pendidikan"),
+                        rs.getString("kontak_darurat"),
+                        rs.getString("no_telepon_darurat"),
                         rs.getTimestamp("created_at") != null ? rs.getTimestamp("created_at").toLocalDateTime() : null,
                         rs.getTimestamp("updated_at") != null ? rs.getTimestamp("updated_at").toLocalDateTime() : null);
                 patientList.add(patient);
             }
 
-            // Mengisi TableView dengan data
             tableView.setItems(patientList);
 
         } catch (SQLException e) {
@@ -124,24 +126,20 @@ public class PatientController {
             private final HBox pane = new HBox(5, viewButton, editButton, deleteButton);
 
             {
-                // Styling tombol
                 viewButton.getStyleClass().add("view-button");
                 editButton.getStyleClass().add("edit-button");
                 deleteButton.getStyleClass().add("delete-button");
 
-                // Handler untuk tombol Lihat
                 viewButton.setOnAction(event -> {
                     Patient patient = getTableView().getItems().get(getIndex());
                     handleViewAction(patient);
                 });
 
-                // Handler untuk tombol Edit
                 editButton.setOnAction(event -> {
                     Patient patient = getTableView().getItems().get(getIndex());
                     handleEditAction(patient);
                 });
 
-                // Handler untuk tombol Hapus
                 deleteButton.setOnAction(event -> {
                     Patient patient = getTableView().getItems().get(getIndex());
                     handleDeleteAction(patient);
@@ -161,41 +159,63 @@ public class PatientController {
         String keyword = searchField.getText().trim();
 
         if (keyword.isEmpty()) {
-            loadPatientData(); // tampilkan semua data jika input kosong
+            loadPatientData();
             return;
         }
 
         ObservableList<Patient> filteredList = FXCollections.observableArrayList();
 
-        String sql = "SELECT * FROM pasien WHERE LOWER(nama_lengkap) LIKE ? OR LOWER(no_rm) LIKE ?";
+        String sql = "("
+                + "SELECT *, 1 AS priority "
+                + "FROM pasien "
+                + "WHERE no_rm = ? "
+                + "LIMIT 20"
+                + ") "
+                + "UNION ALL "
+                + "("
+                + "SELECT *, 2 AS priority "
+                + "FROM pasien "
+                + "WHERE nik = ? "
+                + "LIMIT 20"
+                + ") "
+                + "UNION ALL "
+                + "("
+                + "SELECT *, 3 AS priority "
+                + "FROM pasien "
+                + "WHERE nama_lengkap LIKE ? "
+                + "LIMIT 20"
+                + ") "
+                + "ORDER BY priority, nama_lengkap "
+                + "LIMIT 20";
 
-        try (Connection conn = DatabaseUtil.getConnection();
-                var pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DatabaseUtil.getConnection(); var pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, "%" + keyword.toLowerCase() + "%");
-            pstmt.setString(2, "%" + keyword.toLowerCase() + "%");
+            pstmt.setString(1, keyword);
+            pstmt.setString(2, keyword);
+            pstmt.setString(3, "%" + keyword + "%");
 
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 Patient.Gender gender = Patient.Gender.fromString(rs.getString("jenis_kelamin"));
-                Patient.MaritalStatus status = Patient.MaritalStatus.fromString(rs.getString("status_pernikahan"));
-                Patient.BloodType bloodType = Patient.BloodType.fromString(rs.getString("golongan_darah"));
+                Patient.MaritalStatus maritalStatus = Patient.MaritalStatus.fromString(rs.getString("status_pernikahan"));
 
                 Patient patient = new Patient(
                         rs.getInt("id_pasien"),
                         rs.getString("no_rm"),
                         rs.getString("nik"),
                         rs.getString("nama_lengkap"),
-                        gender,
-                        rs.getDate("tanggal_lahir").toLocalDate(),
                         rs.getString("tempat_lahir"),
+                        rs.getDate("tanggal_lahir").toLocalDate(),
+                        gender,
                         rs.getString("alamat"),
                         rs.getString("no_telepon"),
-                        rs.getString("email"),
                         rs.getString("pekerjaan"),
-                        status,
-                        bloodType,
+                        maritalStatus,
+                        rs.getString("agama"),
+                        rs.getString("pendidikan"),
+                        rs.getString("kontak_darurat"),
+                        rs.getString("no_telepon_darurat"),
                         rs.getTimestamp("created_at") != null ? rs.getTimestamp("created_at").toLocalDateTime() : null,
                         rs.getTimestamp("updated_at") != null ? rs.getTimestamp("updated_at").toLocalDateTime() : null);
 
@@ -210,23 +230,16 @@ public class PatientController {
         }
     }
 
-    // Handler untuk aksi Lihat
     private void handleViewAction(Patient patient) {
-        // TODO: Implementasi navigasi ke halaman detail pasien
-        System.out.println("View patient: " + patient.getNamaLengkap());
         SceneManager.getInstance().switchToPatientShowScene(patient);
     }
 
-    // Handler untuk aksi Edit
     private void handleEditAction(Patient patient) {
-        System.out.println("Edit patient: " + patient.getNamaLengkap());
         SceneManager.getInstance().switchToPatientEditScene(patient);
     }
 
-    // Handler untuk aksi Hapus
     private void handleDeleteAction(Patient patient) {
-        try (Connection conn = DatabaseUtil.getConnection();
-                Statement stmt = conn.createStatement()) {
+        try (Connection conn = DatabaseUtil.getConnection(); Statement stmt = conn.createStatement()) {
             stmt.executeUpdate("DELETE FROM pasien WHERE id_pasien = " + patient.getIdPasien());
             tableView.getItems().remove(patient);
             System.out.println("Deleted patient: " + patient.getNamaLengkap());
@@ -237,35 +250,7 @@ public class PatientController {
     }
 
     @FXML
-    private void handleLogout(ActionEvent event) {
-        UserSession.getInstance().endSession();
-        System.out.println("The user session has ended (logout).");
-
-        SceneManager.getInstance().switchToLoginScene();
-    }
-
-    @FXML
-    protected void handleDashboardLinkAction(ActionEvent event) {
-        SceneManager.getInstance().switchToDashboard();
-    }
-
-    @FXML
-    protected void handlePatientAddAction(ActionEvent event) {
+    protected void handlePatientAddAction() {
         SceneManager.getInstance().switchToPatientAddScene();
-    }
-
-    @FXML
-    protected void handleDoctorLinkAction() {
-        SceneManager.getInstance().switchToDoctorScene();
-    }
-
-    @FXML
-    protected void handleVisitLinkAction() {
-        SceneManager.getInstance().switchToVisitScene();
-    }
-
-    @FXML
-    protected void handleMedicalRecordLinkAction() {
-        SceneManager.getInstance().switchToMedicalRecordScene();
     }
 }

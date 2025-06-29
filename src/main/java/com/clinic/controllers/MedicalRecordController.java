@@ -115,24 +115,27 @@ public class MedicalRecordController {
                     Patient.Gender gender = Patient.Gender.fromString(rs.getString("p.jenis_kelamin"));
                     Patient.MaritalStatus statusPernikahan = Patient.MaritalStatus
                             .fromString(rs.getString("p.status_pernikahan"));
-                    Patient.BloodType bloodType = Patient.BloodType.fromString(rs.getString("p.golongan_darah"));
                     Patient patient = new Patient(
                             patientId,
                             rs.getString("p.no_rm"),
                             rs.getString("p.nik"),
                             rs.getString("p.nama_lengkap"),
-                            gender,
-                            rs.getDate("p.tanggal_lahir").toLocalDate(),
                             rs.getString("p.tempat_lahir"),
+                            rs.getDate("p.tanggal_lahir").toLocalDate(),
+                            gender,
                             rs.getString("p.alamat"),
                             rs.getString("p.no_telepon"),
-                            rs.getString("p.email"),
                             rs.getString("p.pekerjaan"),
                             statusPernikahan,
-                            bloodType,
-                            rs.getTimestamp("p.created_at") != null ? rs.getTimestamp("p.created_at").toLocalDateTime()
+                            rs.getString("p.agama"),
+                            rs.getString("p.pendidikan"),
+                            rs.getString("p.kontak_darurat"),
+                            rs.getString("p.no_telepon_darurat"),
+                            rs.getTimestamp("p.created_at") != null
+                            ? rs.getTimestamp("p.created_at").toLocalDateTime()
                             : null,
-                            rs.getTimestamp("p.updated_at") != null ? rs.getTimestamp("p.updated_at").toLocalDateTime()
+                            rs.getTimestamp("p.updated_at") != null
+                            ? rs.getTimestamp("p.updated_at").toLocalDateTime()
                             : null);
                     patientMap.put(patientId, patient);
                 }
@@ -259,24 +262,27 @@ public class MedicalRecordController {
                     Patient.Gender gender = Patient.Gender.fromString(rs.getString("p.jenis_kelamin"));
                     Patient.MaritalStatus statusPernikahan = Patient.MaritalStatus
                             .fromString(rs.getString("p.status_pernikahan"));
-                    Patient.BloodType bloodType = Patient.BloodType.fromString(rs.getString("p.golongan_darah"));
                     Patient patient = new Patient(
                             patientId,
                             rs.getString("p.no_rm"),
                             rs.getString("p.nik"),
                             rs.getString("p.nama_lengkap"),
-                            gender,
-                            rs.getDate("p.tanggal_lahir").toLocalDate(),
                             rs.getString("p.tempat_lahir"),
+                            rs.getDate("p.tanggal_lahir").toLocalDate(),
+                            gender,
                             rs.getString("p.alamat"),
                             rs.getString("p.no_telepon"),
-                            rs.getString("p.email"),
                             rs.getString("p.pekerjaan"),
                             statusPernikahan,
-                            bloodType,
-                            rs.getTimestamp("p.created_at") != null ? rs.getTimestamp("p.created_at").toLocalDateTime()
+                            rs.getString("p.agama"),
+                            rs.getString("p.pendidikan"),
+                            rs.getString("p.kontak_darurat"),
+                            rs.getString("p.no_telepon_darurat"),
+                            rs.getTimestamp("p.created_at") != null
+                            ? rs.getTimestamp("p.created_at").toLocalDateTime()
                             : null,
-                            rs.getTimestamp("p.updated_at") != null ? rs.getTimestamp("p.updated_at").toLocalDateTime()
+                            rs.getTimestamp("p.updated_at") != null
+                            ? rs.getTimestamp("p.updated_at").toLocalDateTime()
                             : null);
                     patientMap.put(patientId, patient);
                 }
