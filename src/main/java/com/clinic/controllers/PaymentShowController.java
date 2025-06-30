@@ -8,9 +8,14 @@ import java.util.Map;
 
 import com.clinic.models.Payment;
 import com.clinic.utils.DatabaseUtil;
+import com.clinic.utils.PdfGenerator;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 public class PaymentShowController {
 
@@ -91,5 +96,30 @@ public class PaymentShowController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void handlePrintButtonAction(ActionEvent event) {
+        // Dapatkan data pembayaran yang dipilih
+        Payment selectedPayment = payment;
+
+        if (selectedPayment == null) {
+            showAlert(Alert.AlertType.WARNING, "Peringatan", "Silakan pilih data pembayaran terlebih dahulu");
+            return;
+        }
+
+        // Dapatkan stage dari event
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Panggil PDF generator
+        PdfGenerator.generateInvoicePDF(selectedPayment, stage);
+    }
+
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
