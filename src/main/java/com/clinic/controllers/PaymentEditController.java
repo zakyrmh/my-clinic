@@ -51,7 +51,6 @@ public class PaymentEditController {
         biayaKonsultasiField.setText(String.valueOf(payment.getBiayaKonsultasi()));
         biayaObatField.setText(String.valueOf(payment.getBiayaObat()));
         biayaTindakanField.setText(String.valueOf(payment.getBiayaTindakan()));
-        jumlahBayarField.setText(String.valueOf(payment.getJumlahBayar()));
         tanggalPembayaranPicker.setValue(payment.getTanggalPembayaran());
 
         Toggle selectedStatusPembayaran = statusPembayaranGroup.getToggles().stream()

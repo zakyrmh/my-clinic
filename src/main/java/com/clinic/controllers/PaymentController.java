@@ -33,13 +33,9 @@ public class PaymentController {
     @FXML
     private TableColumn<Payment, String> noInvoice;
     @FXML
+    private TableColumn<Payment, String> noRm;
+    @FXML
     private TableColumn<Payment, String> namaPasien;
-    @FXML
-    private TableColumn<Payment, String> biayaKonsultasi;
-    @FXML
-    private TableColumn<Payment, String> biayaObat;
-    @FXML
-    private TableColumn<Payment, String> biayaTindakan;
     @FXML
     private TableColumn<Payment, String> totalBiaya;
     @FXML
@@ -58,6 +54,13 @@ public class PaymentController {
         });
         no.setSortable(false);
         noInvoice.setCellValueFactory(new PropertyValueFactory<>("noInvoice"));
+        noRm.setCellValueFactory(cellData -> {
+            Payment payment = cellData.getValue();
+            Visit visit = visitMap.get(payment.getIdKunjungan());
+            int patientId = visit != null ? visit.getIdPasien() : -1;
+            Patient patient = patientMap.get(patientId);
+            return new SimpleStringProperty(patient != null ? patient.getNoRm() : "-");
+        });
         namaPasien.setCellValueFactory(cellData -> {
             Payment payment = cellData.getValue();
             Visit visit = visitMap.get(payment.getIdKunjungan());
@@ -65,9 +68,6 @@ public class PaymentController {
             Patient patient = patientMap.get(patientId);
             return new SimpleStringProperty(patient != null ? patient.getNamaLengkap() : "Unknown");
         });
-        biayaKonsultasi.setCellValueFactory(new PropertyValueFactory<>("biayaKonsultasi"));
-        biayaObat.setCellValueFactory(new PropertyValueFactory<>("biayaObat"));
-        biayaTindakan.setCellValueFactory(new PropertyValueFactory<>("biayaTindakan"));
         totalBiaya.setCellValueFactory(new PropertyValueFactory<>("totalBiaya"));
         searchField.textProperty().addListener((observable, oldValue, newValue) -> handleSearchAction());
         
@@ -98,8 +98,6 @@ public class PaymentController {
                         rs.getInt("biaya_obat"),
                         rs.getInt("biaya_tindakan"),
                         rs.getInt("total_biaya"),
-                        rs.getInt("jumlah_bayar"),
-                        rs.getInt("kembalian"),
                         statusPembayaran,
                         rs.getDate("tanggal_pembayaran").toLocalDate(),
                         rs.getTimestamp("created_at") != null ? rs.getTimestamp("created_at").toLocalDateTime() : null,
@@ -208,7 +206,7 @@ public class PaymentController {
     }
 
     private void handleViewAction(Payment payment) {
-        // Logika untuk menampilkan detail pembayaran
+        SceneManager.getInstance().switchToPaymentShowScene(payment);
     }
 
     private void handleEditAction(Payment payment) {
@@ -248,8 +246,6 @@ public class PaymentController {
                         rs.getInt("biaya_obat"),
                         rs.getInt("biaya_tindakan"),
                         rs.getInt("total_biaya"),
-                        rs.getInt("jumlah_bayar"),
-                        rs.getInt("kembalian"),
                         statusPembayaran,
                         rs.getDate("tanggal_pembayaran").toLocalDate(),
                         rs.getTimestamp("created_at") != null ? rs.getTimestamp("created_at").toLocalDateTime() : null,

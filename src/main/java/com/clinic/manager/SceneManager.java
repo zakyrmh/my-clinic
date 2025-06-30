@@ -13,6 +13,7 @@ import com.clinic.controllers.PaymentEditController;
 import com.clinic.controllers.ProfileEditController;
 import com.clinic.controllers.VisitEditController;
 import com.clinic.controllers.VisitShowController;
+import com.clinic.controllers.PaymentShowController;
 import com.clinic.models.Doctor;
 import com.clinic.models.Patient;
 import com.clinic.models.Payment;
@@ -248,6 +249,13 @@ public class SceneManager {
                 "/com/clinic/view/visits/VisitShow.fxml",
                 (VisitShowController ctrl) -> ctrl.setVisitData(visit));
         mainLayoutController.setActive("btnKunjungan");
+    }
+
+    public void switchToPaymentShowScene(Payment payment) {
+        loadPageWithController(
+                "/com/clinic/view/payments/PaymentShow.fxml",
+                (PaymentShowController ctrl) -> ctrl.setPaymentData(payment));
+        mainLayoutController.setActive("btnPembayaran");
     }
 
     public void switchToEditProfileScene(User user) {

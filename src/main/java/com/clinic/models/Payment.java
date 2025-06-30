@@ -20,8 +20,6 @@ public class Payment {
     private final IntegerProperty biayaObat;
     private final IntegerProperty biayaTindakan;
     private final IntegerProperty totalBiaya;
-    private final IntegerProperty jumlahBayar;
-    private final IntegerProperty kembalian;
     private final ObjectProperty<PaymentStatus> statusPembayaran;
     private final ObjectProperty<LocalDate> tanggalPembayaran;
     private final ObjectProperty<LocalDateTime> createdAt;
@@ -68,8 +66,6 @@ public class Payment {
         this.biayaObat = new SimpleIntegerProperty();
         this.biayaTindakan = new SimpleIntegerProperty();
         this.totalBiaya = new SimpleIntegerProperty();
-        this.jumlahBayar = new SimpleIntegerProperty();
-        this.kembalian = new SimpleIntegerProperty();
         this.statusPembayaran = new SimpleObjectProperty<>();
         this.tanggalPembayaran = new SimpleObjectProperty<>();
         this.createdAt = new SimpleObjectProperty<>();
@@ -84,8 +80,6 @@ public class Payment {
             int biayaObat,
             int biayaTindakan,
             int totalBiaya,
-            int jumlahBayar,
-            int kembalian,
             PaymentStatus statusPembayaran,
             LocalDate tanggalPembayaran,
             LocalDateTime createdAt,
@@ -97,8 +91,6 @@ public class Payment {
         this.biayaObat = new SimpleIntegerProperty(biayaObat);
         this.biayaTindakan = new SimpleIntegerProperty(biayaTindakan);
         this.totalBiaya = new SimpleIntegerProperty(totalBiaya);
-        this.jumlahBayar = new SimpleIntegerProperty(jumlahBayar);
-        this.kembalian = new SimpleIntegerProperty(kembalian);
         this.statusPembayaran = new SimpleObjectProperty<>(statusPembayaran);
         this.tanggalPembayaran = new SimpleObjectProperty<>(tanggalPembayaran);
         this.createdAt = new SimpleObjectProperty<>(createdAt);
@@ -196,32 +188,6 @@ public class Payment {
 
     public void setTotalBiaya(int totalBiaya) {
         this.totalBiaya.set(totalBiaya);
-    }
-
-    // Jumlah Bayar
-    public IntegerProperty jumlahBayarProperty() {
-        return jumlahBayar;
-    }
-
-    public int getJumlahBayar() {
-        return jumlahBayar.get();
-    }
-
-    public void setJumlahBayar(int jumlahBayar) {
-        this.jumlahBayar.set(jumlahBayar);
-    }
-
-    // Kembalian
-    public IntegerProperty kembalianProperty() {
-        return kembalian;
-    }
-
-    public int getKembalian() {
-        return kembalian.get();
-    }
-
-    public void setKembalian(int kembalian) {
-        this.kembalian.set(kembalian);
     }
 
     // Status Pembayaran

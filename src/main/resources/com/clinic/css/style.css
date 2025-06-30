@@ -479,3 +479,249 @@
     -fx-background-color: #004085;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 2, 0, 0, 1);
 }
+
+/* --- HEADER SECTION --- */
+.header-section {
+    -fx-background-radius: 20px;
+    -fx-padding: 30px;
+    -fx-alignment: CENTER;
+    -fx-spacing: 10px;
+}
+
+.header-icon {
+    -fx-font-size: 28px;
+}
+
+.clinic-name {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+.page-subtitle {
+    -fx-font-size: 16px;
+    -fx-text-fill: rgba(255, 255, 255, 0.9);
+}
+
+/* --- INFO SECTION --- */
+.info-section {
+    -fx-alignment: TOP_CENTER;
+}
+
+.info-card {
+    -fx-background-color: #f8f9ff;
+    -fx-background-radius: 15px;
+    -fx-padding: 20px;
+    -fx-border-color: #2196F3;
+    -fx-border-width: 0 0 0 4px;
+    -fx-border-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+}
+
+.card-icon {
+    -fx-font-size: 20px;
+}
+
+.card-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.field-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-text-fill: #666666;
+}
+
+.field-value {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+/* --- BILLING SECTION --- */
+.billing-section {
+    -fx-background-color: white;
+    -fx-background-radius: 15px;
+    -fx-border-color: #f0f0f0;
+    -fx-border-width: 2px;
+    -fx-border-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+}
+
+.billing-header {
+    -fx-background-radius: 15px 15px 0 0;
+    -fx-padding: 20px;
+}
+
+.billing-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.billing-content {
+    -fx-padding: 0;
+}
+
+.billing-row {
+    -fx-padding: 15px 25px;
+    -fx-border-color: #f0f0f0;
+    -fx-border-width: 0 0 1px 0;
+    -fx-background-color: transparent;
+}
+
+.billing-row:hover {
+    -fx-background-color: #f8f9ff;
+}
+
+.billing-row-total {
+    -fx-padding: 20px 25px;
+    -fx-background-radius: 0 0 15px 15px;
+}
+
+.billing-icon {
+    -fx-font-size: 16px;
+}
+
+.billing-icon-total {
+    -fx-font-size: 18px;
+}
+
+.billing-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: 500;
+    -fx-text-fill: #555555;
+}
+
+.billing-label-total {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.billing-value {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.billing-value-total {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* --- PAYMENT SECTION --- */
+.payment-section {
+    -fx-alignment: TOP_CENTER;
+}
+
+.payment-card {
+    -fx-background-color: #f8f9ff;
+    -fx-background-radius: 15px;
+    -fx-padding: 20px;
+    -fx-border-color: #e3f2fd;
+    -fx-border-width: 2px;
+    -fx-border-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2);
+    -fx-spacing: 10px;
+}
+
+.payment-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666666;
+    -fx-font-weight: 500;
+    -fx-text-alignment: center;
+}
+
+.payment-value {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-text-alignment: center;
+}
+
+.status-paid {
+    -fx-text-fill: white;
+    -fx-padding: 8px 20px;
+    -fx-background-radius: 25px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.status-unpaid {
+    -fx-text-fill: white;
+    -fx-padding: 8px 20px;
+    -fx-background-radius: 25px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* --- ACTION SECTION --- */
+.action-section {
+    -fx-padding: 20px 0;
+}
+
+.print-button {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 25px;
+    -fx-background-radius: 25px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(108, 92, 231, 0.3), 8, 0, 0, 2);
+}
+
+.print-button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(108, 92, 231, 0.5), 12, 0, 0, 4);
+}
+
+.email-button {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 25px;
+    -fx-background-radius: 25px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 184, 148, 0.3), 8, 0, 0, 2);
+}
+
+.email-button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 184, 148, 0.5), 12, 0, 0, 4);
+}
+
+.back-button {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 25px;
+    -fx-background-radius: 25px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(99, 110, 114, 0.3), 8, 0, 0, 2);
+}
+
+.back-button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(99, 110, 114, 0.5), 12, 0, 0, 4);
+}
+
+/* --- FOOTER SECTION --- */
+.footer-section {
+    -fx-background-color: #f8f9fa;
+    -fx-padding: 20px;
+    -fx-background-radius: 15px;
+    -fx-border-color: #e9ecef;
+    -fx-border-width: 1px;
+    -fx-border-radius: 15px;
+    -fx-spacing: 5px;
+}
+
+.footer-text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666666;
+    -fx-text-alignment: center;
+}
+
+.footer-contact {
+    -fx-font-size: 12px;
+    -fx-text-fill: #888888;
+    -fx-text-alignment: center;
+}

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/style.css"
+    fx:controller="com.clinic.controllers.PaymentShowController">
+
+    <center>
+        <VBox spacing="20" styleClass="main-container">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20" />
+            </padding>
+
+            <!-- Header Section -->
+            <VBox styleClass="header-section">
+                <children>
+                    <Label text="Detail Tagihan Pembayaran" styleClass="clinic-name" />
+                </children>
+            </VBox>
+
+            <!-- Invoice and Patient Info Section -->
+            <HBox spacing="20" styleClass="info-section">
+                <children>
+                    <!-- Invoice Information -->
+                    <VBox styleClass="info-card" spacing="15" HBox.hgrow="ALWAYS">
+                        <children>
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <children>
+                                    <Label text="📋" styleClass="card-icon" />
+                                    <Label text="Informasi Invoice" styleClass="card-title" />
+                                </children>
+                            </HBox>
+
+                            <VBox spacing="12">
+                                <children>
+                                    <VBox spacing="4">
+                                        <children>
+                                            <Label text="No. Invoice" styleClass="field-label" />
+                                            <Label fx:id="noInvoiceLabel"
+                                                styleClass="field-value" />
+                                        </children>
+                                    </VBox>
+
+                                    <VBox spacing="4">
+                                        <children>
+                                            <Label text="Tanggal Invoice" styleClass="field-label" />
+                                            <Label fx:id="tanggalInvoiceLabel" styleClass="field-value" />
+                                        </children>
+                                    </VBox>
+                                </children>
+                            </VBox>
+                        </children>
+                    </VBox>
+
+                    <!-- Patient Information -->
+                    <VBox styleClass="info-card" spacing="15" HBox.hgrow="ALWAYS">
+                        <children>
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <children>
+                                    <Label text="👤" styleClass="card-icon" />
+                                    <Label text="Data Pasien" styleClass="card-title" />
+                                </children>
+                            </HBox>
+
+                            <VBox spacing="12">
+                                <children>
+                                    <VBox spacing="4">
+                                        <children>
+                                            <Label text="No. Rekam Medis" styleClass="field-label" />
+                                            <Label fx:id="noRmLabel" text="RM-240615-0087"
+                                                styleClass="field-value" />
+                                        </children>
+                                    </VBox>
+
+                                    <VBox spacing="4">
+                                        <children>
+                                            <Label text="Nama Pasien" styleClass="field-label" />
+                                            <Label fx:id="namaPasienLabel" text="Budi Santoso"
+                                                styleClass="field-value" />
+                                        </children>
+                                    </VBox>
+                                </children>
+                            </VBox>
+                        </children>
+                    </VBox>
+                </children>
+            </HBox>
+
+            <!-- Billing Details Section -->
+            <VBox styleClass="billing-section" spacing="0">
+                <children>
+                    <!-- Billing Items -->
+                    <VBox styleClass="billing-content">
+                        <children>
+                            <!-- Biaya Konsultasi -->
+                            <HBox styleClass="billing-row" alignment="CENTER_LEFT">
+                                <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="10" HBox.hgrow="ALWAYS">
+                                        <children>
+                                            <Label text="Biaya Konsultasi"
+                                                styleClass="billing-label" />
+                                        </children>
+                                    </HBox>
+                                    <Label fx:id="biayaKonsultasiLabel" text="Rp 150,000"
+                                        styleClass="billing-value" />
+                                </children>
+                            </HBox>
+
+                            <!-- Biaya Tindakan -->
+                            <HBox styleClass="billing-row" alignment="CENTER_LEFT">
+                                <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="10" HBox.hgrow="ALWAYS">
+                                        <children>
+                                            <Label text="Biaya Tindakan" styleClass="billing-label" />
+                                        </children>
+                                    </HBox>
+                                    <Label fx:id="biayaTindakanLabel" text="Rp 300,000"
+                                        styleClass="billing-value" />
+                                </children>
+                            </HBox>
+
+                            <!-- Biaya Obat -->
+                            <HBox styleClass="billing-row" alignment="CENTER_LEFT">
+                                <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="10" HBox.hgrow="ALWAYS">
+                                        <children>
+                                            <Label text="Biaya Obat" styleClass="billing-label" />
+                                        </children>
+                                    </HBox>
+                                    <Label fx:id="biayaObatLabel" text="Rp 85,000"
+                                        styleClass="billing-value" />
+                                </children>
+                            </HBox>
+
+                            <!-- Total Biaya -->
+                            <HBox styleClass="billing-row-total" alignment="CENTER_LEFT">
+                                <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="10" HBox.hgrow="ALWAYS">
+                                        <children>
+                                            <Label text="Total Biaya"
+                                                styleClass="billing-label-total" />
+                                        </children>
+                                    </HBox>
+                                    <Label fx:id="totalBiayaLabel"
+                                        styleClass="billing-value-total" />
+                                </children>
+                            </HBox>
+                        </children>
+                    </VBox>
+                </children>
+            </VBox>
+
+            <!-- Payment Information Section -->
+            <HBox spacing="20" styleClass="payment-section">
+                <children>
+                    <!-- Payment Date -->
+                    <VBox styleClass="payment-card" alignment="CENTER" HBox.hgrow="ALWAYS">
+                        <children>
+                            <Label text="Tanggal Pembayaran" styleClass="payment-label" />
+                            <Label fx:id="tanggalPembayaranLabel" text="15 Juni 2024, 14:30 WIB"
+                                styleClass="payment-value" />
+                        </children>
+                    </VBox>
+
+                    <!-- Payment Status -->
+                    <VBox styleClass="payment-card" alignment="CENTER" HBox.hgrow="ALWAYS">
+                        <children>
+                            <Label text="Status Pembayaran" styleClass="payment-label" />
+                            <HBox alignment="CENTER">
+                                <children>
+                                    <Label fx:id="statusPembayaranLabel" text="✅ LUNAS"
+                                        styleClass="status-paid" />
+                                </children>
+                            </HBox>
+                        </children>
+                    </VBox>
+                </children>
+            </HBox>
+
+            <!-- Action Buttons Section -->
+            <HBox alignment="CENTER" spacing="15" styleClass="action-section">
+                <children>
+                    <Button text="🖨️ Cetak Invoice" styleClass="print-button" />
+                    <Button text="📧 Kirim Email" styleClass="email-button" />
+                    <Button text="🔙 Kembali" styleClass="back-button" />
+                </children>
+            </HBox>
+
+            <!-- Footer Section -->
+            <VBox styleClass="footer-section" alignment="CENTER">
+                <children>
+                    <Label text="Terima kasih atas kepercayaan Anda kepada Klinik Sehat Prima"
+                        styleClass="footer-text" />
+                    <Label text="Jl. Kesehatan No. 123, Pekanbaru • Telp: (0761) 123-4567"
+                        styleClass="footer-contact" />
+                </children>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>
