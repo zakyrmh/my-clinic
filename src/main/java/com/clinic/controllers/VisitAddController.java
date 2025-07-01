@@ -174,16 +174,15 @@ public class VisitAddController {
 
         int idPasien = pasienMap.getOrDefault(pasienField.getText(), 0);
         int idDokter = dokterMap.getOrDefault(dokterField.getText(), 0);
+        LocalDate tanggalKunjungan = tanggalKunjunganPicker.getValue();
+        int noAntrian = generateNoAntrian(tanggalKunjungan);
+
         visit.setIdPasien(idPasien);
         visit.setIdDokter(idDokter);
-        
-        LocalDate tanggalKunjungan = tanggalKunjunganPicker.getValue();
-        visit.setTanggalKunjungan(tanggalKunjungan);
-        
-        int noAntrian = generateNoAntrian(tanggalKunjungan);
         visit.setNoAntrian(String.valueOf(noAntrian));
-        visit.setTanggalKunjungan(tanggalKunjunganPicker.getValue());
+        visit.setTanggalKunjungan(tanggalKunjungan);
         visit.setKeluhanUtama(keluhanUtamaField.getText());
+        visit.setJenisKunjungan(Visit.VisitType.NEW);
 
         try {
             LocalTime jamDaftar = LocalTime.parse(jamDaftarField.getText());
@@ -191,19 +190,6 @@ public class VisitAddController {
         } catch (Exception e) {
             showAlert(AlertType.ERROR, "Format Jam Salah", "Gunakan format HH:mm untuk jam daftar.");
             return;
-        }
-
-        try (Connection conn = DatabaseUtil.getConnection()) {
-            PreparedStatement ps = conn.prepareStatement("SELECT COUNT(*) FROM kunjungan WHERE id_pasien = ?");
-            ps.setInt(1, idPasien);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next() && rs.getInt(1) > 0) {
-                visit.setJenisKunjungan(Visit.VisitType.NEW);
-            } else {
-                visit.setJenisKunjungan(Visit.VisitType.FOLLOWUP);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
 
         RadioButton selectedPayment = (RadioButton) caraBayarGroup.getSelectedToggle();
