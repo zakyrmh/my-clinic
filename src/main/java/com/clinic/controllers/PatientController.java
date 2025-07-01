@@ -1,6 +1,7 @@
 package com.clinic.controllers;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,6 +16,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -239,13 +241,50 @@ public class PatientController {
     }
 
     private void handleDeleteAction(Patient patient) {
-        try (Connection conn = DatabaseUtil.getConnection(); Statement stmt = conn.createStatement()) {
-            stmt.executeUpdate("DELETE FROM pasien WHERE id_pasien = " + patient.getIdPasien());
-            tableView.getItems().remove(patient);
-            System.out.println("Deleted patient: " + patient.getNamaLengkap());
+        String checkVisitSql = "SELECT COUNT(*) FROM kunjungan WHERE id_pasien = ?";
+        String deletePatientSql = "DELETE FROM pasien WHERE id_pasien = ?";
+
+        try (Connection conn = DatabaseUtil.getConnection(); PreparedStatement checkStmt = conn.prepareStatement(checkVisitSql)) {
+
+            // 1. Cek apakah ada kunjungan untuk pasien ini
+            checkStmt.setInt(1, patient.getIdPasien());
+            try (ResultSet rs = checkStmt.executeQuery()) {
+                if (rs.next() && rs.getInt(1) > 0) {
+                    // Pasien masih punya data kunjungan: tampilkan alert dan batalkan delete
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Tidak Bisa Dihapus");
+                    alert.setHeaderText("Pasien Memiliki Data Kunjungan");
+                    alert.setContentText(
+                            "Pasien \"" + patient.getNamaLengkap()
+                            + "\" tidak dapat dihapus karena masih memiliki "
+                            + rs.getInt(1) + " kunjungan.\n"
+                            + "Silakan hapus data kunjungan terlebih dahulu."
+                    );
+                    alert.showAndWait();
+                    return;
+                }
+            }
+
+            // 2. Jika tidak ada kunjungan, lanjutkan delete
+            try (PreparedStatement deleteStmt = conn.prepareStatement(deletePatientSql)) {
+                deleteStmt.setInt(1, patient.getIdPasien());
+                int affected = deleteStmt.executeUpdate();
+                if (affected > 0) {
+                    tableView.getItems().remove(patient);
+                    System.out.println("Deleted patient: " + patient.getNamaLengkap());
+                } else {
+                    System.out.println("No patient deleted, id_pasien not found: " + patient.getIdPasien());
+                }
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Error deleting patient: " + e.getMessage());
+            // Tampilkan error dialog jika perlu
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Error");
+            errorAlert.setHeaderText("Gagal Menghapus Pasien");
+            errorAlert.setContentText(e.getMessage());
+            errorAlert.showAndWait();
         }
     }
 
