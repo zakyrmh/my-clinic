@@ -5,13 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import com.clinic.manager.SceneManager;
-import com.clinic.manager.UserSession;
 import com.clinic.models.Patient;
 import com.clinic.models.Patient.Gender;
 import com.clinic.models.Patient.MaritalStatus;
 import com.clinic.utils.DatabaseUtil;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -23,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
 public class PatientAddController {
+
     @FXML
     private TextField nikField;
     @FXML
@@ -42,9 +41,15 @@ public class PatientAddController {
     @FXML
     private TextField noTeleponField;
     @FXML
-    private TextField emailField;
-    @FXML
     private TextField pekerjaanField;
+    @FXML
+    private TextField agamaField;
+    @FXML
+    private TextField pendidikanField;
+    @FXML
+    private TextField kontakDaruratField;
+    @FXML
+    private TextField noTeleponDaruratField;
     @FXML
     private ToggleGroup statusPernikahanGroup;
     @FXML
@@ -55,12 +60,6 @@ public class PatientAddController {
     private RadioButton ceraiHidupRadio;
     @FXML
     private RadioButton ceraiMatiRadio;
-    @FXML
-    private ToggleGroup golonganDarahGroup;
-    @FXML
-    private RadioButton aRadio, bRadio, abRadio, oRadio,
-            aPlusRadio, aMinusRadio, bPlusRadio, bMinusRadio,
-            abPlusRadio, abMinusRadio, oPlusRadio, oMinusRadio;
     @FXML
     private Button submitButton;
 
@@ -77,16 +76,19 @@ public class PatientAddController {
         Patient patient = new Patient();
         patient.setNik(nikField.getText());
         patient.setNamaLengkap(namaLengkapField.getText());
-        patient.setTanggalLahir(tanggalLahirPicker.getValue());
         patient.setTempatLahir(tempatLahirField.getText());
+        patient.setTanggalLahir(tanggalLahirPicker.getValue());
         patient.setAlamat(alamatField.getText());
         patient.setNoTelepon(noTeleponField.getText());
         patient.setPekerjaan(pekerjaanField.getText());
+        patient.setAgama(agamaField.getText());
+        patient.setPendidikan(pendidikanField.getText());
+        patient.setKontakDarurat(kontakDaruratField.getText());
+        patient.setNoTeleponDarurat(noTeleponDaruratField.getText());
 
         // Ambil jenis kelamin
         RadioButton selectedGender = (RadioButton) jenisKelaminGroup.getSelectedToggle();
         patient.setJenisKelamin(Gender.fromString(selectedGender.getUserData().toString()));
-
 
         // Ambil status pernikahan
         RadioButton selectedStatus = (RadioButton) statusPernikahanGroup.getSelectedToggle();
@@ -136,9 +138,6 @@ public class PatientAddController {
         if (statusPernikahanGroup.getSelectedToggle() == null) {
             errorMessage.append("Diperlukan Status Pernikahan.\n");
         }
-        if (golonganDarahGroup.getSelectedToggle() == null) {
-            errorMessage.append("Diperlukan Golongan Darah.\n");
-        }
 
         if (errorMessage.length() > 0) {
             showAlert(AlertType.ERROR, "Validation Error", errorMessage.toString());
@@ -148,20 +147,23 @@ public class PatientAddController {
     }
 
     private boolean saveToDatabase(Patient patient) {
-        String sql = "INSERT INTO pasien (nik, nama_lengkap, jenis_kelamin, tanggal_lahir, tempat_lahir, alamat, no_telepon, email, pekerjaan, status_pernikahan, golongan_darah) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO pasien (nik, nama_lengkap, tempat_lahir, tanggal_lahir, jenis_kelamin, alamat, no_telepon, pekerjaan, status_pernikahan, agama, pendidikan, kontak_darurat, no_telepon_darurat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-        try (Connection conn = DatabaseUtil.getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DatabaseUtil.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, patient.getNik());
             pstmt.setString(2, patient.getNamaLengkap());
-            pstmt.setString(3, patient.getJenisKelamin().toString());
+            pstmt.setString(3, patient.getTempatLahir());
             pstmt.setDate(4, java.sql.Date.valueOf(patient.getTanggalLahir()));
-            pstmt.setString(5, patient.getTempatLahir());
+            pstmt.setString(5, patient.getJenisKelamin().toString());
             pstmt.setString(6, patient.getAlamat());
             pstmt.setString(7, patient.getNoTelepon());
-            pstmt.setString(9, patient.getPekerjaan());
-            pstmt.setString(10, patient.getStatusPernikahan().toString());
+            pstmt.setString(8, patient.getPekerjaan());
+            pstmt.setString(9, patient.getStatusPernikahan().toString());
+            pstmt.setString(10, patient.getAgama());
+            pstmt.setString(11, patient.getPendidikan());
+            pstmt.setString(12, patient.getKontakDarurat());
+            pstmt.setString(13, patient.getNoTeleponDarurat());
 
             int rowsAffected = pstmt.executeUpdate();
             return rowsAffected > 0;
@@ -175,12 +177,15 @@ public class PatientAddController {
     private void handleClear() {
         nikField.clear();
         namaLengkapField.clear();
-        tanggalLahirPicker.setValue(null);
         tempatLahirField.clear();
+        tanggalLahirPicker.setValue(null);
         alamatField.clear();
         noTeleponField.clear();
-        emailField.clear();
         pekerjaanField.clear();
+        agamaField.clear();
+        pendidikanField.clear();
+        kontakDaruratField.clear();
+        noTeleponDaruratField.clear();
     }
 
     private void showAlert(AlertType alertType, String title, String message) {
@@ -192,35 +197,7 @@ public class PatientAddController {
     }
 
     @FXML
-    private void handleLogout(ActionEvent event) {
-        UserSession.getInstance().endSession();
-        System.out.println("The user session has ended (logout).");
-
-        SceneManager.getInstance().switchToLoginScene();
-    }
-
-    @FXML
-    protected void handleDashboardLinkAction(ActionEvent event) {
-        SceneManager.getInstance().switchToDashboard();
-    }
-
-    @FXML
     protected void handlePatientLinkAction() {
         SceneManager.getInstance().switchToPatientScene();
-    }
-
-    @FXML
-    protected void handleDoctorLinkAction() {
-        SceneManager.getInstance().switchToDoctorScene();
-    }
-
-    @FXML
-    protected void handleVisitLinkAction() {
-        SceneManager.getInstance().switchToVisitScene();
-    }
-
-    @FXML
-    protected void handleMedicalRecordLinkAction() {
-        SceneManager.getInstance().switchToMedicalRecordScene();
     }
 }

@@ -4,15 +4,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.clinic.manager.SceneManager;
-import com.clinic.manager.UserSession;
 import com.clinic.models.Patient;
 import com.clinic.models.Visit;
 import com.clinic.utils.DatabaseUtil;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -27,21 +24,23 @@ public class PatientShowController {
     @FXML
     private Label namaLengkapLabel;
     @FXML
-    private Label jenisKelaminLabel;
-    @FXML
     private Label ttlLabel;
+    @FXML
+    private Label jenisKelaminLabel;
     @FXML
     private Label alamatLabel;
     @FXML
     private Label noTeleponLabel;
     @FXML
-    private Label emailLabel;
-    @FXML
     private Label pekerjaanLabel;
     @FXML
     private Label statusPernikahanLabel;
     @FXML
-    private Label golonganDarahLabel;
+    private Label agamaLabel;
+    @FXML
+    private Label pendidikanLabel;
+    @FXML
+    private Label kontakDaruratLabel;
     @FXML
     private TableView<Visit> tableView;
     @FXML
@@ -125,46 +124,16 @@ public class PatientShowController {
         noRmLabel.setText(patient.getNoRm());
         nikLabel.setText(patient.getNik());
         namaLengkapLabel.setText(patient.getNamaLengkap());
-        jenisKelaminLabel.setText(patient.getJenisKelamin() == Patient.Gender.MALE ? "Laki-laki" : "Perempuan");
         ttlLabel.setText(patient.getTanggalLahir().toString());
+        jenisKelaminLabel.setText(patient.getJenisKelamin() == Patient.Gender.MALE ? "Laki-laki" : "Perempuan");
         alamatLabel.setText(patient.getAlamat());
         noTeleponLabel.setText(patient.getNoTelepon());
         pekerjaanLabel.setText(patient.getPekerjaan());
         statusPernikahanLabel.setText(patient.getStatusPernikahan().toString());
+        agamaLabel.setText(patient.getAgama());
+        pendidikanLabel.setText(patient.getPendidikan());
+        kontakDaruratLabel.setText(patient.getKontakDarurat() + " - " + patient.getNoTeleponDarurat());
 
         loadVisitData();
-    }
-
-    @FXML
-    private void handleLogout(ActionEvent event) {
-        UserSession.getInstance().endSession();
-        System.out.println("The user session has ended (logout).");
-
-        SceneManager.getInstance().switchToLoginScene();
-    }
-
-    @FXML
-    protected void handleDashboardLinkAction(ActionEvent event) {
-        SceneManager.getInstance().switchToDashboard();
-    }
-
-    @FXML
-    protected void handlePatientLinkAction() {
-        SceneManager.getInstance().switchToPatientScene();
-    }
-
-    @FXML
-    protected void handleDoctorLinkAction() {
-        SceneManager.getInstance().switchToDoctorScene();
-    }
-
-    @FXML
-    protected void handleVisitLinkAction() {
-        SceneManager.getInstance().switchToVisitScene();
-    }
-
-    @FXML
-    protected void handleMedicalRecordLinkAction() {
-        SceneManager.getInstance().switchToMedicalRecordScene();
     }
 }

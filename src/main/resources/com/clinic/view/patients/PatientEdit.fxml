@@ -77,18 +77,6 @@
                                 </VBox>
                                 <VBox spacing="16">
                                     <children>
-                                        <!-- Tanggal lahir -->
-                                        <VBox spacing="8" alignment="CENTER_LEFT">
-                                            <HBox spacing="4" alignment="CENTER_LEFT">
-                                                <children>
-                                                    <Label text="Tanggal Lahir"
-                                                        styleClass="label-form" />
-                                                    <Label text="*" styleClass="required-star" />
-                                                </children>
-                                            </HBox>
-                                            <DatePicker fx:id="tanggalLahirPicker"
-                                                promptText="MM/DD/YYYY" styleClass="date-picker" />
-                                        </VBox>
                                         <!-- Tempat Lahir -->
                                         <VBox spacing="8" alignment="CENTER_LEFT">
                                             <HBox spacing="4" alignment="CENTER_LEFT">
@@ -101,6 +89,18 @@
                                             <TextArea fx:id="tempatLahirField"
                                                 promptText="Masukkan Tempat Lahir"
                                                 styleClass="text-area" prefHeight="80" />
+                                        </VBox>
+                                        <!-- Tanggal lahir -->
+                                        <VBox spacing="8" alignment="CENTER_LEFT">
+                                            <HBox spacing="4" alignment="CENTER_LEFT">
+                                                <children>
+                                                    <Label text="Tanggal Lahir"
+                                                        styleClass="label-form" />
+                                                    <Label text="*" styleClass="required-star" />
+                                                </children>
+                                            </HBox>
+                                            <DatePicker fx:id="tanggalLahirPicker"
+                                                promptText="MM/DD/YYYY" styleClass="date-picker" />
                                         </VBox>
                                         <!-- Alamat -->
                                         <VBox spacing="8" alignment="CENTER_LEFT">
@@ -130,17 +130,53 @@
                                                 promptText="Masukkan No Telepon"
                                                 styleClass="text-field" />
                                         </VBox>
-                                        <!-- Email -->
-                                        <VBox spacing="8" alignment="CENTER_LEFT">
-                                            <Label text="Email" styleClass="label-form" />
-                                            <TextField fx:id="emailField"
-                                                promptText="Masukkan Email" styleClass="text-field" />
-                                        </VBox>
                                         <!-- Pekerjaan -->
                                         <VBox spacing="8" alignment="CENTER_LEFT">
-                                            <Label text="Pekerjaan" styleClass="label-form" />
+                                            <HBox spacing="4" alignment="CENTER_LEFT">
+                                                <children>
+                                                    <Label text="Pekerjaan" styleClass="label-form" />
+                                                    <Label text="*" styleClass="required-star" />
+                                                </children>
+                                            </HBox>
                                             <TextField fx:id="pekerjaanField"
                                                 promptText="Masukkan Pekerjaan"
+                                                styleClass="text-field" />
+                                        </VBox>
+                                        <!-- Agama -->
+                                        <VBox spacing="8" alignment="CENTER_LEFT">
+                                            <HBox spacing="4" alignment="CENTER_LEFT">
+                                                <children>
+                                                    <Label text="Agama" styleClass="label-form" />
+                                                    <Label text="*" styleClass="required-star" />
+                                                </children>
+                                            </HBox>
+                                            <TextField fx:id="agamaField"
+                                                promptText="Masukkan Agama"
+                                                styleClass="text-field" />
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                                <VBox spacing="16">
+                                    <children>
+                                        <!-- Pendidikan -->
+                                        <VBox spacing="8" alignment="CENTER_LEFT">
+                                            <Label text="Pendidikan Terakhir" styleClass="label-form" />
+                                            <TextField fx:id="pendidikanField"
+                                                promptText="Masukkan Pendidikan"
+                                                styleClass="text-field" />
+                                        </VBox>
+                                        <!-- Kontak Darurat -->
+                                        <VBox spacing="8" alignment="CENTER_LEFT">
+                                            <Label text="Kontak Darurat" styleClass="label-form" />
+                                            <TextField fx:id="kontakDaruratField"
+                                                promptText="Masukkan Kontak Darurat"
+                                                styleClass="text-field" />
+                                        </VBox>
+                                        <!-- No Telepon Darurat -->
+                                        <VBox spacing="8" alignment="CENTER_LEFT">
+                                            <Label text="No Telepon Darurat" styleClass="label-form" />
+                                            <TextField fx:id="noTeleponDaruratField"
+                                                promptText="Masukkan No Telepon Darurat"
                                                 styleClass="text-field" />
                                         </VBox>
                                     </children>
@@ -151,7 +187,12 @@
                             <children>
                                 <!-- Status Pernikahan -->
                                 <VBox spacing="8" alignment="CENTER_LEFT">
-                                    <Label text="Status Pernikahan" styleClass="label-form" />
+                                    <HBox spacing="4" alignment="CENTER_LEFT">
+                                        <children>
+                                            <Label text="Status Pernikahan" styleClass="label-form" />
+                                            <Label text="*" styleClass="required-star" />
+                                        </children>
+                                    </HBox>
                                     <HBox spacing="16">
                                         <VBox.margin>
                                             <Insets right="8" />
@@ -169,51 +210,6 @@
                                         <RadioButton fx:id="ceraiMatiRadio" userData="Cerai Mati"
                                             text="Cerai Mati" styleClass="radio-button"
                                             toggleGroup="$statusPernikahanGroup" />
-                                    </HBox>
-                                </VBox>
-                                <!-- Golongan Darah -->
-                                <VBox spacing="8" alignment="CENTER_LEFT">
-                                    <Label text="Golongan Darah" styleClass="label-form" />
-                                    <HBox spacing="16">
-                                        <VBox.margin>
-                                            <Insets right="8" />
-                                        </VBox.margin>
-                                        <RadioButton fx:id="aRadio" userData="A" text="A"
-                                            styleClass="radio-button"
-                                            toggleGroup="$golonganDarahGroup" />
-                                        <RadioButton fx:id="bRadio" userData="B" text="B"
-                                            styleClass="radio-button"
-                                            toggleGroup="$golonganDarahGroup" />
-                                        <RadioButton fx:id="abRadio" userData="AB" text="AB"
-                                            styleClass="radio-button"
-                                            toggleGroup="$golonganDarahGroup" />
-                                        <RadioButton fx:id="oRadio" userData="O" text="O"
-                                            styleClass="radio-button"
-                                            toggleGroup="$golonganDarahGroup" />
-                                        <RadioButton fx:id="aPlusRadio" userData="A+" text="A+"
-                                            styleClass="radio-button"
-                                            toggleGroup="$golonganDarahGroup" />
-                                        <RadioButton fx:id="aMinusRadio" userData="A-" text="A−"
-                                            styleClass="radio-button"
-                                            toggleGroup="$golonganDarahGroup" />
-                                        <RadioButton fx:id="bPlusRadio" userData="B+" text="B+"
-                                            styleClass="radio-button"
-                                            toggleGroup="$golonganDarahGroup" />
-                                        <RadioButton fx:id="bMinusRadio" userData="B-" text="B−"
-                                            styleClass="radio-button"
-                                            toggleGroup="$golonganDarahGroup" />
-                                        <RadioButton fx:id="abPlusRadio" userData="AB+" text="AB+"
-                                            styleClass="radio-button"
-                                            toggleGroup="$golonganDarahGroup" />
-                                        <RadioButton fx:id="abMinusRadio" userData="AB-" text="AB−"
-                                            styleClass="radio-button"
-                                            toggleGroup="$golonganDarahGroup" />
-                                        <RadioButton fx:id="oPlusRadio" userData="O+" text="O+"
-                                            styleClass="radio-button"
-                                            toggleGroup="$golonganDarahGroup" />
-                                        <RadioButton fx:id="oMinusRadio" userData="O-" text="O−"
-                                            styleClass="radio-button"
-                                            toggleGroup="$golonganDarahGroup" />
                                     </HBox>
                                 </VBox>
                             </children>

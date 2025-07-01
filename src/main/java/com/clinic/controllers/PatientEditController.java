@@ -22,6 +22,7 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 
 public class PatientEditController {
+
     @FXML
     private TextField nikField;
     @FXML
@@ -41,9 +42,15 @@ public class PatientEditController {
     @FXML
     private TextField noTeleponField;
     @FXML
-    private TextField emailField;
-    @FXML
     private TextField pekerjaanField;
+    @FXML
+    private TextField agamaField;
+    @FXML
+    private TextField pendidikanField;
+    @FXML
+    private TextField kontakDaruratField;
+    @FXML
+    private TextField noTeleponDaruratField;
     @FXML
     private ToggleGroup statusPernikahanGroup;
     @FXML
@@ -54,12 +61,6 @@ public class PatientEditController {
     private RadioButton ceraiHidupRadio;
     @FXML
     private RadioButton ceraiMatiRadio;
-    @FXML
-    private ToggleGroup golonganDarahGroup;
-    @FXML
-    private RadioButton aRadio, bRadio, abRadio, oRadio,
-            aPlusRadio, aMinusRadio, bPlusRadio, bMinusRadio,
-            abPlusRadio, abMinusRadio, oPlusRadio, oMinusRadio;
     @FXML
     private Button submitButton;
     @FXML
@@ -77,11 +78,15 @@ public class PatientEditController {
 
         nikField.setText(patient.getNik());
         namaLengkapField.setText(patient.getNamaLengkap());
-        tanggalLahirPicker.setValue(patient.getTanggalLahir());
         tempatLahirField.setText(patient.getTempatLahir());
+        tanggalLahirPicker.setValue(patient.getTanggalLahir());
         alamatField.setText(patient.getAlamat());
         noTeleponField.setText(patient.getNoTelepon());
         pekerjaanField.setText(patient.getPekerjaan());
+        agamaField.setText(patient.getAgama());
+        pendidikanField.setText(patient.getPendidikan());
+        kontakDaruratField.setText(patient.getKontakDarurat());
+        noTeleponDaruratField.setText(patient.getNoTeleponDarurat());
 
         // Jenis kelamin
         Toggle selectedJK = jenisKelaminGroup.getToggles().stream()
@@ -103,37 +108,38 @@ public class PatientEditController {
     @FXML
     private void handleUpdatePatient(ActionEvent event) {
         if (validateInput()) {
-            try (Connection conn = DatabaseUtil.getConnection();
-                    PreparedStatement stmt = conn.prepareStatement(
-                            "UPDATE pasien SET nik = ?, nama_lengkap = ?, jenis_kelamin = ?, tanggal_lahir = ?, tempat_lahir = ?, alamat = ?, no_telepon = ?, email = ?, pekerjaan = ?, status_pernikahan = ?, golongan_darah = ? WHERE id_pasien = ?")) {
+            try (Connection conn = DatabaseUtil.getConnection(); PreparedStatement stmt = conn.prepareStatement(
+                    "UPDATE pasien SET nik = ?, nama_lengkap = ?, tempat_lahir = ?, tanggal_lahir = ?, jenis_kelamin = ?, alamat = ?, no_telepon = ?, pekerjaan = ?, status_pernikahan = ?, agama = ?, pendidikan = ?, kontak_darurat = ?, no_telepon_darurat = ? WHERE id_pasien = ?")) {
 
                 String jkCode = jenisKelaminGroup.getSelectedToggle().getUserData().toString();
                 String statusCode = statusPernikahanGroup.getSelectedToggle().getUserData().toString();
-                String bloodCode = golonganDarahGroup.getSelectedToggle().getUserData().toString();
+
                 stmt.setString(1, nikField.getText());
                 stmt.setString(2, namaLengkapField.getText());
-                stmt.setString(3, jkCode);
+                stmt.setString(3, tempatLahirField.getText());
                 stmt.setDate(4, java.sql.Date.valueOf(tanggalLahirPicker.getValue()));
-                stmt.setString(5, tempatLahirField.getText());
+                stmt.setString(5, jkCode);
                 stmt.setString(6, alamatField.getText());
                 stmt.setString(7, noTeleponField.getText());
-                stmt.setString(8, emailField.getText());
-                stmt.setString(9, pekerjaanField.getText());
-                stmt.setString(10, statusCode);
-
-                stmt.setString(11, bloodCode);
-                stmt.setInt(12, currentPatient.getIdPasien());
+                stmt.setString(8, pekerjaanField.getText());
+                stmt.setString(9, statusCode);
+                stmt.setString(10, agamaField.getText());
+                stmt.setString(11, pendidikanField.getText());
+                stmt.setString(12, kontakDaruratField.getText());
+                stmt.setString(13, noTeleponDaruratField.getText());
+                stmt.setInt(14, currentPatient.getIdPasien());
 
                 int rowsAffected = stmt.executeUpdate();
                 if (rowsAffected > 0) {
-                    showAlert(AlertType.INFORMATION, "Success", "Data pasien berhasil diperbarui.");
+                    showAlert(AlertType.INFORMATION, "Berhasil", "Data pasien berhasil diperbarui.");
                     SceneManager.getInstance().switchToPatientScene();
                 } else {
-                    showAlert(AlertType.ERROR, "Error", "Gagal memperbarui data pasien.");
+                    showAlert(AlertType.ERROR, "Gagal", "Data pasien tidak ditemukan atau tidak berubah.");
                 }
+
             } catch (SQLException e) {
                 e.printStackTrace();
-                showAlert(AlertType.ERROR, "Database Error", "Error updating patient: " + e.getMessage());
+                showAlert(AlertType.ERROR, "Database Error", "Terjadi kesalahan saat memperbarui data: " + e.getMessage());
             }
         }
     }
