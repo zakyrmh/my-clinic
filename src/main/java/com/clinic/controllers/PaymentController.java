@@ -18,6 +18,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -26,6 +27,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 
 public class PaymentController {
+
     @FXML
     private TableView<Payment> tableView;
     @FXML
@@ -40,6 +42,12 @@ public class PaymentController {
     private TableColumn<Payment, String> totalBiaya;
     @FXML
     private TableColumn<Payment, Void> action;
+    @FXML
+    private Label totalTagihanLabel;
+    @FXML
+    private Label tagihanLunasLabel;
+    @FXML
+    private Label tagihanTertundaLabel;
     @FXML
     private TextField searchField;
 
@@ -70,7 +78,7 @@ public class PaymentController {
         });
         totalBiaya.setCellValueFactory(new PropertyValueFactory<>("totalBiaya"));
         searchField.textProperty().addListener((observable, oldValue, newValue) -> handleSearchAction());
-        
+
         configureActionColumn();
 
         if (UserSession.getInstance().isLoggedIn()) {
@@ -83,9 +91,7 @@ public class PaymentController {
 
         String sql = "SELECT p.*, k.*, pa.* FROM pembayaran p LEFT JOIN kunjungan k ON p.id_kunjungan = k.id_kunjungan LEFT JOIN pasien pa ON k.id_pasien = pa.id_pasien;";
 
-        try (Connection conn = DatabaseUtil.getConnection();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(sql)) {
+        try (Connection conn = DatabaseUtil.getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 Payment.PaymentStatus statusPembayaran = Payment.PaymentStatus
                         .fromString(rs.getString("status_pembayaran"));
@@ -125,9 +131,9 @@ public class PaymentController {
                             rs.getInt("k.biaya_konsultasi"),
                             caraBayar,
                             rs.getTimestamp("k.created_at") != null ? rs.getTimestamp("k.created_at").toLocalDateTime()
-                                    : null,
+                            : null,
                             rs.getTimestamp("k.updated_at") != null ? rs.getTimestamp("k.updated_at").toLocalDateTime()
-                                    : null);
+                            : null);
                     visitMap.put(visitId, visit);
 
                     int patientId = rs.getInt("pa.id_pasien");
@@ -152,17 +158,18 @@ public class PaymentController {
                                 rs.getString("pa.kontak_darurat"),
                                 rs.getString("pa.no_telepon_darurat"),
                                 rs.getTimestamp("pa.created_at") != null
-                                        ? rs.getTimestamp("pa.created_at").toLocalDateTime()
-                                        : null,
+                                ? rs.getTimestamp("pa.created_at").toLocalDateTime()
+                                : null,
                                 rs.getTimestamp("pa.updated_at") != null
-                                        ? rs.getTimestamp("pa.updated_at").toLocalDateTime()
-                                        : null);
+                                ? rs.getTimestamp("pa.updated_at").toLocalDateTime()
+                                : null);
                         patientMap.put(patientId, patient);
                     }
                 }
             }
 
             tableView.setItems(paymentList);
+            updateSummaryLabels(paymentList);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error loading payment data: " + e.getMessage());
@@ -226,13 +233,12 @@ public class PaymentController {
 
         String sql = "SELECT p.*, k.*, pa.* FROM pembayaran p LEFT JOIN kunjungan k ON p.id_kunjungan = k.id_kunjungan LEFT JOIN pasien pa ON k.id_pasien = pa.id_pasien WHERE p.no_invoice LIKE ? OR LOWER(pa.nama_lengkap) LIKE ?;";
 
-        try (Connection conn = DatabaseUtil.getConnection();
-                var pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DatabaseUtil.getConnection(); var pstmt = conn.prepareStatement(sql)) {
 
-                pstmt.setString(1, "%" + keyword + "%");
-                pstmt.setString(2, "%" + keyword.toLowerCase() + "%");
-                
-                ResultSet rs = pstmt.executeQuery();
+            pstmt.setString(1, "%" + keyword + "%");
+            pstmt.setString(2, "%" + keyword.toLowerCase() + "%");
+
+            ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 Payment.PaymentStatus statusPembayaran = Payment.PaymentStatus
@@ -273,9 +279,9 @@ public class PaymentController {
                             rs.getInt("k.biaya_konsultasi"),
                             caraBayar,
                             rs.getTimestamp("k.created_at") != null ? rs.getTimestamp("k.created_at").toLocalDateTime()
-                                    : null,
+                            : null,
                             rs.getTimestamp("k.updated_at") != null ? rs.getTimestamp("k.updated_at").toLocalDateTime()
-                                    : null);
+                            : null);
                     visitMap.put(visitId, visit);
 
                     int patientId = rs.getInt("pa.id_pasien");
@@ -300,20 +306,43 @@ public class PaymentController {
                                 rs.getString("pa.kontak_darurat"),
                                 rs.getString("pa.no_telepon_darurat"),
                                 rs.getTimestamp("pa.created_at") != null
-                                        ? rs.getTimestamp("pa.created_at").toLocalDateTime()
-                                        : null,
+                                ? rs.getTimestamp("pa.created_at").toLocalDateTime()
+                                : null,
                                 rs.getTimestamp("pa.updated_at") != null
-                                        ? rs.getTimestamp("pa.updated_at").toLocalDateTime()
-                                        : null);
+                                ? rs.getTimestamp("pa.updated_at").toLocalDateTime()
+                                : null);
                         patientMap.put(patientId, patient);
                     }
                 }
             }
 
             tableView.setItems(filteredList);
+            updateSummaryLabels(filteredList);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error searching payment data: " + e.getMessage());
         }
     }
+
+    private void updateSummaryLabels(ObservableList<Payment> list) {
+        int totalTagihan = 0;
+        int tagihanLunas = 0;
+        int tagihanTertunda = 0;
+
+        for (Payment p : list) {
+            int biaya = p.getTotalBiaya();
+            totalTagihan += biaya;
+            if (p.getStatusPembayaran() == Payment.PaymentStatus.PAID) {
+                tagihanLunas += biaya;
+            } else {
+                tagihanTertunda += biaya;
+            }
+        }
+
+        // Format angka ke string, misal dengan pemisah ribuan:
+        totalTagihanLabel.setText(String.format("%,d", totalTagihan));
+        tagihanLunasLabel.setText(String.format("%,d", tagihanLunas));
+        tagihanTertundaLabel.setText(String.format("%,d", tagihanTertunda));
+    }
+
 }

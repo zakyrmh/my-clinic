@@ -50,11 +50,11 @@
                                         </VBox>
                                         <VBox spacing="16">
                                             <children>
-                                                <Label text="Rp0.00"
+                                                <Label fx:id="totalTagihanLabel"
                                                 styleClass="label-title-show" />
-                                                <Label text="Rp0.00"
+                                                <Label fx:id="tagihanLunasLabel"
                                                 styleClass="label-title-show" />
-                                                <Label text="Rp0.00"
+                                                <Label fx:id="tagihanTertundaLabel"
                                                 styleClass="label-title-show" />
                                             </children>
                                         </VBox>
