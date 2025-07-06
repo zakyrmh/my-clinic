@@ -29,9 +29,11 @@
                                         <!-- Biaya Konsultasi -->
                                         <VBox spacing="8" alignment="CENTER_LEFT">
                                             <HBox spacing="4" alignment="CENTER_LEFT">
-                                                <Label text="Biaya Konsultasi" styleClass="label-form" />
+                                                <Label text="Biaya Konsultasi"
+                                                    styleClass="label-form" />
                                             </HBox>
-                                            <TextField fx:id="biayaKonsultasiField" promptText="Masukkan Biaya Konsultasi"
+                                            <TextField fx:id="biayaKonsultasiField"
+                                                promptText="Masukkan Biaya Konsultasi"
                                                 styleClass="text-field" />
                                         </VBox>
                                         <!-- Biaya Obat -->
@@ -39,27 +41,21 @@
                                             <HBox spacing="4" alignment="CENTER_LEFT">
                                                 <Label text="Biaya Obat" styleClass="label-form" />
                                             </HBox>
-                                            <TextField fx:id="biayaObatField" promptText="Masukkan Biaya Obat"
-                                                styleClass="text-field" />
-                                        </VBox>
-                                        <!-- Biaya Tindakan -->
-                                        <VBox spacing="8" alignment="CENTER_LEFT">
-                                            <HBox spacing="4" alignment="CENTER_LEFT">
-                                                <Label text="Biaya Tindakan" styleClass="label-form" />
-                                            </HBox>
-                                            <TextField fx:id="biayaTindakanField" promptText="Masukkan Biaya Tindakan"
+                                            <TextField fx:id="biayaObatField"
+                                                promptText="Masukkan Biaya Obat"
                                                 styleClass="text-field" />
                                         </VBox>
                                     </children>
                                 </VBox>
                                 <VBox spacing="16">
                                     <children>
-                                        <!-- Jumlah Bayar -->
+                                        <!-- Biaya Tindakan -->
                                         <VBox spacing="8" alignment="CENTER_LEFT">
                                             <HBox spacing="4" alignment="CENTER_LEFT">
-                                                <Label text="Jumlah Bayar" styleClass="label-form" />
+                                                <Label text="Biaya Tindakan" styleClass="label-form" />
                                             </HBox>
-                                            <TextField fx:id="jumlahBayarField" promptText="Masukkan Jumlah Bayar"
+                                            <TextField fx:id="biayaTindakanField"
+                                                promptText="Masukkan Biaya Tindakan"
                                                 styleClass="text-field" />
                                         </VBox>
                                         <!-- Tanggal Pembayaran -->
@@ -116,7 +112,8 @@
                         <HBox spacing="20" alignment="CENTER_RIGHT">
                             <Button fx:id="cancel" text="Cancel" styleClass="secondary-button"
                                 onAction="#handlePatientLinkAction" />
-                            <Button fx:id="submitButton" text="Save" styleClass="primary-button" onAction="#handleEditPayment"/>
+                            <Button fx:id="submitButton" text="Save" styleClass="primary-button"
+                                onAction="#handleEditPayment" />
                         </HBox>
                     </children>
                 </VBox>

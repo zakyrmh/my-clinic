@@ -5,7 +5,6 @@ C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic
 C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\controllers\MainLayoutController.java
 C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\controllers\PaymentShowController.java
 C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\controllers\RegisterController.java
-C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\models\Prescription.java
 C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\utils\DatabaseUtil.java
 C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\utils\SecurityUtil.java
 C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\controllers\MedicalRecordController.java
@@ -33,4 +32,3 @@ C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic
 C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\services\AuthService.java
 C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\models\User.java
 C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\controllers\LoginController.java
-C:\Users\LENOVO\Documents\Programming\Project\my-clinic\src\main\java\com\clinic\models\PrescriptionItem.java

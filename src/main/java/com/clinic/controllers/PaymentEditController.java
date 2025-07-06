@@ -26,8 +26,6 @@ public class PaymentEditController {
     @FXML
     private TextField biayaTindakanField;
     @FXML
-    private TextField jumlahBayarField;
-    @FXML
     private DatePicker tanggalPembayaranPicker;
     @FXML
     private ToggleGroup statusPembayaranGroup;
@@ -66,23 +64,19 @@ public class PaymentEditController {
         if (validateInput()) {
             try (Connection conn = DatabaseUtil.getConnection();
                     PreparedStatement stmt = conn.prepareStatement(
-                            "UPDATE pembayaran SET biaya_konsultasi = ?, biaya_obat = ?, biaya_tindakan = ?, total_biaya = ?, jumlah_bayar = ?, kembalian = ?, tanggal_pembayaran = ?, status_pembayaran = ? WHERE id_pembayaran = ?")) {
+                            "UPDATE pembayaran SET biaya_konsultasi = ?, biaya_obat = ?, biaya_tindakan = ?, total_biaya = ?, tanggal_pembayaran = ?, status_pembayaran = ? WHERE id_pembayaran = ?")) {
                 int biayaKonsultasi = Integer.parseInt(biayaKonsultasiField.getText());
                 int biayaObat = Integer.parseInt(biayaObatField.getText());
                 int biayaTindakan = Integer.parseInt(biayaTindakanField.getText());
-                int jumlahBayar = Integer.parseInt(jumlahBayarField.getText());
                 int totalBiaya = biayaKonsultasi + biayaObat + biayaTindakan;
-                int kembalian = jumlahBayar - totalBiaya;
 
                 stmt.setInt(1, biayaKonsultasi);
                 stmt.setInt(2, biayaObat);
                 stmt.setInt(3, biayaTindakan);
                 stmt.setInt(4, totalBiaya);
-                stmt.setInt(5, jumlahBayar);
-                stmt.setInt(6, kembalian);
-                stmt.setDate(7, java.sql.Date.valueOf(tanggalPembayaranPicker.getValue()));
-                stmt.setString(8, statusPembayaranGroup.getSelectedToggle().getUserData().toString());
-                stmt.setInt(9, currentPayment.getIdPembayaran());
+                stmt.setDate(5, java.sql.Date.valueOf(tanggalPembayaranPicker.getValue()));
+                stmt.setString(6, statusPembayaranGroup.getSelectedToggle().getUserData().toString());
+                stmt.setInt(7, currentPayment.getIdPembayaran());
 
                 int rowsAffected = stmt.executeUpdate();
                 if (rowsAffected > 0) {
@@ -109,9 +103,6 @@ public class PaymentEditController {
         }
         if (biayaTindakanField.getText().isEmpty()) {
             errorMessage.append("Diperlukan Biaya Tindakan.\n");
-        }
-        if (jumlahBayarField.getText().isEmpty()) {
-            errorMessage.append("Diperlukan Jumlah Bayar.\n");
         }
         if (tanggalPembayaranPicker.getValue() == null) {
             errorMessage.append("Diperlukan Tanggal Pembayaran.\n");

@@ -1,11 +1,9 @@
 com\clinic\controllers\PatientAddController.class
 com\clinic\controllers\DashboardController.class
-com\clinic\models\Prescription.class
 com\clinic\services\AuthService.class
 com\clinic\models\Visit$VisitType.class
 com\clinic\controllers\PaymentController.class
 com\clinic\models\Payment.class
-com\clinic\models\Prescription$PrescriptionStatus.class
 com\clinic\Main.class
 com\clinic\controllers\PatientController.class
 com\clinic\controllers\PaymentController$1.class
@@ -40,7 +38,6 @@ com\clinic\controllers\DoctorController$1.class
 com\clinic\controllers\PatientEditController.class
 com\clinic\controllers\MedicalRecordController$1.class
 com\clinic\controllers\RegisterController.class
-com\clinic\models\PrescriptionItem.class
 com\clinic\controllers\PatientController$1.class
 com\clinic\controllers\VisitController$1.class
 com\clinic\controllers\DoctorController.class
