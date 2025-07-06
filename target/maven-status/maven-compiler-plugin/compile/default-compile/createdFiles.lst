@@ -2,6 +2,7 @@ com\clinic\controllers\PatientAddController.class
 com\clinic\controllers\DashboardController.class
 com\clinic\services\AuthService.class
 com\clinic\models\Visit$VisitType.class
+com\clinic\controllers\MedicalRecordShowController.class
 com\clinic\controllers\PaymentController.class
 com\clinic\models\Payment.class
 com\clinic\Main.class
@@ -21,6 +22,7 @@ com\clinic\models\Patient.class
 com\clinic\utils\SecurityUtil.class
 com\clinic\models\Payment$PaymentStatus.class
 com\clinic\models\User.class
+com\clinic\manager\MedicalRecordShowController.class
 com\clinic\models\Visit$PaymentMethod.class
 com\clinic\controllers\ProfileEditController.class
 com\clinic\controllers\PatientShowController.class

@@ -7,14 +7,16 @@ import java.util.function.Consumer;
 import com.clinic.controllers.DoctorEditController;
 import com.clinic.controllers.DoctorShowController;
 import com.clinic.controllers.MainLayoutController;
+import com.clinic.controllers.MedicalRecordShowController;
 import com.clinic.controllers.PatientEditController;
 import com.clinic.controllers.PatientShowController;
 import com.clinic.controllers.PaymentEditController;
+import com.clinic.controllers.PaymentShowController;
 import com.clinic.controllers.ProfileEditController;
 import com.clinic.controllers.VisitEditController;
 import com.clinic.controllers.VisitShowController;
-import com.clinic.controllers.PaymentShowController;
 import com.clinic.models.Doctor;
+import com.clinic.models.MedicalRecord;
 import com.clinic.models.Patient;
 import com.clinic.models.Payment;
 import com.clinic.models.User;
@@ -262,5 +264,12 @@ public class SceneManager {
         loadPageWithController(
             "/com/clinic/view/profile/EditProfile.fxml",
             (ProfileEditController ctrl) -> ctrl.setUserData(user));
+    }
+
+    public void switchToMedicalRecordShowScene(MedicalRecord medicalRecord) {
+        loadPageWithController(
+            "/com/clinic/view/medicalRecords/MedicalRecordShow.fxml",
+            (MedicalRecordShowController ctrl) -> ctrl.setMedicalRecordData(medicalRecord));
+        mainLayoutController.setActive("btnRekamMedis");
     }
 }

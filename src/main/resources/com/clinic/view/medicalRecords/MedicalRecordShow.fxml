@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="720.0" prefWidth="1280.0"
+    xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1"
+    stylesheets="@../../css/style.css"
+    fx:controller="com.clinic.controllers.MedicalRecordShowController">
+
+    <center>
+        <VBox VBox.vgrow="ALWAYS">
+            <children>
+                <VBox styleClass="form-container" spacing="16">
+                    <VBox.margin>
+                        <Insets top="16" right="16" bottom="16" left="16" />
+                    </VBox.margin>
+                    <children>
+                        <!-- Judul Form -->
+                        <Label text="Detail Rekam Medis" styleClass="form-title" />
+
+                        <!-- Data Pasien & Dokter -->
+                        <HBox spacing="80">
+                            <children>
+                                <VBox spacing="16">
+                                    <children>
+                                        <VBox spacing="8">
+                                            <Label text="No Rekam Medis"
+                                                styleClass="label-title-show" />
+                                            <Label fx:id="noRekamMedisLabel"
+                                                styleClass="label-data-show" />
+                                        </VBox>
+                                        <VBox spacing="8">
+                                            <Label text="Nama Pasien" styleClass="label-title-show" />
+                                            <Label fx:id="namaPasienLabel"
+                                                styleClass="label-data-show" />
+                                        </VBox>
+                                        <VBox spacing="8">
+                                            <Label text="Nama Dokter" styleClass="label-title-show" />
+                                            <Label fx:id="namaDokterLabel"
+                                                styleClass="label-data-show" />
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                        <!-- Anamnesis & Pemeriksaan Fisik -->
+                        <HBox spacing="80">
+                            <children>
+                                <VBox spacing="16">
+                                    <children>
+                                        <VBox spacing="8">
+                                            <Label text="Anamnesis" styleClass="label-title-show" />
+                                            <Label fx:id="anamnesisLabel"
+                                                styleClass="label-data-show" wrapText="true" />
+                                        </VBox>
+                                        <VBox spacing="8">
+                                            <Label text="Pemeriksaan Fisik"
+                                                styleClass="label-title-show" />
+                                            <Label fx:id="pemeriksaanFisikLabel"
+                                                styleClass="label-data-show" wrapText="true" />
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                        <!-- Vital Signs -->
+                        <HBox spacing="40">
+                            <children>
+                                <VBox spacing="8">
+                                    <Label text="Tekanan Darah" styleClass="label-title-show" />
+                                    <Label fx:id="tekananDarahLabel" styleClass="label-data-show" />
+                                </VBox>
+                                <VBox spacing="8">
+                                    <Label text="Nadi" styleClass="label-title-show" />
+                                    <Label fx:id="nadiLabel" styleClass="label-data-show" />
+                                </VBox>
+                                <VBox spacing="8">
+                                    <Label text="Suhu (°C)" styleClass="label-title-show" />
+                                    <Label fx:id="suhuLabel" styleClass="label-data-show" />
+                                </VBox>
+                                <VBox spacing="8">
+                                    <Label text="Respirasi" styleClass="label-title-show" />
+                                    <Label fx:id="respirasiLabel" styleClass="label-data-show" />
+                                </VBox>
+                                <VBox spacing="8">
+                                    <Label text="Berat Badan (kg)" styleClass="label-title-show" />
+                                    <Label fx:id="beratBadanLabel" styleClass="label-data-show" />
+                                </VBox>
+                                <VBox spacing="8">
+                                    <Label text="Tinggi Badan (cm)" styleClass="label-title-show" />
+                                    <Label fx:id="tinggiBadanLabel" styleClass="label-data-show" />
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                        <!-- Diagnosis & Tindakan -->
+                        <HBox spacing="80">
+                            <children>
+                                <VBox spacing="16">
+                                    <children>
+                                        <VBox spacing="8">
+                                            <Label text="Diagnosis Utama"
+                                                styleClass="label-title-show" />
+                                            <Label fx:id="diagnosisUtamaLabel"
+                                                styleClass="label-data-show" wrapText="true" />
+                                        </VBox>
+                                        <VBox spacing="8">
+                                            <Label text="Diagnosis Sekunder"
+                                                styleClass="label-title-show" />
+                                            <Label fx:id="diagnosisSekunderLabel"
+                                                styleClass="label-data-show" wrapText="true" />
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                                <VBox spacing="16">
+                                    <children>
+                                        <VBox spacing="8">
+                                            <Label text="Tindakan" styleClass="label-title-show" />
+                                            <Label fx:id="tindakanLabel"
+                                                styleClass="label-data-show" wrapText="true" />
+                                        </VBox>
+                                        <VBox spacing="8">
+                                            <Label text="Terapi" styleClass="label-title-show" />
+                                            <Label fx:id="terapiLabel" styleClass="label-data-show"
+                                                wrapText="true" />
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+
+                        <!-- Catatan Dokter -->
+                        <VBox spacing="8">
+                            <children>
+                                <Label text="Catatan Dokter" styleClass="label-title-show" />
+                                <Label fx:id="catatanDokterLabel" styleClass="label-data-show"
+                                    wrapText="true" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

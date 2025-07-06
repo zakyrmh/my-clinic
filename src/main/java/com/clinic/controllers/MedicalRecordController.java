@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.clinic.manager.SceneManager;
 import com.clinic.manager.UserSession;
 import com.clinic.models.Doctor;
 import com.clinic.models.MedicalRecord;
@@ -172,24 +173,16 @@ public class MedicalRecordController {
     private void configureActionColumn() {
         action.setCellFactory(param -> new TableCell<MedicalRecord, Void>() {
             private final Button viewButton = new Button("Lihat");
-            private final Button editButton = new Button("Edit");
-            private final HBox pane = new HBox(5, viewButton, editButton);
+            private final HBox pane = new HBox(5, viewButton);
 
             {
                 // Styling tombol
                 viewButton.getStyleClass().add("view-button");
-                editButton.getStyleClass().add("edit-button");
 
                 // Handler untuk tombol Lihat
                 viewButton.setOnAction(event -> {
                     MedicalRecord medicalRecord = getTableView().getItems().get(getIndex());
                     handleViewAction(medicalRecord);
-                });
-
-                // Handler untuk tombol Edit
-                editButton.setOnAction(event -> {
-                    MedicalRecord medicalRecord = getTableView().getItems().get(getIndex());
-                    handleEditAction(medicalRecord);
                 });
             }
 
@@ -202,13 +195,8 @@ public class MedicalRecordController {
     }
 
     private void handleViewAction(MedicalRecord medicalRecord) {
-        System.out.println("View medicalRecord: " + medicalRecord.getIdRekamMedis());
+        SceneManager.getInstance().switchToMedicalRecordShowScene(medicalRecord);
         // SceneManager.getInstance().switchToPatientShowScene(medicalRecord);
-    }
-
-    private void handleEditAction(MedicalRecord medicalRecord) {
-        System.out.println("Edit medicalRecord: " + medicalRecord.getIdRekamMedis());
-        // SceneManager.getInstance().switchToPatientEditScene(medicalRecord);
     }
 
     @FXML
